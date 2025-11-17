@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Organizers - Plataforma Profesional</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a237e;
+            --secondary: #283593;
+            --accent: #d4af37;
+            --dark: #121858;
+            --light: #f8f9fa;
+            --gold: #d4af37;
+            --silver: #c0c0c0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+            color: white;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* HEADER ELEGANTE */
+        .header {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(20px);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* LOGO FASHION */
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-chess {
+            font-size: 2.8rem;
+            filter: drop-shadow(0 4px 8px rgba(212, 175, 55, 0.3));
+            background: linear-gradient(135deg, var(--gold), var(--silver));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--gold), #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-btn {
+            padding: 10px 25px;
+            border: 2px solid var(--gold);
+            border-radius: 25px;
+            background: transparent;
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-btn:hover {
+            background: var(--gold);
+            color: var(--dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .language-switcher {
+            display: flex;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+        }
+
+        .language-btn {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+
+        .language-btn.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .language-indicator {
+            position: absolute;
+            top: 5px;
+            height: calc(100% - 10px);
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            z-index: 0;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 1.4rem;
+            transition: all 0.3s ease;
+            padding: 8px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+        }
+
+        .social-link:hover {
+            color: var(--gold);
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* HERO SECTION ELEGANTE - CORREGIDO MARGEN SUPERIOR */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 2rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            z-index: 2;
+        }
+
+        .main-logo {
+            font-size: 8rem;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 8px 16px rgba(0,0,0,0.4));
+            background: linear-gradient(135deg, var(--gold), var(--silver));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-title {
+            font-size: 3.2rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff, #e3f2fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.6rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 3rem;
+            line-height: 1.4;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .highlight {
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        .experience-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold), var(--silver));
+            color: var(--dark);
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 18px 40px;
+            border: none;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            min-width: 200px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold), #f8d568);
+            color: var(--dark);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.6);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
+        }
+
+        /* FEATURES SECTION */
+        .features-section {
+            padding: 6rem 2rem;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--gold), #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.4rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 4rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border-color: var(--gold);
+        }
+
+        .feature-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--gold), var(--silver));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--gold);
+        }
+
+        .feature-text {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        /* TESTIMONIALS SECTION */
+        .testimonials-section {
+            padding: 6rem 2rem;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold), var(--silver));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--dark);
+        }
+
+        .author-info h4 {
+            color: var(--gold);
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 4rem 2rem 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1.5rem;
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .footer-link:hover {
+            color: var(--gold);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 1rem;
+        }
+
+        .footer-social-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        .footer-social-link:hover {
+            color: var(--gold);
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .copyright {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 968px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-social {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .header-controls {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .main-logo {
+                font-size: 5rem;
+            }
+
+            .hero-title {
+                font-size: 2.2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.3rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .hero-section {
+                padding: 120px 1rem 2rem;
+            }
+
+            .social-links {
+                gap: 5px;
+            }
+
+            .social-link {
+                width: 35px;
+                height: 35px;
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 1rem;
+            }
+
+            .hero-section {
+                padding: 120px 1rem 2rem;
+            }
+
+            .main-logo {
+                font-size: 4rem;
+            }
+
+            .hero-title {
+                font-size: 1.8rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .experience-badge {
+                font-size: 1rem;
+                padding: 12px 20px;
+            }
+
+            .header-controls {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .social-links {
+                order: -1;
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo-chess">♚</div>
+                <div class="logo-text">CHESS ORGANIZERS</div>
+            </div>
+            
+            <div class="header-controls">
+                <a href="login.html" class="nav-btn" data-translate="nav_login">INICIAR SESIÓN</a>
+                <div class="language-switcher">
+                    <div class="language-indicator" id="language-indicator"></div>
+                    <button class="language-btn active" data-lang="es">ES</button>
+                    <button class="language-btn" data-lang="en">EN</button>
+                    <button class="language-btn" data-lang="fr">FR</button>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://www.facebook.com/people/Chess-Organizers/" class="social-link" target="_blank" title="Facebook">📘</a>
+                    <a href="https://www.instagram.com/chessorganizers2025/" class="social-link" target="_blank" title="Instagram">📷</a>
+                    <a href="https://x.com/ChessOrganizers" class="social-link" target="_blank" title="X (Twitter)">🐦</a>
+                    <a href="https://www.tiktok.com/@chessorganizers" class="social-link" target="_blank" title="TikTok">🎵</a>
+                    <a href="https://www.youtube.com/@ajedrez_premium" class="social-link" target="_blank" title="YouTube">▶️</a>
+                    <a href="https://www.whatsapp.com/channel/0029Vb2VkTjAojYxJFlnQJ3R" class="social-link" target="_blank" title="WhatsApp Channel">💬</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <div class="main-logo">♚</div>
+            <h1 class="hero-title" data-translate="hero_title">Organiza tu torneo de ajedrez con comodidad y mayor productividad</h1>
+            <p class="hero-subtitle">
+                <span class="highlight" data-translate="hero_subtitle_highlight">¡El asistente inteligente con agenda profesional</span> 
+                <span data-translate="hero_subtitle">que gestiona todos los detalles técnicos y logísticos del evento en un sólo clic!</span>
+            </p>
+            
+            <div class="experience-badge" data-translate="experience_badge">
+                ✅ 35 Años de Experiencia | +60 Eventos Realizados
+            </div>
+
+            <div class="cta-buttons">
+                <a href="login.html" class="btn btn-primary" data-translate="cta_start">Comenzar Ahora</a>
+                <a href="#features" class="btn btn-secondary" data-translate="cta_features">Ver Características</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section class="features-section" id="features">
+        <h2 class="section-title" data-translate="features_title">Solución Integral para Eventos de Ajedrez</h2>
+        <p class="section-subtitle" data-translate="features_subtitle">Metodología contrastada durante 35 años en más de 60 eventos de máxima calidad</p>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">💼</div>
+                <h3 class="feature-title" data-translate="feature1_title">Gestión de Negocio</h3>
+                <p class="feature-text" data-translate="feature1_text">Control completo de presupuestos, patrocinios, ingresos y gastos con reporting profesional</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🚚</div>
+                <h3 class="feature-title" data-translate="feature2_title">Logística Integral</h3>
+                <p class="feature-text" data-translate="feature2_text">Coordinación de sedes, alojamiento, transporte, catering y todos los servicios necesarios</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🎓</div>
+                <h3 class="feature-title" data-translate="feature3_title">Conocimiento Experto</h3>
+                <p class="feature-text" data-translate="feature3_text">Metodología probada en 35 años y +60 eventos. Checklist de +100 tareas automatizadas</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🏆</div>
+                <h3 class="feature-title" data-translate="feature4_title">Pruebas Deportivas</h3>
+                <p class="feature-text" data-translate="feature4_text">Torneos clásicos, matches, simultáneas, exhibiciones y actividades paralelas</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3 class="feature-title" data-translate="feature5_title">Asistente IA</h3>
+                <p class="feature-text" data-translate="feature5_text">Inteligencia artificial especializada que guía cada paso del proceso organizativo</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3 class="feature-title" data-translate="feature6_title">Panel de Control</h3>
+                <p class="feature-text" data-translate="feature6_text">Dashboard profesional con métricas en tiempo real y notificaciones inteligentes</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section class="testimonials-section">
+        <h2 class="section-title" data-translate="testimonials_title">Lo que dicen nuestros organizadores</h2>
+        <p class="section-subtitle" data-translate="testimonials_subtitle">Experiencias reales de profesionales que han transformado su forma de trabajar</p>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-text" data-translate="testimonial1_text">"Chess Organizers ha revolucionado completamente nuestra gestión de torneos. Lo que antes nos llevaba semanas ahora lo hacemos en días."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">MG</div>
+                    <div class="author-info">
+                        <h4 data-translate="testimonial1_name">Miguel García</h4>
+                        <p data-translate="testimonial1_role">Director del Open Internacional de Madrid</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <p class="testimonial-text" data-translate="testimonial2_text">"La integración de todas las áreas en una sola plataforma nos ha permitido aumentar nuestra productividad en un 200%."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">AL</div>
+                    <div class="author-info">
+                        <h4 data-translate="testimonial2_name">Ana López</h4>
+                        <p data-translate="testimonial2_role">Organizadora del Circuito Nacional</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <p class="testimonial-text" data-translate="testimonial3_text">"El asistente IA es increíblemente útil. Nos anticipa problemas y sugiere soluciones antes de que se conviertan en crisis."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">CR</div>
+                    <div class="author-info">
+                        <h4 data-translate="testimonial3_name">Carlos Rodríguez</h4>
+                        <p data-translate="testimonial3_role">Coordinador del Festival de Ajedrez</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4 data-translate="footer_about_title">Chess Organizers</h4>
+                <p data-translate="footer_about_text">Plataforma web profesional para la organización integral de eventos de ajedrez. Integramos negocio, logística, conocimiento y competición con metodologías probadas durante 35 años.</p>
+                <div class="footer-social">
+                    <a href="https://www.facebook.com/people/Chess-Organizers/" class="footer-social-link" target="_blank" title="Facebook">📘</a>
+                    <a href="https://www.instagram.com/chessorganizers2025/" class="footer-social-link" target="_blank" title="Instagram">📷</a>
+                    <a href="https://x.com/ChessOrganizers" class="footer-social-link" target="_blank" title="X (Twitter)">🐦</a>
+                    <a href="https://www.tiktok.com/@chessorganizers" class="footer-social-link" target="_blank" title="TikTok">🎵</a>
+                    <a href="https://www.youtube.com/@ajedrez_premium" class="footer-social-link" target="_blank" title="YouTube">▶️</a>
+                    <a href="https://www.whatsapp.com/channel/0029Vb2VkTjAojYxJFlnQJ3R" class="footer-social-link" target="_blank" title="WhatsApp Channel">💬</a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4 data-translate="footer_links_title">Enlaces</h4>
+                <div class="footer-links">
+                    <a href="login.html" class="footer-link" data-translate="footer_link_platform">Acceso Plataforma</a>
+                    <a href="terms.html" class="footer-link" data-translate="footer_link_terms">Términos de Servicio</a>
+                    <a href="privacy.html" class="footer-link" data-translate="footer_link_privacy">Política de Privacidad</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h4 data-translate="footer_contact_title">Contacto</h4>
+                <div class="footer-links">
+                    <a href="mailto:info@chessorganizers.com" class="footer-link">info@chessorganizers.com</a>
+                    <a href="mailto:soporte@chessorganizers.com" class="footer-link">soporte@chessorganizers.com</a>
+                    <a href="mailto:comercial@chessorganizers.com" class="footer-link">comercial@chessorganizers.com</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="copyright" data-translate="footer_copyright">
+                <strong>© 2025 Chess Organizers.</strong> Todos los derechos reservados. 
+                Plataforma profesional para gestión integral de eventos de ajedrez.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sistema de idiomas completo y funcional
+        const translations = {
+            es: {
+                // Navegación
+                "nav_login": "INICIAR SESIÓN",
+                
+                // Hero Section
+                "hero_title": "Organiza tu torneo de ajedrez con comodidad y mayor productividad",
+                "hero_subtitle_highlight": "¡El asistente inteligente con agenda profesional",
+                "hero_subtitle": "que gestiona todos los detalles técnicos y logísticos del evento en un sólo clic!",
+                "experience_badge": "✅ 35 Años de Experiencia | +60 Eventos Realizados",
+                "cta_start": "Comenzar Ahora",
+                "cta_features": "Ver Características",
+                
+                // Features Section
+                "features_title": "Solución Integral para Eventos de Ajedrez",
+                "features_subtitle": "Metodología contrastada durante 35 años en más de 60 eventos de máxima calidad",
+                
+                "feature1_title": "Gestión de Negocio",
+                "feature1_text": "Control completo de presupuestos, patrocinios, ingresos y gastos con reporting profesional",
+                
+                "feature2_title": "Logística Integral",
+                "feature2_text": "Coordinación de sedes, alojamiento, transporte, catering y todos los servicios necesarios",
+                
+                "feature3_title": "Conocimiento Experto",
+                "feature3_text": "Metodología probada en 35 años y +60 eventos. Checklist de +100 tareas automatizadas",
+                
+                "feature4_title": "Pruebas Deportivas",
+                "feature4_text": "Torneos clásicos, matches, simultáneas, exhibiciones y actividades paralelas",
+                
+                "feature5_title": "Asistente IA",
+                "feature5_text": "Inteligencia artificial especializada que guía cada paso del proceso organizativo",
+                
+                "feature6_title": "Panel de Control",
+                "feature6_text": "Dashboard profesional con métricas en tiempo real y notificaciones inteligentes",
+                
+                // Testimonials Section
+                "testimonials_title": "Lo que dicen nuestros organizadores",
+                "testimonials_subtitle": "Experiencias reales de profesionales que han transformado su forma de trabajar",
+                
+                "testimonial1_text": "\"Chess Organizers ha revolucionado completamente nuestra gestión de torneos. Lo que antes nos llevaba semanas ahora lo hacemos en días.\"",
+                "testimonial1_name": "Miguel García",
+                "testimonial1_role": "Director del Open Internacional de Madrid",
+                
+                "testimonial2_text": "\"La integración de todas las áreas en una sola plataforma nos ha permitido aumentar nuestra productividad en un 200%.\"",
+                "testimonial2_name": "Ana López",
+                "testimonial2_role": "Organizadora del Circuito Nacional",
+                
+                "testimonial3_text": "\"El asistente IA es increíblemente útil. Nos anticipa problemas y sugiere soluciones antes de que se conviertan en crisis.\"",
+                "testimonial3_name": "Carlos Rodríguez",
+                "testimonial3_role": "Coordinador del Festival de Ajedrez",
+                
+                // Footer
+                "footer_about_title": "Chess Organizers",
+                "footer_about_text": "Plataforma web profesional para la organización integral de eventos de ajedrez. Integramos negocio, logística, conocimiento y competición con metodologías probadas durante 35 años.",
+                "footer_links_title": "Enlaces",
+                "footer_link_platform": "Acceso Plataforma",
+                "footer_link_terms": "Términos de Servicio",
+                "footer_link_privacy": "Política de Privacidad",
+                "footer_contact_title": "Contacto",
+                "footer_copyright": "© 2025 Chess Organizers. Todos los derechos reservados. Plataforma profesional para gestión integral de eventos de ajedrez."
+            },
+            en: {
+                // Navigation
+                "nav_login": "LOGIN",
+                
+                // Hero Section
+                "hero_title": "Organize your chess tournament with comfort and greater productivity",
+                "hero_subtitle_highlight": "The intelligent assistant with professional agenda",
+                "hero_subtitle": "that manages all technical and logistical details of the event in just one click!",
+                "experience_badge": "✅ 35 Years of Experience | +60 Events Completed",
+                "cta_start": "Get Started Now",
+                "cta_features": "View Features",
+                
+                // Features Section
+                "features_title": "Complete Solution for Chess Events",
+                "features_subtitle": "Methodology tested over 35 years in more than 60 high-quality events",
+                
+                "feature1_title": "Business Management",
+                "feature1_text": "Complete control of budgets, sponsorships, income and expenses with professional reporting",
+                
+                "feature2_title": "Comprehensive Logistics",
+                "feature2_text": "Coordination of venues, accommodation, transport, catering and all necessary services",
+                
+                "feature3_title": "Expert Knowledge",
+                "feature3_text": "Methodology proven over 35 years and +60 events. Checklist of +100 automated tasks",
+                
+                "feature4_title": "Sporting Events",
+                "feature4_text": "Classical tournaments, matches, simultaneous exhibitions, and parallel activities",
+                
+                "feature5_title": "AI Assistant",
+                "feature5_text": "Specialized artificial intelligence that guides every step of the organizational process",
+                
+                "feature6_title": "Control Panel",
+                "feature6_text": "Professional dashboard with real-time metrics and intelligent notifications",
+                
+                // Testimonials Section
+                "testimonials_title": "What our organizers say",
+                "testimonials_subtitle": "Real experiences from professionals who have transformed their way of working",
+                
+                "testimonial1_text": "\"Chess Organizers has completely revolutionized our tournament management. What used to take us weeks now takes days.\"",
+                "testimonial1_name": "Miguel García",
+                "testimonial1_role": "Director of Madrid International Open",
+                
+                "testimonial2_text": "\"The integration of all areas into a single platform has allowed us to increase our productivity by 200%.\"",
+                "testimonial2_name": "Ana López",
+                "testimonial2_role": "National Circuit Organizer",
+                
+                "testimonial3_text": "\"The AI assistant is incredibly useful. It anticipates problems and suggests solutions before they become crises.\"",
+                "testimonial3_name": "Carlos Rodríguez",
+                "testimonial3_role": "Chess Festival Coordinator",
+                
+                // Footer
+                "footer_about_title": "Chess Organizers",
+                "footer_about_text": "Professional web platform for comprehensive chess event organization. We integrate business, logistics, knowledge and competition with methodologies tested over 35 years.",
+                "footer_links_title": "Links",
+                "footer_link_platform": "Platform Access",
+                "footer_link_terms": "Terms of Service",
+                "footer_link_privacy": "Privacy Policy",
+                "footer_contact_title": "Contact",
+                "footer_copyright": "© 2025 Chess Organizers. All rights reserved. Professional platform for comprehensive chess event management."
+            },
+            fr: {
+                // Navigation
+                "nav_login": "CONNEXION",
+                
+                // Hero Section
+                "hero_title": "Organisez votre tournoi d'échecs avec confort et productivité accrue",
+                "hero_subtitle_highlight": "L'assistant intelligent avec agenda professionnel",
+                "hero_subtitle": "qui gère tous les détails techniques et logistiques de l'événement en un seul clic !",
+                "experience_badge": "✅ 35 Ans d'Expérience | +60 Événements Réalisés",
+                "cta_start": "Commencer Maintenant",
+                "cta_features": "Voir Caractéristiques",
+                
+                // Features Section
+                "features_title": "Solution Intégrale pour les Événements d'Échecs",
+                "features_subtitle": "Méthodologie éprouvée pendant 35 ans dans plus de 60 événements de qualité supérieure",
+                
+                "feature1_title": "Gestion d'Entreprise",
+                "feature1_text": "Contrôle complet des budgets, sponsorships, revenus et dépenses avec reporting professionnel",
+                
+                "feature2_title": "Logistique Intégrale",
+                "feature2_text": "Coordination des lieux, hébergement, transport, restauration et tous les services nécessaires",
+                
+                "feature3_title": "Connaissance Expert",
+                "feature3_text": "Méthodologie éprouvée sur 35 ans et +60 événements. Checklist de +100 tâches automatisées",
+                
+                "feature4_title": "Épreuves Sportives",
+                "feature4_text": "Tournois classiques, matches, simultanées, exhibitions et activités parallèles",
+                
+                "feature5_title": "Assistant IA",
+                "feature5_text": "Intelligence artificielle spécialisée qui guide chaque étape du processus organisationnel",
+                
+                "feature6_title": "Tableau de Bord",
+                "feature6_text": "Dashboard professionnel avec métriques en temps réel et notifications intelligentes",
+                
+                // Testimonials Section
+                "testimonials_title": "Ce que disent nos organisateurs",
+                "testimonials_subtitle": "Expériences réelles de professionnels qui ont transformé leur façon de travailler",
+                
+                "testimonial1_text": "\"Chess Organizers a complètement révolutionné notre gestion de tournois. Ce qui nous prenait des semaines se fait maintenant en jours.\"",
+                "testimonial1_name": "Miguel García",
+                "testimonial1_role": "Directeur de l'Open International de Madrid",
+                
+                "testimonial2_text": "\"L'intégration de tous les domaines dans une seule plateforme nous a permis d'augmenter notre productivité de 200%.\"",
+                "testimonial2_name": "Ana López",
+                "testimonial2_role": "Organisatrice du Circuit National",
+                
+                "testimonial3_text": "\"L'assistant IA est incroyablement utile. Il anticipe les problèmes et suggère des solutions avant qu'elles ne deviennent des crises.\"",
+                "testimonial3_name": "Carlos Rodríguez",
+                "testimonial3_role": "Coordinateur du Festival d'Échecs",
+                
+                // Footer
+                "footer_about_title": "Chess Organizers",
+                "footer_about_text": "Plateforme web professionnelle pour l'organisation intégrale d'événements d'échecs. Nous intégrons business, logistique, connaissance et compétition avec des méthodologies éprouvées pendant 35 ans.",
+                "footer_links_title": "Liens",
+                "footer_link_platform": "Accès Plateforme",
+                "footer_link_terms": "Conditions d'Utilisation",
+                "footer_link_privacy": "Politique de Confidentialité",
+                "footer_contact_title": "Contact",
+                "footer_copyright": "© 2025 Chess Organizers. Tous droits réservés. Plateforme professionnelle pour la gestion intégrale d'événements d'échecs."
+            }
+        };
+
+        // Función para cambiar idioma
+        function changeLanguage(lang) {
+            // Guardar preferencia
+            localStorage.setItem('preferred-language', lang);
+            
+            // Actualizar botones de idioma
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Actualizar indicador visual
+            const indicator = document.getElementById('language-indicator');
+            const activeBtn = document.querySelector(`.language-btn[data-lang="${lang}"]`);
+            if (activeBtn && indicator) {
+                const btnRect = activeBtn.getBoundingClientRect();
+                const containerRect = activeBtn.parentElement.getBoundingClientRect();
+                indicator.style.width = `${btnRect.width}px`;
+                indicator.style.left = `${btnRect.left - containerRect.left}px`;
+            }
+            
+            // Actualizar textos
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+            
+            // Actualizar atributo lang del HTML
+            document.documentElement.lang = lang;
+        }
+
+        // Inicializar al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            // Detectar idioma preferido
+            const savedLang = localStorage.getItem('preferred-language') || 'es';
+            
+            // Configurar evento para botones de idioma
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    changeLanguage(lang);
+                });
+            });
+            
+            // Aplicar idioma guardado
+            changeLanguage(savedLang);
+            
+            // Smooth scroll para enlaces internos
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // Efecto de carga progresiva
+            console.log('♛ Chess Organizers - Portada profesional cargada');
+            
+            // Animación suave de elementos
+            setTimeout(() => {
+                document.querySelectorAll('.feature-card').forEach((card, index) => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(30px)';
+                    
+                    setTimeout(() => {
+                        card.style.transition = 'all 0.6s ease';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 200 * index);
+                });
+                
+                // Animación para testimonios
+                document.querySelectorAll('.testimonial-card').forEach((card, index) => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(30px)';
+                    
+                    setTimeout(() => {
+                        card.style.transition = 'all 0.6s ease';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 300 + (200 * index));
+                });
+            }, 500);
+        });
+    </script>
+</body>
+</html>
