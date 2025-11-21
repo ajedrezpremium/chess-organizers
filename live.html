@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Organizers - Live Streaming</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --sidebar-width: 250px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .logo {
+            text-align: center;
+            padding: 20px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 10px;
+            background-color: #fff;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 2rem;
+        }
+
+        .logo h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .menu {
+            list-style: none;
+            padding: 0 15px;
+        }
+
+        .menu-item {
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+
+        .menu-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .menu-item.active {
+            background-color: var(--secondary-color);
+        }
+
+        .menu-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .menu-link i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 30px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e1e8ed;
+        }
+
+        .page-title h1 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .page-title p {
+            color: #7f8c8d;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-secondary {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #c0392b;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--secondary-color);
+            color: var(--secondary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        /* Card Styles */
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e1e8ed;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        /* Platform Options */
+        .platform-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .platform-card {
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .platform-card:hover {
+            border-color: var(--secondary-color);
+            transform: translateY(-5px);
+        }
+
+        .platform-card.selected {
+            border-color: var(--secondary-color);
+            background-color: rgba(52, 152, 219, 0.05);
+        }
+
+        .platform-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+
+        .platform-name {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .platform-desc {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .form-text {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+
+        /* Toggle Switch */
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .toggle-label {
+            margin-right: 15px;
+            font-weight: 600;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: var(--secondary-color);
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(30px);
+        }
+
+        /* Guide Section */
+        .guide-section {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .guide-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .guide-step {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .guide-step:before {
+            content: "•";
+            position: absolute;
+            left: 10px;
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+
+        /* Status Indicators */
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status-live {
+            background-color: rgba(231, 76, 60, 0.1);
+            color: var(--accent-color);
+        }
+
+        .status-ready {
+            background-color: rgba(46, 204, 113, 0.1);
+            color: var(--success-color);
+        }
+
+        .status-offline {
+            background-color: rgba(149, 165, 166, 0.1);
+            color: #95a5a6;
+        }
+
+        /* Stream Preview */
+        .stream-preview {
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stream-placeholder {
+            text-align: center;
+        }
+
+        .stream-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #7f8c8d;
+        }
+
+        .stream-overlay {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(231, 76, 60, 0.9);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        /* Business Opportunities */
+        .opportunity-card {
+            background-color: #f8f9fa;
+            border-left: 4px solid var(--warning-color);
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .opportunity-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .opportunity-desc {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 15px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 70px;
+            }
+            
+            .sidebar .logo h1,
+            .sidebar .menu-link span {
+                display: none;
+            }
+            
+            .main-content {
+                margin-left: 70px;
+            }
+            
+            .platform-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .header-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-img">
+                    <i class="fas fa-chess-knight"></i>
+                </div>
+                <h1>Chess Organizers</h1>
+            </div>
+            <ul class="menu">
+                <li class="menu-item"><a href="dashboard.html" class="menu-link"><i class="fas fa-tachometer-alt"></i> <span>Panel</span></a></li>
+                <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-trophy"></i> <span>Torneo</span></a></li>
+                <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-users"></i> <span>Participantes</span></a></li>
+                <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-calendar-alt"></i> <span>Agenda</span></a></li>
+                <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-project-diagram"></i> <span>Proyecto</span></a></li>
+                <li class="menu-item active"><a href="live.html" class="menu-link"><i class="fas fa-broadcast-tower"></i> <span>Live</span></a></li>
+                <li class="menu-item"><a href="crear-evento.html" class="menu-link"><i class="fas fa-calendar-plus"></i> <span>Evento</span></a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="page-title">
+                    <h1>Transmisión en Vivo</h1>
+                    <p>Configura y gestiona la retransmisión de tu torneo de ajedrez</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-primary" onclick="startStream()">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Iniciar Transmisión</span>
+                    </button>
+                    <button class="btn btn-outline" onclick="saveConfig()">
+                        <i class="fas fa-save"></i>
+                        <span>Guardar Configuración</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Content Grid -->
+            <div class="content-grid">
+                <!-- Left Column -->
+                <div class="left-column">
+                    <!-- Platform Selection -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Plataforma de Transmisión</h2>
+                            <span class="status-indicator status-ready">Configurado</span>
+                        </div>
+                        
+                        <div class="platform-options">
+                            <div class="platform-card selected" onclick="selectPlatform('youtube')">
+                                <div class="platform-icon">
+                                    <i class="fab fa-youtube"></i>
+                                </div>
+                                <div class="platform-name">YouTube</div>
+                                <div class="platform-desc">Ideal para alcance masivo</div>
+                            </div>
+                            
+                            <div class="platform-card" onclick="selectPlatform('twitch')">
+                                <div class="platform-icon">
+                                    <i class="fab fa-twitch"></i>
+                                </div>
+                                <div class="platform-name">Twitch</div>
+                                <div class="platform-desc">Comunidad gaming activa</div>
+                            </div>
+                            
+                            <div class="platform-card" onclick="selectPlatform('chesscom')">
+                                <div class="platform-icon">
+                                    <i class="fas fa-chess-board"></i>
+                                </div>
+                                <div class="platform-name">Chess.com</div>
+                                <div class="platform-desc">Audiencia especializada</div>
+                            </div>
+                            
+                            <div class="platform-card" onclick="selectPlatform('lichess')">
+                                <div class="platform-icon">
+                                    <i class="fas fa-chess-knight"></i>
+                                </div>
+                                <div class="platform-name">Lichess.org</div>
+                                <div class="platform-desc">Comunidad de código abierto</div>
+                            </div>
+                        </div>
+
+                        <div class="toggle-container">
+                            <span class="toggle-label">Usar plataforma externa</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="externalToggle" onchange="toggleExternalPlatform()">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div id="externalPlatformConfig" style="display: none;">
+                            <div class="form-group">
+                                <label class="form-label">URL de Transmisión Externa</label>
+                                <input type="url" class="form-control" id="externalUrl" placeholder="https://">
+                                <div class="form-text">Ingresa la URL completa de tu transmisión externa</div>
+                            </div>
+                        </div>
+
+                        <div id="internalPlatformConfig">
+                            <div class="form-group">
+                                <label class="form-label">Clave de Transmisión</label>
+                                <input type="text" class="form-control" id="streamKey" value="live_7829461832_ak9s8d7f6g5h4" readonly>
+                                <div class="form-text">Esta clave es única para tu torneo</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">URL del Servidor</label>
+                                <input type="text" class="form-control" id="serverUrl" value="rtmp://a.rtmp.youtube.com/live2" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stream Configuration -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Configuración de la Transmisión</h2>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Título de la Transmisión</label>
+                            <input type="text" class="form-control" id="streamTitle" value="Torneo de Ajedrez Rápido - Final">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Descripción</label>
+                            <textarea class="form-control" id="streamDescription" rows="3">Transmisión en vivo de la final del Torneo de Ajedrez Rápido. ¡No te lo pierdas!</textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Categoría</label>
+                            <select class="form-select" id="streamCategory">
+                                <option value="chess">Ajedrez</option>
+                                <option value="gaming">Gaming</option>
+                                <option value="sports">Deportes</option>
+                                <option value="education">Educación</option>
+                            </select>
+                        </div>
+                        
+                        <div class="toggle-container">
+                            <span class="toggle-label">Grabar para la Galería</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="recordToggle" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="form-text">La grabación estará disponible en la sección Galería después del evento</div>
+                    </div>
+
+                    <!-- Monetization -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Oportunidades de Negocio</h2>
+                        </div>
+                        
+                        <div class="opportunity-card">
+                            <div class="opportunity-title">Venta de Publicidad</div>
+                            <div class="opportunity-desc">Ofrece espacios publicitarios durante tu transmisión. Los anunciantes pueden patrocinar rondas específicas o el torneo completo.</div>
+                            <button class="btn btn-outline" onclick="showAdOpportunities()">
+                                <i class="fas fa-bullhorn"></i>
+                                <span>Gestionar Anunciantes</span>
+                            </button>
+                        </div>
+                        
+                        <div class="opportunity-card">
+                            <div class="opportunity-title">Colaboradores de la Comunidad</div>
+                            <div class="opportunity-desc">Involucra a comentaristas, analistas y voluntarios de la comunidad para enriquecer tu transmisión.</div>
+                            <button class="btn btn-outline" onclick="showCommunityCollaborators()">
+                                <i class="fas fa-users"></i>
+                                <span>Gestionar Colaboradores</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="right-column">
+                    <!-- Stream Preview -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Vista Previa</h2>
+                            <span class="status-indicator status-offline">Offline</span>
+                        </div>
+                        
+                        <div class="stream-preview">
+                            <div class="stream-overlay">EN VIVO</div>
+                            <div class="stream-placeholder">
+                                <i class="fas fa-broadcast-tower"></i>
+                                <p>La transmisión aparecerá aquí</p>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Enlace Público</label>
+                            <input type="text" class="form-control" id="publicLink" value="https://chessorganizers.com/live/torneo-rapido-2024" readonly>
+                            <div class="form-text">Comparte este enlace con tu audiencia</div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Guide -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Guía Rápida para Transmitir</h2>
+                        </div>
+                        
+                        <div class="guide-section">
+                            <h3 class="guide-title">Configuración Profesional</h3>
+                            
+                            <div class="guide-step">
+                                <strong>Paso 1:</strong> Configura tu software de streaming (OBS Studio recomendado)
+                            </div>
+                            
+                            <div class="guide-step">
+                                <strong>Paso 2:</strong> Usa la clave de transmisión y URL del servidor proporcionadas
+                            </div>
+                            
+                            <div class="guide-step">
+                                <strong>Paso 3:</strong> Añade escenas para: tablero principal, análisis, entrevistas
+                            </div>
+                            
+                            <div class="guide-step">
+                                <strong>Paso 4:</strong> Configura overlays para mostrar patrocinadores y información
+                            </div>
+                            
+                            <div class="guide-step">
+                                <strong>Paso 5:</strong> Realiza una prueba antes del evento en directo
+                            </div>
+                        </div>
+                        
+                        <div style="text-align: center; margin-top: 20px;">
+                            <button class="btn btn-outline" onclick="showFullGuide()">
+                                <i class="fas fa-book"></i>
+                                <span>Ver Guía Completa</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Analytics -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Estadísticas de Transmisiones Anteriores</h2>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
+                            <div style="text-align: center; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                                <div style="font-size: 1.8rem; font-weight: bold; color: var(--secondary-color);">1,248</div>
+                                <div style="font-size: 0.9rem; color: #7f8c8d;">Espectadores máx.</div>
+                            </div>
+                            
+                            <div style="text-align: center; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                                <div style="font-size: 1.8rem; font-weight: bold; color: var(--secondary-color);">4.2h</div>
+                                <div style="font-size: 0.9rem; color: #7f8c8d;">Duración promedio</div>
+                            </div>
+                            
+                            <div style="text-align: center; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                                <div style="font-size: 1.8rem; font-weight: bold; color: var(--secondary-color);">87%</div>
+                                <div style="font-size: 0.9rem; color: #7f8c8d;">Retención</div>
+                            </div>
+                            
+                            <div style="text-align: center; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                                <div style="font-size: 1.8rem; font-weight: bold; color: var(--secondary-color);">€320</div>
+                                <div style="font-size: 0.9rem; color: #7f8c8d;">Ingresos prom.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Estado de la aplicación
+        const appState = {
+            currentPlatform: 'youtube',
+            useExternalPlatform: false,
+            isStreaming: false
+        };
+
+        // Seleccionar plataforma
+        function selectPlatform(platform) {
+            appState.currentPlatform = platform;
+            
+            // Actualizar UI
+            document.querySelectorAll('.platform-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            event.currentTarget.classList.add('selected');
+            
+            // Actualizar configuración según plataforma
+            updatePlatformConfig(platform);
+        }
+
+        // Actualizar configuración según plataforma seleccionada
+        function updatePlatformConfig(platform) {
+            const serverUrls = {
+                youtube: 'rtmp://a.rtmp.youtube.com/live2',
+                twitch: 'rtmp://live.twitch.tv/app',
+                chesscom: 'rtmp://live.chess.com/live',
+                lichess: 'rtmp://broadcast.lichess.org/live'
+            };
+            
+            document.getElementById('serverUrl').value = serverUrls[platform] || '';
+        }
+
+        // Alternar entre plataforma interna y externa
+        function toggleExternalPlatform() {
+            const externalToggle = document.getElementById('externalToggle');
+            const externalConfig = document.getElementById('externalPlatformConfig');
+            const internalConfig = document.getElementById('internalPlatformConfig');
+            
+            appState.useExternalPlatform = externalToggle.checked;
+            
+            if (externalToggle.checked) {
+                externalConfig.style.display = 'block';
+                internalConfig.style.display = 'none';
+            } else {
+                externalConfig.style.display = 'none';
+                internalConfig.style.display = 'block';
+            }
+        }
+
+        // Iniciar transmisión
+        function startStream() {
+            if (appState.isStreaming) {
+                // Detener transmisión
+                appState.isStreaming = false;
+                document.querySelector('.status-indicator.status-live').classList.replace('status-live', 'status-offline');
+                document.querySelector('.status-indicator.status-live').textContent = 'Offline';
+                document.querySelector('.stream-overlay').style.display = 'none';
+                document.querySelector('.btn-primary i').className = 'fas fa-play-circle';
+                document.querySelector('.btn-primary span').textContent = 'Iniciar Transmisión';
+                
+                showNotification('Transmisión detenida', 'info');
+            } else {
+                // Iniciar transmisión
+                appState.isStreaming = true;
+                document.querySelector('.status-indicator.status-offline').classList.replace('status-offline', 'status-live');
+                document.querySelector('.status-indicator.status-live').textContent = 'En Vivo';
+                document.querySelector('.stream-overlay').style.display = 'block';
+                document.querySelector('.btn-primary i').className = 'fas fa-stop-circle';
+                document.querySelector('.btn-primary span').textContent = 'Detener Transmisión';
+                
+                showNotification('Transmisión iniciada correctamente', 'success');
+                
+                // Si está configurado para grabar, mostrar mensaje
+                if (document.getElementById('recordToggle').checked) {
+                    setTimeout(() => {
+                        showNotification('La grabación se guardará automáticamente en la Galería', 'info');
+                    }, 2000);
+                }
+            }
+        }
+
+        // Guardar configuración
+        function saveConfig() {
+            // Aquí iría la lógica para guardar en base de datos
+            showNotification('Configuración guardada correctamente', 'success');
+        }
+
+        // Mostrar oportunidades de publicidad
+        function showAdOpportunities() {
+            alert('Redirigiendo a la sección CRM - Oportunidades de Publicidad\n\nAquí podrás gestionar anunciantes, crear paquetes publicitarios y hacer seguimiento de las oportunidades de negocio.');
+            // En una implementación real, redirigiría a la sección CRM
+            // window.location.href = 'crm-opportunities.html';
+        }
+
+        // Mostrar colaboradores de la comunidad
+        function showCommunityCollaborators() {
+            alert('Redirigiendo a la sección Comunidad - Colaboradores\n\nAquí podrás gestionar comentaristas, analistas y voluntarios para tu transmisión.');
+            // En una implementación real, redirigiría a la sección Comunidad
+            // window.location.href = 'community-collaborators.html';
+        }
+
+        // Mostrar guía completa
+        function showFullGuide() {
+            alert('Abriendo Guía Completa de Transmisión\n\nEsta guía incluye:\n- Configuración técnica detallada\n- Mejores prácticas para transmisiones de ajedrez\n- Cómo monetizar tu contenido\n- Ejemplos de overlays y gráficos\n- Consejos para interactuar con la audiencia');
+            // En una implementación real, abriría un modal o redirigiría a la guía
+        }
+
+        // Mostrar notificación
+        function showNotification(message, type) {
+            // En una implementación real, usaríamos un sistema de notificaciones
+            alert(`[${type.toUpperCase()}] ${message}`);
+        }
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('♛ Chess Organizers - Módulo Live Streaming cargado');
+            updatePlatformConfig('youtube');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Nuevo Evento - Chess Organizers</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #64748b;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f8fafc;
+            color: #1f2937;
+        }
+        
+        .navbar {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .evento-container {
+            max-width: 900px;
+            margin: 1rem auto;
+            padding: 0 1rem;
+        }
+        
+        .progress-steps {
+            display: flex;
+            margin-bottom: 1.5rem;
+            background: white;
+            padding: 0.5rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .step {
+            flex: 1;
+            text-align: center;
+            padding: 0.75rem;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .step.active {
+            border-bottom-color: var(--primary);
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .step.completed {
+            color: var(--success);
+        }
+        
+        .form-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+        
+        .form-section.active {
+            display: block;
+        }
+        
+        .section-title {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 1.2rem;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.25rem;
+            font-weight: 600;
+            color: #374151;
+            font-size: 0.9rem;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #475569;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .rating-system {
+            display: flex;
+            gap: 0.25rem;
+            margin: 0.5rem 0;
+        }
+        
+        .star {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #d1d5db;
+            transition: color 0.3s;
+        }
+        
+        .star.active {
+            color: #f59e0b;
+        }
+        
+        .criteria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.75rem;
+            margin: 0.75rem 0;
+        }
+        
+        .criteria-item {
+            padding: 0.75rem;
+            background: #f8fafc;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
+            font-size: 0.8rem;
+        }
+        
+        .criteria-item.fulfilled {
+            border-color: var(--success);
+            background: #f0fdf4;
+        }
+        
+        .file-upload {
+            border: 1px dashed #d1d5db;
+            padding: 1rem;
+            text-align: center;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: border-color 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .file-upload:hover {
+            border-color: var(--primary);
+        }
+        
+        .resumen-item {
+            margin-bottom: 0.75rem;
+            padding: 0.75rem;
+            background: #f8fafc;
+            border-radius: 6px;
+        }
+        
+        .resumen-item strong {
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">♛ Chess Organizers</div>
+        <div>
+            <a href="/dashboard.html" class="btn btn-secondary">← Volver al Dashboard</a>
+        </div>
+    </nav>
+
+    <div class="evento-container">
+        <h1 style="margin-bottom: 1rem; font-size: 1.5rem;">Crear Nuevo Evento de Ajedrez</h1>
+        
+        <!-- Progreso -->
+        <div class="progress-steps">
+            <div class="step active" onclick="showSection('tecnica')">1. Datos Técnicos</div>
+            <div class="step" onclick="showSection('logistica')">2. Logística</div>
+            <div class="step" onclick="showSection('resumen')">3. Confirmación</div>
+        </div>
+
+        <!-- SECCIÓN 1: DATOS TÉCNICOS -->
+        <form id="form-tecnica" class="form-section active">
+            <h2 class="section-title">📋 Datos Técnicos del Torneo</h2>
+            
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="nombre-torneo">Nombre del Torneo *</label>
+                    <input type="text" id="nombre-torneo" required placeholder="Ej: Torneo Nacional 2025">
+                </div>
+                
+                <div class="form-group">
+                    <label for="fecha-inicio">Fecha Inicio *</label>
+                    <input type="date" id="fecha-inicio" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="fecha-fin">Fecha Fin *</label>
+                    <input type="date" id="fecha-fin" required>
+                </div>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="lugar">Lugar y Sede *</label>
+                    <input type="text" id="lugar" required placeholder="Palacio de Congresos de Madrid">
+                </div>
+                
+                <div class="form-group">
+                    <label for="entidad">Entidad Organizadora *</label>
+                    <input type="text" id="entidad" required placeholder="Federación Española de Ajedrez">
+                </div>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="organizador">Organizador Principal *</label>
+                    <input type="text" id="organizador" required placeholder="Nombre del organizador">
+                </div>
+                
+                <div class="form-group">
+                    <label for="arbitro">Árbitro Principal *</label>
+                    <input type="text" id="arbitro" required placeholder="Nombre del árbitro">
+                </div>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="sistema-juego">Sistema de Juego *</label>
+                    <select id="sistema-juego" required>
+                        <option value="">Seleccionar...</option>
+                        <option value="swiss">Sistema Suizo</option>
+                        <option value="round-robin">Round Robin</option>
+                        <option value="knockout">Eliminación Directa</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ritmo-juego">Ritmo de Juego *</label>
+                    <input type="text" id="ritmo-juego" required placeholder="90min + 30seg">
+                </div>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="modalidad">Modalidad *</label>
+                    <select id="modalidad" required>
+                        <option value="">Seleccionar...</option>
+                        <option value="presencial">Presencial</option>
+                        <option value="online">Online</option>
+                        <option value="hibrido">Híbrido</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="max-participantes">Máx. Participantes</label>
+                    <input type="number" id="max-participantes" min="2" placeholder="100">
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <div></div>
+                <button type="button" class="btn btn-primary" onclick="validarTecnica()">
+                    Continuar a Logística →
+                </button>
+            </div>
+        </form>
+
+        <!-- SECCIÓN 2: LOGÍSTICA Y CATEGORIZACIÓN -->
+        <form id="form-logistica" class="form-section">
+            <h2 class="section-title">🏨 Logística y Categorización</h2>
+            
+            <div class="form-group">
+                <label>Categoría del Evento</label>
+                <div class="rating-system" id="rating-stars">
+                    <span class="star" data-rating="1">♔</span>
+                    <span class="star" data-rating="2">♔</span>
+                    <span class="star" data-rating="3">♔</span>
+                    <span class="star" data-rating="4">♔</span>
+                    <span class="star" data-rating="5">♔</span>
+                </div>
+                <small id="rating-description" style="color: #6b7280;">Provisional - Pendiente ratificación CO</small>
+            </div>
+
+            <h3 style="font-size: 1rem; margin: 1rem 0 0.5rem 0;">📊 Criterios de Categorización</h3>
+            <div class="criteria-grid" id="criteria-list">
+                <!-- Los criterios se generarán con JavaScript -->
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="presupuesto">Presupuesto Total (€)</label>
+                    <input type="number" id="presupuesto" min="0" placeholder="50000">
+                </div>
+                
+                <div class="form-group">
+                    <label for="patrocinadores">Patrocinadores</label>
+                    <textarea id="patrocinadores" rows="2" placeholder="Patrocinadores principales..."></textarea>
+                </div>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="hotel-principal">Hotel Principal</label>
+                    <input type="text" id="hotel-principal" placeholder="Hotel oficial">
+                </div>
+                
+                <div class="form-group">
+                    <label for="transmision">Transmisión en Vivo</label>
+                    <select id="transmision">
+                        <option value="">Seleccionar...</option>
+                        <option value="si">Sí</option>
+                        <option value="no">No</option>
+                        <option value="parcial">Parcial</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" onclick="showSection('tecnica')">
+                    ← Volver
+                </button>
+                <button type="button" class="btn btn-primary" onclick="validarLogistica()">
+                    Ver Resumen →
+                </button>
+            </div>
+        </form>
+
+        <!-- SECCIÓN 3: RESUMEN Y CONFIRMACIÓN -->
+        <div id="form-resumen" class="form-section">
+            <h2 class="section-title">✅ Resumen del Evento</h2>
+            
+            <div id="resumen-contenido">
+                <!-- El resumen se generará con JavaScript -->
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" onclick="showSection('logistica')">
+                    ← Volver
+                </button>
+                <button type="button" class="btn btn-primary" onclick="crearEvento()">
+                    🚀 Crear Evento
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sistema de 10 criterios principales (simplificado)
+        const criteriosCO = [
+            { id: 1, nombre: "Presupuesto > 50.000€", puntos: 1 },
+            { id: 2, nombre: "Apoyo federación nacional", puntos: 1 },
+            { id: 3, nombre: "Transmisión en vivo", puntos: 1 },
+            { id: 4, nombre: "Al menos 3 GMs", puntos: 1 },
+            { id: 5, nombre: "Premios > 10.000€", puntos: 1 },
+            { id: 6, nombre: "Sede capacidad > 500", puntos: 1 },
+            { id: 7, nombre: "Hotel 4-5 estrellas", puntos: 1 },
+            { id: 8, nombre: "Medios nacionales", puntos: 1 },
+            { id: 9, nombre: "Programa social", puntos: 1 },
+            { id: 10, nombre: "Sponsors internacionales", puntos: 1 }
+        ];
+
+        let ratingActual = 0;
+        let criteriosCumplidos = [];
+
+        // Navegación entre secciones
+        function showSection(sectionName) {
+            document.querySelectorAll('.form-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            document.getElementById(`form-${sectionName}`).classList.add('active');
+            
+            document.querySelectorAll('.step').forEach((step, index) => {
+                step.classList.remove('active');
+            });
+            
+            const stepIndex = ['tecnica', 'logistica', 'resumen'].indexOf(sectionName);
+            document.querySelectorAll('.step')[stepIndex].classList.add('active');
+            
+            if (sectionName === 'resumen') {
+                generarResumen();
+            }
+        }
+
+        // Validación sección técnica
+        function validarTecnica() {
+            const required = ['nombre-torneo', 'fecha-inicio', 'fecha-fin', 'lugar', 'entidad', 'organizador', 'arbitro', 'sistema-juego', 'ritmo-juego', 'modalidad'];
+            let valid = true;
+
+            required.forEach(field => {
+                const element = document.getElementById(field);
+                if (!element.value) {
+                    valid = false;
+                    element.style.borderColor = 'var(--error)';
+                } else {
+                    element.style.borderColor = '';
+                }
+            });
+
+            if (valid) {
+                showSection('logistica');
+            } else {
+                alert('Por favor, completa todos los campos obligatorios (*)');
+            }
+        }
+
+        // Validación sección logística
+        function validarLogistica() {
+            showSection('resumen');
+        }
+
+        // Sistema de rating
+        function inicializarRating() {
+            const stars = document.querySelectorAll('.star');
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    const rating = parseInt(this.getAttribute('data-rating'));
+                    ratingActual = rating;
+                    
+                    stars.forEach(s => {
+                        if (parseInt(s.getAttribute('data-rating')) <= rating) {
+                            s.classList.add('active');
+                        } else {
+                            s.classList.remove('active');
+                        }
+                    });
+                    
+                    const descriptions = [
+                        "Evento Local",
+                        "Evento Regional", 
+                        "Evento Nacional",
+                        "Evento Internacional",
+                        "Evento Élite"
+                    ];
+                    document.getElementById('rating-description').textContent = 
+                        `${descriptions[rating-1]} - Provisional - Pendiente ratificación CO`;
+                });
+            });
+        }
+
+        // Sistema de criterios
+        function inicializarCriterios() {
+            const container = document.getElementById('criteria-list');
+            
+            criteriosCO.forEach(criterio => {
+                const item = document.createElement('div');
+                item.className = 'criteria-item';
+                item.innerHTML = `
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                        <input type="checkbox" value="${criterio.id}" onchange="actualizarCriterio(this)">
+                        ${criterio.nombre}
+                    </label>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        function actualizarCriterio(checkbox) {
+            const criterioId = parseInt(checkbox.value);
+            const item = checkbox.closest('.criteria-item');
+            
+            if (checkbox.checked) {
+                criteriosCumplidos.push(criterioId);
+                item.classList.add('fulfilled');
+            } else {
+                criteriosCumplidos = criteriosCumplidos.filter(id => id !== criterioId);
+                item.classList.remove('fulfilled');
+            }
+        }
+
+        // Generar resumen
+        function generarResumen() {
+            const container = document.getElementById('resumen-contenido');
+            const datosTecnicos = obtenerDatosTecnicos();
+            const datosLogistica = obtenerDatosLogistica();
+            
+            container.innerHTML = `
+                <div style="background: #f0f9ff; padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
+                    <h3 style="color: #0369a1; margin-top: 0; font-size: 1.1rem;">🎯 Resumen del Evento</h3>
+                    
+                    <div class="resumen-item">
+                        <strong>Nombre:</strong> ${datosTecnicos.nombre}
+                    </div>
+                    <div class="resumen-item">
+                        <strong>Fechas:</strong> ${datosTecnicos.fechas}
+                    </div>
+                    <div class="resumen-item">
+                        <strong>Lugar:</strong> ${datosTecnicos.lugar}
+                    </div>
+                    <div class="resumen-item">
+                        <strong>Sistema:</strong> ${datosTecnicos.sistema}
+                    </div>
+                    <div class="resumen-item">
+                        <strong>Categoría:</strong> ${ratingActual} ${ratingActual === 1 ? 'Rey' : 'Reyes'} - ${criteriosCumplidos.length}/10 criterios
+                    </div>
+                    <div class="resumen-item">
+                        <strong>Presupuesto:</strong> ${datosLogistica.presupuesto}
+                    </div>
+                    
+                    <div style="margin-top: 1rem; padding: 0.75rem; background: white; border-radius: 6px;">
+                        <h4 style="margin: 0 0 0.5rem 0; font-size: 0.9rem;">📊 Progreso Categorización CO</h4>
+                        <div style="background: #e5e7eb; height: 15px; border-radius: 8px; margin: 0.25rem 0;">
+                            <div style="background: #10b981; height: 100%; width: ${(criteriosCumplidos.length / 10) * 100}%; border-radius: 8px;"></div>
+                        </div>
+                        <small style="color: #6b7280;">${criteriosCumplidos.length} de 10 criterios cumplidos</small>
+                    </div>
+                </div>
+            `;
+        }
+
+        function obtenerDatosTecnicos() {
+            const sistemaTexto = {
+                'swiss': 'Sistema Suizo',
+                'round-robin': 'Round Robin',
+                'knockout': 'Eliminación Directa'
+            };
+            
+            const modalidadTexto = {
+                'presencial': 'Presencial',
+                'online': 'Online', 
+                'hibrido': 'Híbrido'
+            };
+
+            return {
+                nombre: document.getElementById('nombre-torneo').value,
+                fechas: `${document.getElementById('fecha-inicio').value} al ${document.getElementById('fecha-fin').value}`,
+                lugar: document.getElementById('lugar').value,
+                sistema: sistemaTexto[document.getElementById('sistema-juego').value] || document.getElementById('sistema-juego').value,
+                modalidad: modalidadTexto[document.getElementById('modalidad').value] || document.getElementById('modalidad').value
+            };
+        }
+
+        function obtenerDatosLogistica() {
+            return {
+                presupuesto: document.getElementById('presupuesto').value ? `${document.getElementById('presupuesto').value}€` : 'No especificado'
+            };
+        }
+
+        // Crear evento final
+        function crearEvento() {
+            const eventoData = {
+                tecnica: obtenerDatosTecnicos(),
+                logistica: obtenerDatosLogistica(),
+                rating: ratingActual,
+                criteriosCumplidos: criteriosCumplidos,
+                fechaCreacion: new Date().toISOString()
+            };
+            
+            console.log('Evento creado:', eventoData);
+            alert('✅ Evento creado exitosamente!\n\nPróximamente se guardará en la base de datos Firestore.');
+            window.location.href = '/dashboard.html';
+        }
+
+        // Inicializar cuando cargue la página
+        document.addEventListener('DOMContentLoaded', function() {
+            inicializarRating();
+            inicializarCriterios();
+            
+            // Establecer fecha mínima como hoy
+            const hoy = new Date().toISOString().split('T')[0];
+            document.getElementById('fecha-inicio').min = hoy;
+            document.getElementById('fecha-fin').min = hoy;
+        });
+    </script>
+</body>
+</html>
