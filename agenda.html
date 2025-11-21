@@ -1,0 +1,1637 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Organizers - Agenda del Evento</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --info-color: #9b59b6;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --sidebar-width: 250px;
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --hover-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: linear-gradient(180deg, var(--primary-color) 0%, #1a2530 100%);
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+
+        .logo {
+            text-align: center;
+            padding: 20px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 10px;
+            background: linear-gradient(135deg, #fff 0%, #e1e8ed 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .menu {
+            list-style: none;
+            padding: 0 15px;
+        }
+
+        .menu-item {
+            margin-bottom: 5px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .menu-item.active {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #2980b9 100%);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .menu-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .menu-link i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            background-color: #f5f7fa;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e1e8ed;
+        }
+
+        .page-title h1 {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .page-title p {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #2980b9 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success-color) 0%, #27ae60 100%);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(46, 204, 113, 0.4);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--secondary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Calendar Layout */
+        .calendar-layout {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+            flex: 1;
+        }
+
+        /* Calendar Sidebar */
+        .calendar-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Mini Calendar */
+        .mini-calendar {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .mini-calendar:hover {
+            box-shadow: var(--hover-shadow);
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .calendar-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+
+        .calendar-day {
+            text-align: center;
+            padding: 8px 5px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #7f8c8d;
+        }
+
+        .calendar-date {
+            text-align: center;
+            padding: 8px 5px;
+            font-size: 0.85rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .calendar-date:hover {
+            background-color: #f8f9fa;
+            transform: scale(1.1);
+        }
+
+        .calendar-date.today {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #2980b9 100%);
+            color: white;
+            box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3);
+        }
+
+        .calendar-date.selected {
+            background: linear-gradient(135deg, var(--success-color) 0%, #27ae60 100%);
+            color: white;
+            box-shadow: 0 3px 10px rgba(46, 204, 113, 0.3);
+        }
+
+        .calendar-date.has-events {
+            position: relative;
+            font-weight: 600;
+        }
+
+        .calendar-date.has-events::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-color) 0%, #c0392b 100%);
+        }
+
+        /* Team Status */
+        .team-status {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .team-status:hover {
+            box-shadow: var(--hover-shadow);
+        }
+
+        .team-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .team-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .team-members {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .team-member {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 8px;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .team-member:hover {
+            background: #f8f9fa;
+            border-color: #e1e8ed;
+            transform: translateY(-2px);
+        }
+
+        .member-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #2980b9 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3);
+        }
+
+        .member-info {
+            flex: 1;
+        }
+
+        .member-name {
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .member-role {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+        }
+
+        .member-status {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .status-online {
+            background: linear-gradient(135deg, var(--success-color) 0%, #27ae60 100%);
+        }
+
+        .status-busy {
+            background: linear-gradient(135deg, var(--warning-color) 0%, #e67e22 100%);
+        }
+
+        .status-offline {
+            background: linear-gradient(135deg, #bdc3c7 0%, #95a5a6 100%);
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .quick-actions:hover {
+            box-shadow: var(--hover-shadow);
+        }
+
+        .actions-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* Main Calendar Area */
+        .calendar-main {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Calendar Controls */
+        .calendar-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .calendar-controls:hover {
+            box-shadow: var(--hover-shadow);
+        }
+
+        .view-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .view-option {
+            padding: 10px 18px;
+            border: 1px solid #e1e8ed;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .view-option:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .view-option.active {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #2980b9 100%);
+            color: white;
+            border-color: var(--secondary-color);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .current-date {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        /* Daily Schedule */
+        .daily-schedule {
+            background: white;
+            border-radius: 12px;
+            padding: 0;
+            box-shadow: var(--card-shadow);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+
+        .daily-schedule:hover {
+            box-shadow: var(--hover-shadow);
+        }
+
+        .schedule-header {
+            padding: 20px;
+            border-bottom: 1px solid #e1e8ed;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px 12px 0 0;
+        }
+
+        .schedule-title {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+
+        .schedule-date {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+        }
+
+        .schedule-grid {
+            flex: 1;
+            overflow-y: auto;
+            max-height: 600px;
+        }
+
+        .time-slot {
+            display: flex;
+            border-bottom: 1px solid #f1f3f4;
+            min-height: 80px;
+            transition: all 0.3s;
+        }
+
+        .time-slot:hover {
+            background: #f8f9fa;
+        }
+
+        .time-label {
+            width: 80px;
+            padding: 10px 15px;
+            font-weight: 600;
+            color: #7f8c8d;
+            border-right: 1px solid #f1f3f4;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-end;
+            background: #f8f9fa;
+        }
+
+        .events-container {
+            flex: 1;
+            padding: 5px;
+            position: relative;
+        }
+
+        .calendar-event {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #2980b9 100%);
+            color: white;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 5px;
+            cursor: pointer;
+            position: relative;
+            border-left: 4px solid var(--accent-color);
+            box-shadow: 0 3px 10px rgba(52, 152, 219, 0.2);
+            transition: all 0.3s;
+        }
+
+        .calendar-event:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .calendar-event.urgent {
+            background: linear-gradient(135deg, var(--accent-color) 0%, #c0392b 100%);
+            border-left: 4px solid #c0392b;
+        }
+
+        .calendar-event.completed {
+            background: linear-gradient(135deg, var(--success-color) 0%, #27ae60 100%);
+            border-left: 4px solid #27ae60;
+            opacity: 0.8;
+        }
+
+        .calendar-event.meeting {
+            background: linear-gradient(135deg, var(--info-color) 0%, #8e44ad 100%);
+            border-left: 4px solid #8e44ad;
+        }
+
+        .event-time {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            margin-bottom: 2px;
+            font-weight: 600;
+        }
+
+        .event-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .event-desc {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            margin-top: 4px;
+        }
+
+        /* Task List */
+        .task-list {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .task-list:hover {
+            box-shadow: var(--hover-shadow);
+        }
+
+        .task-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .task-title {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .tasks-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #e1e8ed;
+            transition: all 0.3s;
+            background: #f8f9fa;
+        }
+
+        .task-item:hover {
+            background: white;
+            border-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .task-item.completed {
+            opacity: 0.7;
+            background: #f8f9fa;
+        }
+
+        .task-item.completed .task-content {
+            text-decoration: line-through;
+        }
+
+        .task-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #bdc3c7;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .task-item.completed .task-checkbox {
+            background: linear-gradient(135deg, var(--success-color) 0%, #27ae60 100%);
+            border-color: var(--success-color);
+            color: white;
+            box-shadow: 0 3px 10px rgba(46, 204, 113, 0.3);
+        }
+
+        .task-content {
+            flex: 1;
+        }
+
+        .task-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+            font-size: 1rem;
+        }
+
+        .task-meta {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .task-actions {
+            display: flex;
+            gap: 8px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .task-item:hover .task-actions {
+            opacity: 1;
+        }
+
+        .task-btn {
+            background: none;
+            border: none;
+            color: #7f8c8d;
+            cursor: pointer;
+            padding: 6px;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+
+        .task-btn:hover {
+            background: #e1e8ed;
+            color: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        /* Notes Section */
+        .notes-section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .notes-section:hover {
+            box-shadow: var(--hover-shadow);
+        }
+
+        .notes-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .notes-title {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .notes-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .note-item {
+            padding: 18px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid var(--warning-color);
+            transition: all 0.3s;
+        }
+
+        .note-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .note-content {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .note-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: #7f8c8d;
+        }
+
+        .note-author {
+            font-weight: 600;
+        }
+
+        /* Status Badges */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-urgent {
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.15) 0%, rgba(192, 57, 43, 0.15) 100%);
+            color: var(--accent-color);
+        }
+
+        .status-in-progress {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.15) 0%, rgba(41, 128, 185, 0.15) 100%);
+            color: var(--secondary-color);
+        }
+
+        .status-completed {
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.15) 0%, rgba(39, 174, 96, 0.15) 100%);
+            color: var(--success-color);
+        }
+
+        /* Mobile menu toggle */
+        .mobile-menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: var(--primary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            z-index: 101;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .calendar-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .calendar-sidebar {
+                order: 2;
+            }
+            
+            .calendar-main {
+                order: 1;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+            
+            .header-actions {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            
+            .calendar-controls {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .view-options {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 70px;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .sidebar .logo h1,
+            .sidebar .menu-link span {
+                display: none;
+            }
+            
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+            
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            
+            .calendar-controls {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .view-options {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .task-meta {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .page-title h1 {
+                font-size: 1.8rem;
+            }
+            
+            .current-date {
+                font-size: 1.1rem;
+            }
+            
+            .btn {
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
+            
+            .task-list,
+            .notes-section {
+                padding: 20px;
+            }
+            
+            .note-meta {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+    </div>
+    
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="logo">
+                <div class="logo-img">
+                    <i class="fas fa-chess-knight"></i>
+                </div>
+                <h1>Chess Organizers</h1>
+            </div>
+            <ul class="menu">
+                <li class="menu-item"><a href="dashboard.html" class="menu-link"><i class="fas fa-tachometer-alt"></i> <span>Panel</span></a></li>
+                <li class="menu-item"><a href="torneos.html" class="menu-link"><i class="fas fa-trophy"></i> <span>Torneo</span></a></li>
+                <li class="menu-item active"><a href="agenda.html" class="menu-link"><i class="fas fa-calendar-alt"></i> <span>Agenda</span></a></li>
+                <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-lightbulb"></i> <span>Anteproyecto</span></a></li>
+                <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-project-diagram"></i> <span>Proyecto</span></a></li>
+                <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-calendar-check"></i> <span>Evento</span></a></li>
+                <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-chart-line"></i> <span>Post Evento</span></a></li>
+                <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-users"></i> <span>Team Evento</span></a></li>
+                <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-chart-bar"></i> <span>Informes</span></a></li>
+                <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-images"></i> <span>Galería</span></a></li>
+                <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-users"></i> <span>Comunidad</span></a></li>
+                <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-address-book"></i> <span>CRM</span></a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="page-title">
+                    <h1>Agenda del Evento</h1>
+                    <p>Timón de navegación para la coordinación diaria del equipo</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-outline" onclick="shareAgenda()">
+                        <i class="fas fa-share-alt"></i>
+                        <span>Compartir Agenda</span>
+                    </button>
+                    <button class="btn btn-primary" onclick="addNewEvent()">
+                        <i class="fas fa-plus"></i>
+                        <span>Nuevo Evento</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Calendar Layout -->
+            <div class="calendar-layout">
+                <!-- Left Sidebar -->
+                <div class="calendar-sidebar">
+                    <!-- Mini Calendar -->
+                    <div class="mini-calendar">
+                        <div class="calendar-header">
+                            <div class="calendar-title">Noviembre 2025</div>
+                            <div>
+                                <button class="task-btn"><i class="fas fa-chevron-left"></i></button>
+                                <button class="task-btn"><i class="fas fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                        
+                        <div class="calendar-grid">
+                            <div class="calendar-day">Lun</div>
+                            <div class="calendar-day">Mar</div>
+                            <div class="calendar-day">Mié</div>
+                            <div class="calendar-day">Jue</div>
+                            <div class="calendar-day">Vie</div>
+                            <div class="calendar-day">Sáb</div>
+                            <div class="calendar-day">Dom</div>
+                            
+                            <!-- Calendar Dates -->
+                            <div class="calendar-date">27</div>
+                            <div class="calendar-date">28</div>
+                            <div class="calendar-date">29</div>
+                            <div class="calendar-date">30</div>
+                            <div class="calendar-date">31</div>
+                            <div class="calendar-date">1</div>
+                            <div class="calendar-date">2</div>
+                            <div class="calendar-date">3</div>
+                            <div class="calendar-date">4</div>
+                            <div class="calendar-date">5</div>
+                            <div class="calendar-date">6</div>
+                            <div class="calendar-date has-events">7</div>
+                            <div class="calendar-date">8</div>
+                            <div class="calendar-date">9</div>
+                            <div class="calendar-date has-events">10</div>
+                            <div class="calendar-date">11</div>
+                            <div class="calendar-date">12</div>
+                            <div class="calendar-date">13</div>
+                            <div class="calendar-date">14</div>
+                            <div class="calendar-date">15</div>
+                            <div class="calendar-date has-events">16</div>
+                            <div class="calendar-date">17</div>
+                            <div class="calendar-date">18</div>
+                            <div class="calendar-date today selected">19</div>
+                            <div class="calendar-date">20</div>
+                            <div class="calendar-date">21</div>
+                            <div class="calendar-date">22</div>
+                            <div class="calendar-date">23</div>
+                            <div class="calendar-date">24</div>
+                            <div class="calendar-date has-events">25</div>
+                            <div class="calendar-date">26</div>
+                            <div class="calendar-date">27</div>
+                            <div class="calendar-date">28</div>
+                            <div class="calendar-date">29</div>
+                            <div class="calendar-date">30</div>
+                        </div>
+                    </div>
+
+                    <!-- Team Status -->
+                    <div class="team-status">
+                        <div class="team-header">
+                            <div class="team-title">Team Evento</div>
+                            <button class="task-btn" onclick="manageTeam()">
+                                <i class="fas fa-cog"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="team-members">
+                            <div class="team-member">
+                                <div class="member-avatar">CR</div>
+                                <div class="member-info">
+                                    <div class="member-name">Carlos Rodríguez</div>
+                                    <div class="member-role">Director del Torneo</div>
+                                </div>
+                                <div class="member-status status-online"></div>
+                            </div>
+                            
+                            <div class="team-member">
+                                <div class="member-avatar">MG</div>
+                                <div class="member-info">
+                                    <div class="member-name">María González</div>
+                                    <div class="member-role">Árbitro Principal</div>
+                                </div>
+                                <div class="member-status status-busy"></div>
+                            </div>
+                            
+                            <div class="team-member">
+                                <div class="member-avatar">AP</div>
+                                <div class="member-info">
+                                    <div class="member-name">Ana Pérez</div>
+                                    <div class="member-role">Coordinadora Logística</div>
+                                </div>
+                                <div class="member-status status-online"></div>
+                            </div>
+                            
+                            <div class="team-member">
+                                <div class="member-avatar">JL</div>
+                                <div class="member-info">
+                                    <div class="member-name">Javier López</div>
+                                    <div class="member-role">Responsable Streaming</div>
+                                </div>
+                                <div class="member-status status-offline"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="quick-actions">
+                        <div class="actions-title">Acciones Rápidas</div>
+                        
+                        <div class="action-buttons">
+                            <button class="btn btn-outline" onclick="sendTeamUpdate()">
+                                <i class="fas fa-bullhorn"></i>
+                                <span>Enviar Actualización</span>
+                            </button>
+                            
+                            <button class="btn btn-outline" onclick="generateDailyReport()">
+                                <i class="fas fa-file-alt"></i>
+                                <span>Reporte Diario</span>
+                            </button>
+                            
+                            <button class="btn btn-outline" onclick="scheduleMeeting()">
+                                <i class="fas fa-video"></i>
+                                <span>Reunión Rápida</span>
+                            </button>
+                            
+                            <button class="btn btn-outline" onclick="checkCriticalTasks()">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <span>Tareas Críticas</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Calendar Area -->
+                <div class="calendar-main">
+                    <!-- Calendar Controls -->
+                    <div class="calendar-controls">
+                        <div class="view-options">
+                            <button class="view-option active">Día</button>
+                            <button class="view-option">Semana</button>
+                            <button class="view-option">Mes</button>
+                            <button class="view-option">Evento</button>
+                        </div>
+                        
+                        <div class="current-date">Miércoles, 19 de Noviembre 2025</div>
+                        
+                        <div>
+                            <button class="btn btn-outline" onclick="previousDay()">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="btn btn-outline" onclick="goToToday()">Hoy</button>
+                            <button class="btn btn-outline" onclick="nextDay()">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Daily Schedule -->
+                    <div class="daily-schedule">
+                        <div class="schedule-header">
+                            <div class="schedule-title">Agenda del Día - Día 3 del Torneo</div>
+                            <div class="schedule-date">Rondas 5-6 | 85 participantes activos</div>
+                        </div>
+                        
+                        <div class="schedule-grid">
+                            <!-- Time Slots from 8:00 to 20:00 -->
+                            <div class="time-slot">
+                                <div class="time-label">08:00</div>
+                                <div class="events-container">
+                                    <div class="calendar-event">
+                                        <div class="event-time">08:00 - 08:30</div>
+                                        <div class="event-title">Briefing Matutino</div>
+                                        <div class="event-desc">Coordinación con equipo arbitral</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="time-slot">
+                                <div class="time-label">08:30</div>
+                                <div class="events-container">
+                                    <div class="calendar-event">
+                                        <div class="event-time">08:30 - 09:00</div>
+                                        <div class="event-title">Preparación Salas</div>
+                                        <div class="event-desc">Verificación tableros y relojes</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="time-slot">
+                                <div class="time-label">09:00</div>
+                                <div class="events-container">
+                                    <div class="calendar-event">
+                                        <div class="event-time">09:00 - 09:30</div>
+                                        <div class="event-title">Llegada Participantes</div>
+                                        <div class="event-desc">Registro y acomodación</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="time-slot">
+                                <div class="time-label">09:30</div>
+                                <div class="events-container">
+                                    <div class="calendar-event urgent">
+                                        <div class="event-time">09:30 - 13:00</div>
+                                        <div class="event-title">Ronda 5</div>
+                                        <div class="event-desc">Ritmo: 90' + 30" | Sala Principal</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="time-slot">
+                                <div class="time-label">13:00</div>
+                                <div class="events-container">
+                                    <div class="calendar-event completed">
+                                        <div class="event-time">13:00 - 14:00</div>
+                                        <div class="event-title">Almuerzo</div>
+                                        <div class="event-desc">Catering para participantes</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="time-slot">
+                                <div class="time-label">14:00</div>
+                                <div class="events-container">
+                                    <div class="calendar-event meeting">
+                                        <div class="event-time">14:00 - 14:30</div>
+                                        <div class="event-title">Reunión Técnica</div>
+                                        <div class="event-desc">Análisis incidencias primera mitad</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="time-slot">
+                                <div class="time-label">14:30</div>
+                                <div class="events-container">
+                                    <div class="calendar-event urgent">
+                                        <div class="event-time">14:30 - 18:00</div>
+                                        <div class="event-title">Ronda 6</div>
+                                        <div class="event-desc">Ritmo: 90' + 30" | Sala Principal</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="time-slot">
+                                <div class="time-label">18:00</div>
+                                <div class="events-container">
+                                    <div class="calendar-event">
+                                        <div class="event-time">18:00 - 18:30</div>
+                                        <div class="event-title">Análisis Resultados</div>
+                                        <div class="event-desc">Preparación emparejamientos ronda 7</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="time-slot">
+                                <div class="time-label">18:30</div>
+                                <div class="events-container">
+                                    <div class="calendar-event">
+                                        <div class="event-time">18:30 - 19:00</div>
+                                        <div class="event-title">Publicación Resultados</div>
+                                        <div class="event-desc">Sistema y paneles informativos</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="time-slot">
+                                <div class="time-label">19:00</div>
+                                <div class="events-container">
+                                    <div class="calendar-event">
+                                        <div class="event-time">19:00 - 19:30</div>
+                                        <div class="event-title">Briefing Nocturno</div>
+                                        <div class="event-desc">Coordinación equipo para mañana</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="time-slot">
+                                <div class="time-label">19:30</div>
+                                <div class="events-container">
+                                    <div class="calendar-event">
+                                        <div class="event-time">19:30 - 20:00</div>
+                                        <div class="event-title">Cierre Diario</div>
+                                        <div class="event-desc">Verificación instalaciones y seguridad</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Task List -->
+                    <div class="task-list">
+                        <div class="task-header">
+                            <div class="task-title">Checklist Inteligente del Día</div>
+                            <button class="btn btn-outline" onclick="addNewTask()">
+                                <i class="fas fa-plus"></i>
+                                <span>Nueva Tarea</span>
+                            </button>
+                        </div>
+                        
+                        <div class="tasks-container">
+                            <div class="task-item completed">
+                                <div class="task-checkbox">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <div class="task-content">
+                                    <div class="task-name">Confirmar asistencia árbitros</div>
+                                    <div class="task-meta">
+                                        <span>Asignado: María González</span>
+                                        <span>08:00</span>
+                                    </div>
+                                </div>
+                                <div class="task-actions">
+                                    <button class="task-btn" onclick="editTask(1)"><i class="fas fa-edit"></i></button>
+                                    <button class="task-btn" onclick="deleteTask(1)"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                            
+                            <div class="task-item">
+                                <div class="task-checkbox"></div>
+                                <div class="task-content">
+                                    <div class="task-name">Verificar sistema de streaming</div>
+                                    <div class="task-meta">
+                                        <span>Asignado: Javier López</span>
+                                        <span>09:00</span>
+                                        <span class="status-badge status-urgent">Urgente</span>
+                                    </div>
+                                </div>
+                                <div class="task-actions">
+                                    <button class="task-btn" onclick="editTask(2)"><i class="fas fa-edit"></i></button>
+                                    <button class="task-btn" onclick="deleteTask(2)"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                            
+                            <div class="task-item">
+                                <div class="task-checkbox"></div>
+                                <div class="task-content">
+                                    <div class="task-name">Coordinación con catering</div>
+                                    <div class="task-meta">
+                                        <span>Asignado: Ana Pérez</span>
+                                        <span>12:30</span>
+                                        <span class="status-badge status-in-progress">En Proceso</span>
+                                    </div>
+                                </div>
+                                <div class="task-actions">
+                                    <button class="task-btn" onclick="editTask(3)"><i class="fas fa-edit"></i></button>
+                                    <button class="task-btn" onclick="deleteTask(3)"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                            
+                            <div class="task-item">
+                                <div class="task-checkbox"></div>
+                                <div class="task-content">
+                                    <div class="task-name">Preparar salas para ronda 6</div>
+                                    <div class="task-meta">
+                                        <span>Asignado: Equipo Logística</span>
+                                        <span>13:45</span>
+                                    </div>
+                                </div>
+                                <div class="task-actions">
+                                    <button class="task-btn" onclick="editTask(4)"><i class="fas fa-edit"></i></button>
+                                    <button class="task-btn" onclick="deleteTask(4)"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                            
+                            <div class="task-item">
+                                <div class="task-checkbox"></div>
+                                <div class="task-content">
+                                    <div class="task-name">Revisión incidencias arbitrales</div>
+                                    <div class="task-meta">
+                                        <span>Asignado: Carlos Rodríguez</span>
+                                        <span>18:15</span>
+                                    </div>
+                                </div>
+                                <div class="task-actions">
+                                    <button class="task-btn" onclick="editTask(5)"><i class="fas fa-edit"></i></button>
+                                    <button class="task-btn" onclick="deleteTask(5)"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notes Section -->
+                    <div class="notes-section">
+                        <div class="notes-header">
+                            <div class="notes-title">Notas y Comentarios del Equipo</div>
+                            <button class="btn btn-outline" onclick="addNewNote()">
+                                <i class="fas fa-plus"></i>
+                                <span>Nueva Nota</span>
+                            </button>
+                        </div>
+                        
+                        <div class="notes-container">
+                            <div class="note-item">
+                                <div class="note-content">
+                                    <strong>Incidencia Relojes:</strong> Revisar relojes en mesas 15-18, varios participantes reportan malfuncionamiento en el incremento.
+                                </div>
+                                <div class="note-meta">
+                                    <span class="note-author">María González</span>
+                                    <span>Hace 2 horas</span>
+                                </div>
+                            </div>
+                            
+                            <div class="note-item">
+                                <div class="note-content">
+                                    <strong>Streaming:</strong> Cámaras principales funcionando correctamente. Problema de audio en sala secundaria, equipo técnico trabajando en ello.
+                                </div>
+                                <div class="note-meta">
+                                    <span class="note-author">Javier López</span>
+                                    <span>Hace 1 hora</span>
+                                </div>
+                            </div>
+                            
+                            <div class="note-item">
+                                <div class="note-content">
+                                    <strong>Logística:</strong> Catering confirmado para 120 personas. Necesitamos confirmar números exactos para mañana antes de las 16:00.
+                                </div>
+                                <div class="note-meta">
+                                    <span class="note-author">Ana Pérez</span>
+                                    <span>Hace 45 minutos</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Estado de la aplicación
+        const appState = {
+            currentDate: new Date(),
+            selectedDate: new Date(),
+            events: [],
+            tasks: [],
+            teamMembers: [
+                { id: 1, name: 'Carlos Rodríguez', role: 'Director del Torneo', status: 'online' },
+                { id: 2, name: 'María González', role: 'Árbitro Principal', status: 'busy' },
+                { id: 3, name: 'Ana Pérez', role: 'Coordinadora Logística', status: 'online' },
+                { id: 4, name: 'Javier López', role: 'Responsable Streaming', status: 'offline' }
+            ],
+            notes: []
+        };
+
+        // Inicializar la aplicación
+        function initializeApp() {
+            // Cargar datos iniciales
+            loadInitialData();
+            
+            // Configurar event listeners
+            setupEventListeners();
+            
+            // Configurar menú móvil
+            setupMobileMenu();
+            
+            // Actualizar UI
+            updateUI();
+            
+            console.log('📅 Agenda del evento inicializada');
+        }
+
+        // Configurar menú móvil
+        function setupMobileMenu() {
+            const menuToggle = document.getElementById('menuToggle');
+            const sidebar = document.getElementById('sidebar');
+            
+            if (menuToggle && sidebar) {
+                menuToggle.addEventListener('click', function() {
+                    sidebar.classList.toggle('active');
+                });
+            }
+        }
+
+        // Cargar datos iniciales
+        function loadInitialData() {
+            // En una implementación real, esto vendría de una API
+            appState.events = [
+                {
+                    id: 1,
+                    title: 'Briefing Matutino',
+                    startTime: '08:00',
+                    endTime: '08:30',
+                    description: 'Coordinación con equipo arbitral',
+                    type: 'meeting'
+                },
+                {
+                    id: 2,
+                    title: 'Ronda 5',
+                    startTime: '09:30',
+                    endTime: '13:00',
+                    description: 'Ritmo: 90\' + 30" | Sala Principal',
+                    type: 'urgent'
+                }
+            ];
+            
+            appState.tasks = [
+                {
+                    id: 1,
+                    name: 'Confirmar asistencia árbitros',
+                    assignedTo: 'María González',
+                    time: '08:00',
+                    completed: true,
+                    priority: 'normal'
+                },
+                {
+                    id: 2,
+                    name: 'Verificar sistema de streaming',
+                    assignedTo: 'Javier López',
+                    time: '09:00',
+                    completed: false,
+                    priority: 'urgent'
+                }
+            ];
+            
+            appState.notes = [
+                {
+                    id: 1,
+                    content: 'Incidencia Relojes: Revisar relojes en mesas 15-18, varios participantes reportan malfuncionamiento en el incremento.',
+                    author: 'María González',
+                    timestamp: 'Hace 2 horas'
+                }
+            ];
+        }
+
+        // Añadir nuevo evento
+        function addNewEvent() {
+            alert('Añadir Nuevo Evento\n\nFormulario para programar nuevas actividades en la agenda.');
+        }
+
+        // Añadir nueva tarea
+        function addNewTask() {
+            alert('Añadir Nueva Tarea\n\nFormulario para crear nuevas tareas en el checklist.');
+        }
+
+        // Añadir nueva nota
+        function addNewNote() {
+            alert('Añadir Nueva Nota\n\nEditor para añadir comentarios y observaciones del equipo.');
+        }
+
+        // Compartir agenda
+        function shareAgenda() {
+            alert('Compartir Agenda\n\nOpciones para compartir la agenda con el equipo completo o miembros específicos.');
+        }
+
+        // Gestionar equipo
+        function manageTeam() {
+            alert('Gestionar Team Evento\n\nPanel de administración de miembros del equipo y sus roles.');
+        }
+
+        // Enviar actualización al equipo
+        function sendTeamUpdate() {
+            alert('Enviar Actualización al Equipo\n\nSistema de notificaciones push y email para el equipo.');
+        }
+
+        // Generar reporte diario
+        function generateDailyReport() {
+            alert('Generar Reporte Diario\n\nCreación automática del reporte de actividades del día.');
+        }
+
+        // Programar reunión
+        function scheduleMeeting() {
+            alert('Programar Reunión Rápida\n\nSistema de reserva de salas y notificación a participantes.');
+        }
+
+        // Ver tareas críticas
+        function checkCriticalTasks() {
+            alert('Tareas Críticas\n\nFiltro para mostrar solo las tareas de alta prioridad.');
+        }
+
+        // Navegación del calendario
+        function previousDay() {
+            appState.currentDate.setDate(appState.currentDate.getDate() - 1);
+            updateUI();
+        }
+
+        function nextDay() {
+            appState.currentDate.setDate(appState.currentDate.getDate() + 1);
+            updateUI();
+        }
+
+        function goToToday() {
+            appState.currentDate = new Date();
+            updateUI();
+        }
+
+        // Editar tarea
+        function editTask(taskId) {
+            alert(`Editar Tarea #${taskId}\n\nFormulario de edición de tareas.`);
+        }
+
+        // Eliminar tarea
+        function deleteTask(taskId) {
+            if (confirm('¿Estás seguro de que quieres eliminar esta tarea?')) {
+                appState.tasks = appState.tasks.filter(task => task.id !== taskId);
+                showNotification('Tarea eliminada correctamente', 'success');
+            }
+        }
+
+        // Actualizar UI
+        function updateUI() {
+            // Actualizar fecha actual
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const dateString = appState.currentDate.toLocaleDateString('es-ES', options);
+            document.querySelector('.current-date').textContent = dateString;
+            
+            // Actualizar fecha en el schedule header
+            const scheduleDate = document.querySelector('.schedule-date');
+            scheduleDate.textContent = `Día ${getDayOfEvent()} del Torneo | Rondas 5-6 | 85 participantes activos`;
+        }
+
+        // Obtener día del evento
+        function getDayOfEvent() {
+            // En una implementación real, calcularía basado en la fecha de inicio del torneo
+            return 3;
+        }
+
+        // Mostrar notificación
+        function showNotification(message, type) {
+            // En una implementación real, usaríamos un sistema de notificaciones toast
+            console.log(`[${type.toUpperCase()}] ${message}`);
+            alert(`[${type.toUpperCase()}] ${message}`);
+        }
+
+        // Configurar event listeners
+        function setupEventListeners() {
+            // Seleccionar fecha en mini calendario
+            document.querySelectorAll('.calendar-date').forEach(date => {
+                date.addEventListener('click', function() {
+                    document.querySelectorAll('.calendar-date').forEach(d => d.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+            
+            // Cambiar vista del calendario
+            document.querySelectorAll('.view-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.view-option').forEach(o => o.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        }
+
+        // Inicializar la aplicación al cargar
+        document.addEventListener('DOMContentLoaded', initializeApp);
+    </script>
+</body>
+</html>
