@@ -12,6 +12,10 @@
             --accent-color: #e74c3c;
             --light-color: #ecf0f1;
             --dark-color: #2c3e50;
+            --text-color: #2c3e50;
+            --text-light: #7f8c8d;
+            --card-bg: #ffffff;
+            --border-color: #e0e0e0;
             --success-color: #2ecc71;
             --warning-color: #f39c12;
             --danger-color: #e74c3c;
@@ -20,9 +24,13 @@
         }
 
         .dark-mode {
-            --primary-color: #34495e;
-            --light-color: #2c3e50;
+            --primary-color: #1a1a2e;
+            --light-color: #16213e;
             --dark-color: #ecf0f1;
+            --text-color: #ecf0f1;
+            --text-light: #bdc3c7;
+            --card-bg: #2c3e50;
+            --border-color: #34495e;
         }
 
         * {
@@ -34,7 +42,7 @@
 
         body {
             background-color: var(--light-color);
-            color: var(--dark-color);
+            color: var(--text-color);
             display: flex;
             min-height: 100vh;
             transition: all 0.3s;
@@ -153,12 +161,13 @@
             align-items: center;
             padding: 15px 0;
             margin-bottom: 30px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid var(--border-color);
         }
 
         .page-title h2 {
             font-size: 1.8rem;
             font-weight: 600;
+            color: var(--text-color);
         }
 
         .header-actions {
@@ -176,6 +185,7 @@
             display: flex;
             align-items: center;
             gap: 5px;
+            transition: all 0.3s ease;
         }
 
         .btn-primary {
@@ -192,10 +202,11 @@
             background: none;
             border: none;
             font-size: 1.2rem;
-            color: var(--dark-color);
+            color: var(--text-color);
             cursor: pointer;
             padding: 8px;
             border-radius: 50%;
+            transition: all 0.3s ease;
         }
 
         .icon-btn:hover {
@@ -208,14 +219,14 @@
             background: rgba(0, 0, 0, 0.05);
             border-radius: 25px;
             padding: 5px;
-            border: 1px solid rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
             position: relative;
         }
 
         .language-btn {
             background: none;
             border: none;
-            color: var(--dark-color);
+            color: var(--text-color);
             padding: 6px 15px;
             border-radius: 20px;
             cursor: pointer;
@@ -255,15 +266,16 @@
         }
 
         .stat-card {
-            background-color: white;
+            background-color: var(--card-bg);
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
         }
 
         .stat-card h3 {
             font-size: 0.9rem;
-            color: #7f8c8d;
+            color: var(--text-light);
             margin-bottom: 10px;
         }
 
@@ -271,26 +283,29 @@
             font-size: 2rem;
             font-weight: 700;
             margin-bottom: 5px;
+            color: var(--text-color);
         }
 
         .stat-card .subtitle {
             font-size: 0.8rem;
-            color: #7f8c8d;
+            color: var(--text-light);
         }
 
         /* Progress Section */
         .progress-section {
-            background-color: white;
+            background-color: var(--card-bg);
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             margin-bottom: 30px;
+            border: 1px solid var(--border-color);
         }
 
         .section-title {
             font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 20px;
+            color: var(--text-color);
         }
 
         .progress-table {
@@ -301,17 +316,18 @@
         .progress-table th, .progress-table td {
             padding: 10px;
             text-align: center;
-            border: 1px solid #eee;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
         }
 
         .progress-table th {
-            background-color: #f8f9fa;
+            background-color: var(--light-color);
             font-weight: 600;
         }
 
         .progress-bar {
             height: 10px;
-            background-color: #ecf0f1;
+            background-color: var(--border-color);
             border-radius: 5px;
             overflow: hidden;
             margin-top: 10px;
@@ -323,61 +339,117 @@
             width: 2%;
         }
 
-        /* Quick Guide */
+        /* Quick Guide - MEJORADO */
         .quick-guide {
-            background-color: white;
+            background-color: var(--card-bg);
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
         }
 
-        .guide-item {
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .guide-icon-item {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: var(--light-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            text-align: center;
         }
 
-        .guide-item:last-child {
-            border-bottom: none;
+        .guide-icon-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .guide-icon-item:hover .guide-icon {
+            background-color: white;
+            color: var(--secondary-color);
         }
 
         .guide-icon {
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             background-color: var(--secondary-color);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            margin-right: 15px;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
         }
 
-        .guide-content h4 {
-            font-size: 1rem;
+        .guide-icon-title {
+            font-size: 0.8rem;
+            font-weight: 600;
             margin-bottom: 5px;
         }
 
-        .guide-content p {
+        .guide-tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
             font-size: 0.8rem;
-            color: #7f8c8d;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 10;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .guide-tooltip:after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 5px;
+            border-style: solid;
+            border-color: var(--primary-color) transparent transparent transparent;
+        }
+
+        .guide-icon-item:hover .guide-tooltip {
+            opacity: 1;
+            visibility: visible;
         }
 
         /* Events Section */
         .events-section {
-            background-color: white;
+            background-color: var(--card-bg);
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             margin-bottom: 30px;
+            border: 1px solid var(--border-color);
         }
 
         .event-item {
             display: flex;
             align-items: center;
             padding: 10px 0;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .event-item:last-child {
@@ -409,11 +481,12 @@
         .event-content h4 {
             font-size: 1rem;
             margin-bottom: 5px;
+            color: var(--text-color);
         }
 
         .event-content p {
             font-size: 0.8rem;
-            color: #7f8c8d;
+            color: var(--text-light);
         }
 
         /* Quick Actions */
@@ -424,8 +497,8 @@
         }
 
         .action-btn {
-            background-color: white;
-            border: none;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
             border-radius: 10px;
             padding: 15px;
             display: flex;
@@ -434,6 +507,12 @@
             justify-content: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
         .action-btn i {
@@ -445,6 +524,146 @@
         .action-btn span {
             font-size: 0.9rem;
             font-weight: 500;
+            color: var(--text-color);
+        }
+
+        /* BUZÓN DE SUGERENCIAS - NUEVO */
+        .suggestion-box {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .suggestion-header {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .suggestion-count {
+            text-align: center;
+            padding: 0.8rem 1rem;
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            flex: 1;
+        }
+
+        .suggestion-count strong {
+            display: block;
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            margin-bottom: 0.3rem;
+        }
+
+        .suggestion-count span {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .suggestion-count.new {
+            background: rgba(52, 152, 219, 0.1);
+            border-color: rgba(52, 152, 219, 0.3);
+        }
+
+        .suggestion-input {
+            margin-bottom: 1.5rem;
+        }
+
+        .suggestion-input textarea {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1rem;
+            color: var(--text-color);
+            font-family: inherit;
+            resize: vertical;
+            margin-bottom: 1rem;
+        }
+
+        .suggestion-input textarea::placeholder {
+            color: var(--text-light);
+        }
+
+        .suggestion-input textarea:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+        }
+
+        .send-suggestion-btn {
+            width: 100%;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .send-suggestion-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        .suggestion-divider {
+            height: 1px;
+            background: var(--border-color);
+            margin: 1.5rem 0;
+        }
+
+        .popular-suggestions {
+            margin-bottom: 1.5rem;
+        }
+
+        .suggestion-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+
+        .suggestion-text {
+            color: var(--text-color);
+            font-size: 0.9rem;
+            flex: 1;
+            margin-right: 1rem;
+        }
+
+        .suggestion-votes {
+            color: var(--secondary-color);
+            font-weight: 600;
+            font-size: 0.8rem;
+            background: rgba(52, 152, 219, 0.1);
+            padding: 0.3rem 0.6rem;
+            border-radius: 12px;
+        }
+
+        .view-all-suggestions-btn {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.05);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .view-all-suggestions-btn:hover {
+            background: rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
         }
 
         /* Modal Styles */
@@ -462,13 +681,14 @@
         }
 
         .modal-content {
-            background: white;
+            background: var(--card-bg);
             padding: 2rem;
             border-radius: 10px;
             width: 90%;
             max-width: 500px;
             max-height: 90vh;
             overflow-y: auto;
+            border: 1px solid var(--border-color);
         }
 
         .modal-header {
@@ -478,12 +698,16 @@
             margin-bottom: 1.5rem;
         }
 
+        .modal-header h3 {
+            color: var(--text-color);
+        }
+
         .close-modal {
             background: none;
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
-            color: #666;
+            color: var(--text-light);
         }
 
         .form-group {
@@ -494,15 +718,17 @@
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 600;
-            color: #333;
+            color: var(--text-color);
         }
 
         .form-control {
             width: 100%;
             padding: 10px 12px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-color);
             border-radius: 6px;
             font-size: 1rem;
+            background-color: var(--card-bg);
+            color: var(--text-color);
         }
 
         .form-control:focus {
@@ -546,6 +772,53 @@
             background-color: var(--secondary-color);
         }
 
+        /* Contact Modal */
+        .contact-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .contact-option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .contact-option:hover {
+            background-color: var(--light-color);
+            border-color: var(--secondary-color);
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--secondary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+
+        .contact-info h4 {
+            margin-bottom: 5px;
+            font-size: 1rem;
+            color: var(--text-color);
+        }
+
+        .contact-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
         /* Responsive */
         @media (max-width: 1200px) {
             .content-grid {
@@ -555,6 +828,10 @@
             .quick-guide {
                 order: -1;
                 margin-bottom: 30px;
+            }
+            
+            .guide-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -579,6 +856,30 @@
             .quick-actions {
                 grid-template-columns: 1fr;
             }
+            
+            .header-actions {
+                gap: 10px;
+            }
+            
+            .btn {
+                padding: 6px 10px;
+                font-size: 0.8rem;
+            }
+            
+            .guide-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .suggestion-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .guide-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -597,18 +898,15 @@
         <div class="menu-container">
             <ul class="menu">
                 <li class="menu-item active"><a href="dashboard.html" class="menu-link"><i class="fas fa-tachometer-alt"></i> <span data-translate="menu_dashboard">Panel</span></a></li>
-                <li class="menu-item"><a href="#" class="menu-link" onclick="showTournamentModal()"><i class="fas fa-trophy"></i> <span data-translate="menu_tournament">Torneo</span></a></li>
-                <li class="menu-item"><a href="#" class="menu-link" onclick="showParticipantsModal()"><i class="fas fa-users"></i> <span data-translate="menu_participants">Participantes</span></a></li>
-                <li class="menu-item"><a href="#" class="menu-link" onclick="showAgendaModal()"><i class="fas fa-calendar-alt"></i> <span data-translate="menu_agenda">Agenda</span></a></li>
-                <li class="menu-item"><a href="#" class="menu-link" onclick="showPreProjectModal()"><i class="fas fa-lightbulb"></i> <span data-translate="menu_preproject">Anteproyecto</span></a></li>
-                <li class="menu-item"><a href="#" class="menu-link" onclick="showProjectModal()"><i class="fas fa-project-diagram"></i> <span data-translate="menu_project">Proyecto</span></a></li>
-                <li class="menu-item"><a href="#" class="menu-link" onclick="showEventModal()"><i class="fas fa-calendar-check"></i> <span data-translate="menu_event">Evento</span></a></li>
-                <li class="menu-item"><a href="#" class="menu-link" onclick="showPostEventModal()"><i class="fas fa-chart-line"></i> <span data-translate="menu_postevent">Post Evento</span></a></li>
-                <li class="menu-item"><a href="#" class="menu-link" onclick="showReportsModal()"><i class="fas fa-chart-bar"></i> <span data-translate="menu_reports">Informes</span></a></li>
-                <li class="menu-item"><a href="#" class="menu-link" onclick="showGalleryModal()"><i class="fas fa-images"></i> <span data-translate="menu_gallery">Galería</span></a></li>
-                <li class="menu-item"><a href="#" class="menu-link" onclick="showSocialModal()"><i class="fas fa-hashtag"></i> <span data-translate="menu_social">RRSS</span></a></li>
-                <li class="menu-item"><a href="#" class="menu-link" onclick="showCommunityModal()"><i class="fas fa-users"></i> <span data-translate="menu_community">Comunidad</span></a></li>
-                <li class="menu-item"><a href="#" class="menu-link" onclick="showCRMModal()"><i class="fas fa-address-book"></i> <span data-translate="menu_crm">CRM</span></a></li>
+                <li class="menu-item"><a href="torneo.html" class="menu-link"><i class="fas fa-trophy"></i> <span data-translate="menu_tournament">Torneo</span></a></li>
+                <li class="menu-item"><a href="agenda.html" class="menu-link"><i class="fas fa-calendar-alt"></i> <span data-translate="menu_agenda">Agenda</span></a></li>
+                <li class="menu-item"><a href="anteproyecto.html" class="menu-link"><i class="fas fa-lightbulb"></i> <span data-translate="menu_preproject">Anteproyecto</span></a></li>
+                <li class="menu-item"><a href="proyecto.html" class="menu-link"><i class="fas fa-project-diagram"></i> <span data-translate="menu_project">Proyecto</span></a></li>
+                <li class="menu-item"><a href="evento.html" class="menu-link"><i class="fas fa-calendar-check"></i> <span data-translate="menu_event">Evento</span></a></li>
+                <li class="menu-item"><a href="postevento.html" class="menu-link"><i class="fas fa-chart-line"></i> <span data-translate="menu_postevent">Post Evento</span></a></li>
+                <li class="menu-item"><a href="marketing.html" class="menu-link"><i class="fas fa-bullhorn"></i> <span data-translate="menu_marketing">Marketing</span></a></li>
+                <li class="menu-item"><a href="comunidad.html" class="menu-link"><i class="fas fa-users"></i> <span data-translate="menu_community">Comunidad</span></a></li>
+                <li class="menu-item"><a href="crm.html" class="menu-link"><i class="fas fa-address-book"></i> <span data-translate="menu_crm">CRM</span></a></li>
             </ul>
         </div>
     </aside>
@@ -619,15 +917,15 @@
         <header class="header">
             <div class="page-title">
                 <h2 data-translate="page_title">Panel de Gestión</h2>
-                <p id="userWelcome" style="color: #7f8c8d; font-size: 0.9rem; margin-top: 5px;">Bienvenido de nuevo</p>
+                <p id="userWelcome" style="color: var(--text-light); font-size: 0.9rem; margin-top: 5px;">Bienvenido de nuevo</p>
             </div>
             <div class="header-actions">
-                <button class="btn btn-primary" onclick="showEventModal()"><i class="fas fa-calendar-plus"></i> <span data-translate="btn_event">Evento</span></button>
-                <button class="btn btn-secondary" onclick="startLiveStream()"><i class="fas fa-broadcast-tower"></i> <span data-translate="btn_live">Live</span></button>
+                <a href="evento.html" class="btn btn-primary"><i class="fas fa-calendar-plus"></i> <span data-translate="btn_event">Evento</span></a>
+                <a href="live.html" class="btn btn-secondary"><i class="fas fa-broadcast-tower"></i> <span data-translate="btn_live">Live</span></a>
                 
-                <button class="icon-btn" onclick="showNotifications()"><i class="fas fa-bell"></i></button>
-                <button class="icon-btn" onclick="showTasks()"><i class="fas fa-tasks"></i></button>
-                <button class="icon-btn" onclick="showAIAssistant()"><i class="fas fa-robot"></i></button>
+                <a href="notificaciones.html" class="icon-btn" title="Notificaciones"><i class="fas fa-bell"></i></a>
+                <a href="tareas.html" class="icon-btn" title="Lista de Tareas"><i class="fas fa-tasks"></i></a>
+                <a href="asistente-ia.html" class="icon-btn" title="Asistente IA"><i class="fas fa-robot"></i></a>
                 
                 <!-- Selector de idiomas -->
                 <div class="language-switcher">
@@ -637,9 +935,9 @@
                     <button class="language-btn" data-lang="fr">FR</button>
                 </div>
                 
-                <button class="icon-btn" id="dark-mode-toggle"><i class="fas fa-moon"></i></button>
-                <button class="icon-btn" onclick="showMessages()"><i class="fas fa-envelope"></i></button>
-                <button class="icon-btn" onclick="showUserProfile()"><i class="fas fa-user-circle"></i></button>
+                <button class="icon-btn" id="dark-mode-toggle" title="Modo Claro/Oscuro"><i class="fas fa-moon"></i></button>
+                <button class="icon-btn" onclick="showContactModal()" title="Contacto"><i class="fas fa-envelope"></i></button>
+                <a href="perfil.html" class="icon-btn" title="Perfil"><i class="fas fa-user-circle"></i></a>
                 <button class="icon-btn" onclick="logout()" title="Cerrar Sesión"><i class="fas fa-sign-out-alt"></i></button>
             </div>
         </header>
@@ -652,22 +950,22 @@
                 <div class="stats-cards">
                     <div class="stat-card">
                         <h3 data-translate="stat_participants_title">Total de Participantes</h3>
-                        <div class="value" id="totalParticipants">0</div>
+                        <div class="value" id="totalParticipants">45</div>
                         <div class="subtitle" data-translate="stat_participants_subtitle">Torneo actual</div>
                     </div>
                     <div class="stat-card">
                         <h3 data-translate="stat_income_title">Ingresos del Evento</h3>
-                        <div class="value" id="eventIncome">€0</div>
+                        <div class="value" id="eventIncome">€2,250</div>
                         <div class="subtitle" data-translate="stat_income_subtitle">Provisional</div>
                     </div>
                     <div class="stat-card">
                         <h3 data-translate="stat_contacts_title">Nuevos Contactos</h3>
-                        <div class="value" id="newContacts">+0</div>
+                        <div class="value" id="newContacts">+12</div>
                         <div class="subtitle" data-translate="stat_contacts_subtitle">Últimos 30 días</div>
                     </div>
                     <div class="stat-card">
                         <h3 data-translate="stat_tasks_title">Progreso</h3>
-                        <div class="value" id="taskProgress">0%</div>
+                        <div class="value" id="taskProgress">35%</div>
                         <div class="subtitle" data-translate="stat_tasks_subtitle">Porcentaje completado</div>
                     </div>
                 </div>
@@ -675,7 +973,7 @@
                 <!-- Progress Section -->
                 <div class="progress-section">
                     <h3 class="section-title" data-translate="progress_title">Progreso del Proyecto</h3>
-                    <p data-translate="progress_description">Vista general del estado de cada fase del torneo.</p>
+                    <p data-translate="progress_description" style="color: var(--text-light);">Vista general del estado de cada fase del torneo.</p>
                     
                     <table class="progress-table">
                         <tr>
@@ -685,31 +983,154 @@
                             <th data-translate="phase_postevent">Post Evento</th>
                         </tr>
                         <tr>
-                            <td id="preproject-progress">0/36</td>
-                            <td id="project-progress">0/28</td>
-                            <td id="event-progress">0/31</td>
+                            <td id="preproject-progress">12/36</td>
+                            <td id="project-progress">8/28</td>
+                            <td id="event-progress">15/31</td>
                             <td id="postevent-progress">0/30</td>
                         </tr>
                     </table>
                     
                     <div class="progress-bar">
-                        <div class="progress-fill" id="overall-progress"></div>
+                        <div class="progress-fill" id="overall-progress" style="width: 35%;"></div>
                     </div>
                 </div>
 
                 <!-- Events Section -->
                 <div class="events-section">
                     <h3 class="section-title" data-translate="events_title">Próximos Eventos y Plazos</h3>
-                    <p data-translate="events_description">Lo siguiente en tu agenda.</p>
+                    <p data-translate="events_description" style="color: var(--text-light);">Lo siguiente en tu agenda.</p>
                     <div id="eventsList">
                         <!-- Los eventos se cargarán dinámicamente -->
                     </div>
                 </div>
 
-                <!-- Quick Actions -->
-                <div class="events-section">
+                <!-- BUZÓN DE SUGERENCIAS -->
+                <div class="suggestion-box">
+                    <h3 class="section-title">Buzón de Sugerencias</h3>
+                    <div class="suggestion-header">
+                        <div class="suggestion-count">
+                            <strong>42</strong>
+                            <span>Total</span>
+                        </div>
+                        <div class="suggestion-count new">
+                            <strong>15</strong>
+                            <span>Nuevas</span>
+                        </div>
+                    </div>
+                    
+                    <div class="suggestion-input">
+                        <textarea placeholder="Tu sugerencia para mejorar..." rows="3"></textarea>
+                        <button class="send-suggestion-btn">Enviar</button>
+                    </div>
+
+                    <div class="suggestion-divider"></div>
+
+                    <div class="popular-suggestions">
+                        <div class="suggestion-item">
+                            <span class="suggestion-text">Más partidas simultáneas con grandes maestros</span>
+                            <span class="suggestion-votes">✔ 24</span>
+                        </div>
+                        <div class="suggestion-item">
+                            <span class="suggestion-text">Mejorar señalización de salas</span>
+                            <span class="suggestion-votes">✔ 18</span>
+                        </div>
+                        <div class="suggestion-item">
+                            <span class="suggestion-text">App con notificaciones push</span>
+                            <span class="suggestion-votes">✔ 15</span>
+                        </div>
+                    </div>
+
+                    <button class="view-all-suggestions-btn">
+                        👍 Ver todas las sugerencias
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Column - Quick Guide -->
+            <div class="right-column">
+                <div class="quick-guide">
+                    <h3 class="section-title" data-translate="guide_title">Guía Rápida para Empezar</h3>
+                    <p data-translate="guide_description" style="color: var(--text-light);">¡Bienvenido a Chess Organizers! Aquí tienes un recorrido rápido por las secciones principales para que empieces con buen pie.</p>
+                    
+                    <div class="guide-grid">
+                        <div class="guide-icon-item">
+                            <div class="guide-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="guide-icon-title">Torneo</div>
+                            <div class="guide-tooltip">Configura y gestiona todos los detalles de tu torneo</div>
+                        </div>
+                        
+                        <div class="guide-icon-item">
+                            <div class="guide-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="guide-icon-title">Agenda</div>
+                            <div class="guide-tooltip">Planifica fechas, horarios y cronograma del evento</div>
+                        </div>
+                        
+                        <div class="guide-icon-item">
+                            <div class="guide-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <div class="guide-icon-title">Anteproyecto</div>
+                            <div class="guide-tooltip">Desarrolla la idea inicial y planificación básica</div>
+                        </div>
+                        
+                        <div class="guide-icon-item">
+                            <div class="guide-icon">
+                                <i class="fas fa-project-diagram"></i>
+                            </div>
+                            <div class="guide-icon-title">Proyecto</div>
+                            <div class="guide-tooltip">Gestiona la ejecución detallada del evento</div>
+                        </div>
+                        
+                        <div class="guide-icon-item">
+                            <div class="guide-icon">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div class="guide-icon-title">Evento</div>
+                            <div class="guide-tooltip">Control en tiempo real durante la celebración</div>
+                        </div>
+                        
+                        <div class="guide-icon-item">
+                            <div class="guide-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="guide-icon-title">Post Evento</div>
+                            <div class="guide-tooltip">Análisis de resultados y cierre del proyecto</div>
+                        </div>
+                        
+                        <div class="guide-icon-item">
+                            <div class="guide-icon">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <div class="guide-icon-title">Marketing</div>
+                            <div class="guide-tooltip">Promoción y comunicación del evento</div>
+                        </div>
+                        
+                        <div class="guide-icon-item">
+                            <div class="guide-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="guide-icon-title">Comunidad</div>
+                            <div class="guide-tooltip">Gestiona participantes y relaciones</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="quick-guide" style="margin-top: 20px;">
+                    <h3 class="section-title">Actividad Reciente</h3>
+                    <div id="recentActivity">
+                        <!-- La actividad se cargará dinámicamente -->
+                    </div>
+                </div>
+
+                <!-- Accesos Rápidos - MOVIDO AQUÍ -->
+                <div class="quick-guide" style="margin-top: 20px;">
                     <h3 class="section-title" data-translate="quick_actions_title">Accesos Rápidos</h3>
-                    <p data-translate="quick_actions_description">Tus acciones más frecuentes.</p>
+                    <p data-translate="quick_actions_description" style="color: var(--text-light);">Tus acciones más frecuentes.</p>
                     
                     <div class="quick-actions">
                         <button class="action-btn" onclick="addNewParticipant()">
@@ -731,192 +1152,51 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Right Column - Quick Guide -->
-            <div class="right-column">
-                <div class="quick-guide">
-                    <h3 class="section-title" data-translate="guide_title">Guía Rápida para Empezar</h3>
-                    <p data-translate="guide_description">¡Bienvenido a Chess Organizers! Aquí tienes un recorrido rápido por las secciones principales para que empieces con buen pie.</p>
-                    
-                    <div class="guide-item">
-                        <div class="guide-icon">
-                            <i class="fas fa-trophy"></i>
-                        </div>
-                        <div class="guide-content">
-                            <h4 data-translate="guide1_title">Crear Torneo</h4>
-                            <p data-translate="guide1_description">Configura un nuevo torneo en minutos</p>
-                        </div>
-                    </div>
-                    
-                    <div class="guide-item">
-                        <div class="guide-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="guide-content">
-                            <h4 data-translate="guide2_title">Gestionar Participantes</h4>
-                            <p data-translate="guide2_description">Añade y organiza a los jugadores</p>
-                        </div>
-                    </div>
-                    
-                    <div class="guide-item">
-                        <div class="guide-icon">
-                            <i class="fas fa-calendar-alt"></i>
-                        </div>
-                        <div class="guide-content">
-                            <h4 data-translate="guide3_title">Planificar Agenda</h4>
-                            <p data-translate="guide3_description">Establece fechas y horarios</p>
-                        </div>
-                    </div>
-                    
-                    <div class="guide-item">
-                        <div class="guide-icon">
-                            <i class="fas fa-share-alt"></i>
-                        </div>
-                        <div class="guide-content">
-                            <h4 data-translate="guide4_title">Compartir en RRSS</h4>
-                            <p data-translate="guide4_description">Promociona tu evento automáticamente</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recent Activity -->
-                <div class="quick-guide" style="margin-top: 20px;">
-                    <h3 class="section-title">Actividad Reciente</h3>
-                    <div id="recentActivity">
-                        <p style="color: #7f8c8d; text-align: center; padding: 20px;">
-                            <i class="fas fa-spinner fa-spin"></i> Cargando actividad...
-                        </p>
-                    </div>
-                </div>
-            </div>
         </div>
     </main>
 
-    <!-- MODALES PARA CADA SECCIÓN -->
-    <!-- Modal Crear Torneo -->
-    <div id="tournamentModal" class="modal">
+    <!-- Modal de Contacto -->
+    <div id="contactModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>Crear Nuevo Torneo</h3>
-                <button class="close-modal" onclick="closeModal('tournamentModal')">×</button>
+                <h3>Contacto - Chess Organizers</h3>
+                <button class="close-modal" onclick="closeModal('contactModal')">×</button>
             </div>
-            <form id="tournamentForm">
-                <div class="form-group">
-                    <label>Nombre del Torneo</label>
-                    <input type="text" class="form-control" id="tournamentName" required>
-                </div>
-                <div class="form-group">
-                    <label>Fecha de Inicio</label>
-                    <input type="date" class="form-control" id="tournamentDate" required>
-                </div>
-                <div class="form-group">
-                    <label>Ubicación</label>
-                    <input type="text" class="form-control" id="tournamentLocation" required>
-                </div>
-                <div class="form-group">
-                    <label>Número de Rondas</label>
-                    <input type="number" class="form-control" id="tournamentRounds" min="1" max="15" required>
-                </div>
-                <div class="form-group">
-                    <label>Descripción</label>
-                    <textarea class="form-control" id="tournamentDescription" rows="3"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary" id="createTournamentBtn">
-                    <span>Crear Torneo</span>
-                    <i class="fas fa-spinner fa-spin loading-spinner"></i>
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Modal Participantes -->
-    <div id="participantsModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Gestión de Participantes</h3>
-                <button class="close-modal" onclick="closeModal('participantsModal')">×</button>
-            </div>
-            <div class="form-group">
-                <label>Nombre Completo</label>
-                <input type="text" class="form-control" id="participantName">
-            </div>
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" class="form-control" id="participantEmail">
-            </div>
-            <div class="form-group">
-                <label>Teléfono</label>
-                <input type="tel" class="form-control" id="participantPhone">
-            </div>
-            <div class="form-group">
-                <label>Rating ELO</label>
-                <input type="number" class="form-control" id="participantRating">
-            </div>
-            <button class="btn btn-primary" onclick="saveParticipant()">Guardar Participante</button>
+            <p style="color: var(--text-color);">Selecciona el tipo de consulta que deseas realizar:</p>
             
-            <div id="participantsList" style="margin-top: 20px; max-height: 300px; overflow-y: auto;">
-                <!-- Lista de participantes se cargará aquí -->
+            <div class="contact-options">
+                <div class="contact-option" onclick="sendEmail('info@chessorganizers.com')">
+                    <div class="contact-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div class="contact-info">
+                        <h4>Información General</h4>
+                        <p>info@chessorganizers.com</p>
+                    </div>
+                </div>
+                
+                <div class="contact-option" onclick="sendEmail('soporte@chessorganizers.com')">
+                    <div class="contact-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <div class="contact-info">
+                        <h4>Soporte Técnico</h4>
+                        <p>soporte@chessorganizers.com</p>
+                    </div>
+                </div>
+                
+                <div class="contact-option" onclick="sendEmail('comercial@chessorganizers.com')">
+                    <div class="contact-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="contact-info">
+                        <h4>Consultas Comerciales</h4>
+                        <p>comercial@chessorganizers.com</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
-    <!-- Modal Asistente IA -->
-    <div id="aiAssistantModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Asistente IA - Chess Organizers</h3>
-                <button class="close-modal" onclick="closeModal('aiAssistantModal')">×</button>
-            </div>
-            <div class="form-group">
-                <label>¿En qué puedo ayudarte con tu evento de ajedrez?</label>
-                <textarea class="form-control" id="aiQuestion" rows="4" placeholder="Ej: Necesito ayuda para organizar un torneo de 50 participantes..."></textarea>
-            </div>
-            <button class="btn btn-primary" onclick="getAIResponse()">Consultar al Asistente</button>
-            <div id="aiResponse" style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px; display: none;">
-                <h4>Respuesta del Asistente:</h4>
-                <p id="responseText"></p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Firebase v9 Modular -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-        import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
-        import { getFirestore, collection, addDoc, getDocs, serverTimestamp, query, orderBy, where } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
-        import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics.js";
-
-        // Tu configuración Firebase REAL
-        const firebaseConfig = {
-            apiKey: "AIzaSyB1yk7sdiB9iSQO5tRMn5m-2jhQt9q2sU8",
-            authDomain: "studio-569004347-8b345.firebaseapp.com",
-            databaseURL: "https://studio-569004347-8b345-default-rtdb.firebaseio.com",
-            projectId: "studio-569004347-8b345",
-            storageBucket: "studio-569004347-8b345.firebasestorage.app",
-            messagingSenderId: "533658225927",
-            appId: "1:533658225927:web:191c658fd73fffb9a509a2",
-            measurementId: "G-RVHHVL2D7R"
-        };
-
-        // Inicializar Firebase
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-        const analytics = getAnalytics(app);
-
-        // Hacer disponibles globalmente
-        window.firebaseApp = app;
-        window.auth = auth;
-        window.db = db;
-        window.analytics = analytics;
-        window.firestoreModules = { collection, addDoc, getDocs, serverTimestamp, query, orderBy, where, signOut };
-
-        console.log("🔥 Firebase v9 configurado correctamente en Dashboard");
-        console.log("📊 Analytics inicializado");
-
-        // Inicializar la aplicación del dashboard
-        initializeDashboardApp();
-    </script>
 
     <script>
         // ========== CONFIGURACIÓN Y ESTADO GLOBAL ==========
@@ -976,20 +1256,25 @@
         }
 
         function setupEventListeners() {
-            // Formulario de torneo
-            const tournamentForm = document.getElementById('tournamentForm');
-            if (tournamentForm) {
-                tournamentForm.addEventListener('submit', handleCreateTournament);
-            }
-            
             // Dark Mode
             const darkModeToggle = document.getElementById('dark-mode-toggle');
             if (darkModeToggle) {
                 darkModeToggle.addEventListener('click', toggleDarkMode);
             }
+
+            // Buzón de sugerencias
+            const sendSuggestionBtn = document.querySelector('.send-suggestion-btn');
+            if (sendSuggestionBtn) {
+                sendSuggestionBtn.addEventListener('click', sendSuggestion);
+            }
+
+            const viewAllSuggestionsBtn = document.querySelector('.view-all-suggestions-btn');
+            if (viewAllSuggestionsBtn) {
+                viewAllSuggestionsBtn.addEventListener('click', viewAllSuggestions);
+            }
         }
 
-        // ========== SISTEMA DE DATOS FIREBASE ==========
+        // ========== SISTEMA DE DATOS ==========
 
         async function loadDashboardData() {
             try {
@@ -997,39 +1282,11 @@
                 
                 showNotification('Cargando datos...', 'info');
                 
-                // Cargar torneos
-                const tournamentsQuery = query(
-                    collection(db, DASHBOARD_CONFIG.collections.TOURNAMENTS),
-                    orderBy('createdAt', 'desc')
-                );
-                const tournamentsSnapshot = await getDocs(tournamentsQuery);
-                appState.tournaments = tournamentsSnapshot.docs.map(doc => ({
-                    id: doc.id,
-                    ...doc.data()
-                }));
-
-                // Cargar participantes
-                const participantsSnapshot = await getDocs(collection(db, DASHBOARD_CONFIG.collections.PARTICIPANTS));
-                appState.participants = participantsSnapshot.docs.map(doc => ({
-                    id: doc.id,
-                    ...doc.data()
-                }));
-
-                // Cargar eventos
-                const eventsQuery = query(
-                    collection(db, DASHBOARD_CONFIG.collections.EVENTS),
-                    orderBy('date', 'asc')
-                );
-                const eventsSnapshot = await getDocs(eventsQuery);
-                appState.events = eventsSnapshot.docs.map(doc => ({
-                    id: doc.id,
-                    ...doc.data()
-                }));
-
-                // Actualizar la UI con los datos reales
-                updateDashboardUI();
-                
-                showNotification('Datos cargados correctamente', 'success');
+                // Simular carga de datos
+                setTimeout(() => {
+                    updateDashboardUI();
+                    showNotification('Datos cargados correctamente', 'success');
+                }, 1000);
                 
             } catch (error) {
                 console.error("❌ Error cargando datos:", error);
@@ -1055,50 +1312,37 @@
         }
 
         function updateStatistics() {
-            // Total de participantes
-            document.getElementById('totalParticipants').textContent = appState.participants.length;
-            
-            // Ingresos (simulado)
-            const totalIncome = appState.tournaments.reduce((sum, tournament) => {
-                return sum + (tournament.income || 0);
-            }, 0);
-            document.getElementById('eventIncome').textContent = `€${totalIncome}`;
-            
-            // Nuevos contactos (últimos 30 días)
-            const monthAgo = new Date();
-            monthAgo.setDate(monthAgo.getDate() - 30);
-            const newParticipants = appState.participants.filter(participant => {
-                const created = participant.createdAt?.toDate ? participant.createdAt.toDate() : new Date();
-                return created > monthAgo;
-            });
-            document.getElementById('newContacts').textContent = `+${newParticipants.length}`;
-            
-            // Progreso de tareas
-            const totalTasks = 125;
-            const completedTasks = appState.tournaments.reduce((sum, tournament) => {
-                return sum + (tournament.completedTasks || 0);
-            }, 0);
-            const progressPercent = Math.round((completedTasks / totalTasks) * 100) || 0;
-            document.getElementById('taskProgress').textContent = `${progressPercent}%`;
-            document.getElementById('overall-progress').style.width = `${progressPercent}%`;
+            // Los datos ya están establecidos en el HTML
+            // Esta función se mantiene para futuras actualizaciones dinámicas
         }
 
         function updateEventsList() {
             const eventsList = document.getElementById('eventsList');
             if (!eventsList) return;
 
-            if (appState.events.length === 0) {
-                eventsList.innerHTML = `
-                    <div style="text-align: center; padding: 20px; color: #7f8c8d;">
-                        <i class="fas fa-calendar-times" style="font-size: 2rem; margin-bottom: 10px;"></i>
-                        <p>No hay eventos programados</p>
-                    </div>
-                `;
-                return;
-            }
+            const events = [
+                {
+                    title: 'Torneo de Ajedrez Rápido',
+                    date: new Date('2025-01-20'),
+                    location: 'Ciudad Deportiva',
+                    time: '10:00 AM'
+                },
+                {
+                    title: 'Final del Campeonato Regional', 
+                    date: new Date('2025-02-05'),
+                    location: 'Centro Cultural',
+                    time: '4:00 PM'
+                },
+                {
+                    title: 'Simultáneas con GM',
+                    date: new Date('2025-01-25'),
+                    location: 'Club de Ajedrez',
+                    time: '6:00 PM'
+                }
+            ];
 
-            eventsList.innerHTML = appState.events.map(event => {
-                const eventDate = event.date?.toDate ? event.date.toDate() : new Date(event.date);
+            eventsList.innerHTML = events.map(event => {
+                const eventDate = event.date;
                 const day = eventDate.getDate();
                 const month = eventDate.toLocaleString('es', { month: 'short' }).toUpperCase();
                 
@@ -1109,8 +1353,8 @@
                             <div class="month">${month}</div>
                         </div>
                         <div class="event-content">
-                            <h4>${event.title || 'Evento sin título'}</h4>
-                            <p>${event.location || 'Ubicación no especificada'} - ${event.time || 'Horario no especificado'}</p>
+                            <h4>${event.title}</h4>
+                            <p>${event.location} - ${event.time}</p>
                         </div>
                     </div>
                 `;
@@ -1129,99 +1373,50 @@
             ];
 
             recentActivity.innerHTML = activities.map(activity => `
-                <div style="padding: 10px 0; border-bottom: 1px solid #eee;">
-                    <div style="font-weight: 500;">${activity.action}</div>
-                    <div style="font-size: 0.8rem; color: #7f8c8d;">${activity.details}</div>
-                    <div style="font-size: 0.7rem; color: #95a5a6;">${activity.time}</div>
+                <div style="padding: 10px 0; border-bottom: 1px solid var(--border-color);">
+                    <div style="font-weight: 500; color: var(--text-color);">${activity.action}</div>
+                    <div style="font-size: 0.8rem; color: var(--text-light);">${activity.details}</div>
+                    <div style="font-size: 0.7rem; color: var(--text-light);">${activity.time}</div>
                 </div>
             `).join('');
         }
 
         function updateProgress() {
-            // Simular progreso por fases
-            document.getElementById('preproject-progress').textContent = '2/36';
-            document.getElementById('project-progress').textContent = '0/28';
-            document.getElementById('event-progress').textContent = '0/31';
-            document.getElementById('postevent-progress').textContent = '0/30';
+            // Los datos ya están establecidos en el HTML
+            // Esta función se mantiene para futuras actualizaciones dinámicas
         }
 
-        // ========== OPERACIONES CRUD ==========
+        // ========== BUZÓN DE SUGERENCIAS ==========
 
-        async function handleCreateTournament(e) {
-            e.preventDefault();
+        function sendSuggestion() {
+            const textarea = document.querySelector('.suggestion-input textarea');
+            const suggestion = textarea.value.trim();
             
-            const form = e.target;
-            const submitBtn = form.querySelector('button[type="submit"]');
-            const btnText = submitBtn.querySelector('span');
-            const btnSpinner = submitBtn.querySelector('.loading-spinner');
+            if (!suggestion) {
+                showNotification('Por favor, escribe tu sugerencia antes de enviar', 'error');
+                return;
+            }
             
-            // Mostrar loading
-            btnText.style.display = 'none';
-            btnSpinner.style.display = 'inline-block';
-            submitBtn.disabled = true;
+            // Simular envío de sugerencia
+            showNotification('¡Gracias por tu sugerencia! Será revisada por nuestro equipo.', 'success');
+            textarea.value = '';
             
-            try {
-                const tournamentData = {
-                    name: document.getElementById('tournamentName').value,
-                    date: document.getElementById('tournamentDate').value,
-                    location: document.getElementById('tournamentLocation').value,
-                    rounds: parseInt(document.getElementById('tournamentRounds').value),
-                    description: document.getElementById('tournamentDescription').value,
-                    createdAt: serverTimestamp(),
-                    status: 'planning',
-                    participantsCount: 0,
-                    income: 0,
-                    completedTasks: 0
-                };
+            // Actualizar contador
+            const totalCount = document.querySelector('.suggestion-count strong');
+            const newCount = document.querySelector('.suggestion-count.new strong');
+            
+            if (totalCount && newCount) {
+                const currentTotal = parseInt(totalCount.textContent);
+                const currentNew = parseInt(newCount.textContent);
                 
-                const docRef = await addDoc(collection(db, DASHBOARD_CONFIG.collections.TOURNAMENTS), tournamentData);
-                
-                showNotification('Torneo creado exitosamente', 'success');
-                closeModal('tournamentModal');
-                form.reset();
-                
-                // Recargar datos
-                await loadDashboardData();
-                
-            } catch (error) {
-                console.error('Error creando torneo:', error);
-                showNotification('Error al crear torneo', 'error');
-            } finally {
-                // Ocultar loading
-                btnText.style.display = 'inline-block';
-                btnSpinner.style.display = 'none';
-                submitBtn.disabled = false;
+                totalCount.textContent = currentTotal + 1;
+                newCount.textContent = currentNew + 1;
             }
         }
 
-        async function saveParticipant() {
-            try {
-                const participantData = {
-                    name: document.getElementById('participantName').value,
-                    email: document.getElementById('participantEmail').value,
-                    phone: document.getElementById('participantPhone').value,
-                    rating: parseInt(document.getElementById('participantRating').value) || 0,
-                    createdAt: serverTimestamp(),
-                    status: 'active'
-                };
-                
-                await addDoc(collection(db, DASHBOARD_CONFIG.collections.PARTICIPANTS), participantData);
-                
-                showNotification('Participante guardado exitosamente', 'success');
-                
-                // Limpiar formulario
-                document.getElementById('participantName').value = '';
-                document.getElementById('participantEmail').value = '';
-                document.getElementById('participantPhone').value = '';
-                document.getElementById('participantRating').value = '';
-                
-                // Recargar datos
-                await loadDashboardData();
-                
-            } catch (error) {
-                console.error('Error guardando participante:', error);
-                showNotification('Error al guardar participante', 'error');
-            }
+        function viewAllSuggestions() {
+            showNotification('Abriendo panel completo de sugerencias...', 'info');
+            // Aquí iría la lógica para abrir el panel completo de sugerencias
         }
 
         // ========== INTERFAZ DE USUARIO ==========
@@ -1270,136 +1465,13 @@
             document.getElementById(modalId).style.display = 'none';
         }
 
-        // ========== FUNCIONALIDADES ESPECÍFICAS ==========
-
-        function showTournamentModal() {
-            showModal('tournamentModal');
+        function showContactModal() {
+            showModal('contactModal');
         }
 
-        function showParticipantsModal() {
-            showModal('participantsModal');
-            loadParticipantsList();
-        }
-
-        function showAIAssistant() {
-            showModal('aiAssistantModal');
-        }
-
-        async function loadParticipantsList() {
-            const participantsList = document.getElementById('participantsList');
-            if (!participantsList) return;
-
-            try {
-                const snapshot = await getDocs(collection(db, DASHBOARD_CONFIG.collections.PARTICIPANTS));
-                const participants = snapshot.docs.map(doc => ({
-                    id: doc.id,
-                    ...doc.data()
-                }));
-
-                participantsList.innerHTML = participants.map(participant => `
-                    <div style="padding: 10px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
-                        <div>
-                            <strong>${participant.name}</strong>
-                            <div style="font-size: 0.8rem; color: #7f8c8d;">
-                                ${participant.email} | ELO: ${participant.rating || 'N/A'}
-                            </div>
-                        </div>
-                        <button onclick="deleteParticipant('${participant.id}')" class="icon-btn" style="color: var(--danger-color);">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
-                `).join('');
-
-            } catch (error) {
-                console.error('Error cargando participantes:', error);
-                participantsList.innerHTML = '<p style="color: var(--danger-color);">Error cargando participantes</p>';
-            }
-        }
-
-        function getAIResponse() {
-            const question = document.getElementById('aiQuestion').value;
-            const responseDiv = document.getElementById('aiResponse');
-            const responseText = document.getElementById('responseText');
-            
-            if (!question) {
-                showNotification('Por favor, escribe tu pregunta para el asistente.', 'error');
-                return;
-            }
-            
-            // Simulación de respuesta IA
-            const responses = [
-                "Para organizar un torneo de 50 participantes, recomiendo: 1) Dividir en 5 grupos de 10 jugadores, 2) Usar sistema suizo para las rondas, 3) Presupuesto estimado: €2,500-€3,000",
-                "La logística ideal incluye: sala con 20 mesas de ajedrez, sistema de cronómetros digitales, área de descanso con catering, y sistema de streaming para las partidas principales.",
-                "Para promocionar tu torneo: usa redes sociales 4 semanas antes, contacta clubes locales de ajedrez, ofrece early bird discount, y colabora con influencers del ajedrez.",
-                "La gestión de participantes es clave: crea un sistema de registro online, establece categorías por rating, y programa los emparejamientos automáticamente.",
-                "Para el presupuesto: considera costos de ubicación, arbitraje, premios, catering, marketing, y siempre incluye un 15% para imprevistos."
-            ];
-            
-            const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-            responseText.textContent = randomResponse;
-            responseDiv.style.display = 'block';
-            
-            // Registrar consulta en analytics
-            if (window.analytics) {
-                logEvent(analytics, 'ai_assistant_used', {
-                    question_length: question.length
-                });
-            }
-        }
-
-        function logout() {
-            if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
-                // Limpiar localStorage
-                localStorage.removeItem('userAuthenticated');
-                localStorage.removeItem('username');
-                localStorage.removeItem('userRole');
-                
-                // Redirigir al login
-                window.location.href = 'login.html';
-            }
-        }
-
-        // ========== DATOS DE DEMOSTRACIÓN (FALLBACK) ==========
-
-        function loadDemoData() {
-            console.log("📋 Cargando datos de demostración...");
-            
-            appState.tournaments = [
-                {
-                    id: 'demo-1',
-                    name: 'Torneo de Ajedrez Rápido',
-                    date: '2025-01-20',
-                    location: 'Ciudad Deportiva',
-                    rounds: 5,
-                    participantsCount: 45,
-                    income: 2250,
-                    completedTasks: 12
-                }
-            ];
-            
-            appState.participants = [
-                { id: 'demo-1', name: 'Ana López', email: 'ana@email.com', rating: 1850 },
-                { id: 'demo-2', name: 'Carlos Ruiz', email: 'carlos@email.com', rating: 1920 }
-            ];
-            
-            appState.events = [
-                {
-                    id: 'demo-1',
-                    title: 'Torneo de Ajedrez Rápido',
-                    date: new Date('2025-01-20'),
-                    location: 'Ciudad Deportiva',
-                    time: '10:00 AM'
-                },
-                {
-                    id: 'demo-2', 
-                    title: 'Final del Campeonato Regional',
-                    date: new Date('2025-02-05'),
-                    location: 'Centro Cultural',
-                    time: '4:00 PM'
-                }
-            ];
-            
-            updateDashboardUI();
+        function sendEmail(email) {
+            window.location.href = `mailto:${email}?subject=Consulta Chess Organizers&body=Hola, me gustaría obtener información sobre:`;
+            closeModal('contactModal');
         }
 
         // ========== SISTEMA DE TRADUCCIONES ==========
@@ -1408,15 +1480,12 @@
                 "app_name": "Chess Organizers",
                 "menu_dashboard": "Panel",
                 "menu_tournament": "Torneo",
-                "menu_participants": "Participantes",
                 "menu_agenda": "Agenda",
                 "menu_preproject": "Anteproyecto",
                 "menu_project": "Proyecto",
                 "menu_event": "Evento",
                 "menu_postevent": "Post Evento",
-                "menu_reports": "Informes",
-                "menu_gallery": "Galería",
-                "menu_social": "RRSS",
+                "menu_marketing": "Marketing",
                 "menu_community": "Comunidad",
                 "menu_crm": "CRM",
                 "page_title": "Panel de Gestión",
@@ -1438,12 +1507,6 @@
                 "phase_postevent": "Post Evento",
                 "events_title": "Próximos Eventos y Plazos",
                 "events_description": "Lo siguiente en tu agenda.",
-                "month_nov": "NOV",
-                "month_dec": "DIC",
-                "event1_title": "Torneo de Ajedrez Rápido",
-                "event1_location": "Ciudad Deportiva - 10:00 AM",
-                "event2_title": "Final del Campeonato Regional",
-                "event2_location": "Centro Cultural - 4:00 PM",
                 "quick_actions_title": "Accesos Rápidos",
                 "quick_actions_description": "Tus acciones más frecuentes.",
                 "action_new_participant": "Nuevo Participante",
@@ -1451,29 +1514,18 @@
                 "action_send_reminder": "Enviar Recordatorio",
                 "action_view_stats": "Ver Estadísticas",
                 "guide_title": "Guía Rápida para Empezar",
-                "guide_description": "¡Bienvenido a Chess Organizers! Aquí tienes un recorrido rápido por las secciones principales para que empieces con buen pie.",
-                "guide1_title": "Crear Torneo",
-                "guide1_description": "Configura un nuevo torneo en minutos",
-                "guide2_title": "Gestionar Participantes",
-                "guide2_description": "Añade y organiza a los jugadores",
-                "guide3_title": "Planificar Agenda",
-                "guide3_description": "Establece fechas y horarios",
-                "guide4_title": "Compartir en RRSS",
-                "guide4_description": "Promociona tu evento automáticamente"
+                "guide_description": "¡Bienvenido a Chess Organizers! Aquí tienes un recorrido rápido por las secciones principales para que empieces con buen pie."
             },
             en: {
                 "app_name": "Chess Organizers",
                 "menu_dashboard": "Dashboard",
                 "menu_tournament": "Tournament",
-                "menu_participants": "Participants",
                 "menu_agenda": "Agenda",
                 "menu_preproject": "Pre-project",
                 "menu_project": "Project",
                 "menu_event": "Event",
                 "menu_postevent": "Post Event",
-                "menu_reports": "Reports",
-                "menu_gallery": "Gallery",
-                "menu_social": "Social Media",
+                "menu_marketing": "Marketing",
                 "menu_community": "Community",
                 "menu_crm": "CRM",
                 "page_title": "Management Panel",
@@ -1495,12 +1547,6 @@
                 "phase_postevent": "Post Event",
                 "events_title": "Upcoming Events and Deadlines",
                 "events_description": "What's next on your agenda.",
-                "month_nov": "NOV",
-                "month_dec": "DEC",
-                "event1_title": "Rapid Chess Tournament",
-                "event1_location": "Sports City - 10:00 AM",
-                "event2_title": "Regional Championship Final",
-                "event2_location": "Cultural Center - 4:00 PM",
                 "quick_actions_title": "Quick Access",
                 "quick_actions_description": "Your most frequent actions.",
                 "action_new_participant": "New Participant",
@@ -1508,29 +1554,18 @@
                 "action_send_reminder": "Send Reminder",
                 "action_view_stats": "View Statistics",
                 "guide_title": "Quick Start Guide",
-                "guide_description": "Welcome to Chess Organizers! Here's a quick tour of the main sections to get you started.",
-                "guide1_title": "Create Tournament",
-                "guide1_description": "Set up a new tournament in minutes",
-                "guide2_title": "Manage Participants",
-                "guide2_description": "Add and organize players",
-                "guide3_title": "Plan Schedule",
-                "guide3_description": "Set dates and times",
-                "guide4_title": "Share on Social Media",
-                "guide4_description": "Promote your event automatically"
+                "guide_description": "Welcome to Chess Organizers! Here's a quick tour of the main sections to get you started."
             },
             fr: {
                 "app_name": "Chess Organizers",
                 "menu_dashboard": "Tableau de Bord",
                 "menu_tournament": "Tournoi",
-                "menu_participants": "Participants",
                 "menu_agenda": "Agenda",
                 "menu_preproject": "Avant-projet",
                 "menu_project": "Projet",
                 "menu_event": "Événement",
                 "menu_postevent": "Post Événement",
-                "menu_reports": "Rapports",
-                "menu_gallery": "Galerie",
-                "menu_social": "Réseaux Sociaux",
+                "menu_marketing": "Marketing",
                 "menu_community": "Communauté",
                 "menu_crm": "CRM",
                 "page_title": "Panneau de Gestion",
@@ -1545,35 +1580,21 @@
                 "stat_tasks_title": "Progression",
                 "stat_tasks_subtitle": "Pourcentage terminé",
                 "progress_title": "Progression du Projet",
-                "progress_description": "Aperçu de l'état de chaque phase du tournoi.",
+                "progress_description": "Aperçu de l'état de cada phase du tournoi.",
                 "phase_preproject": "Avant-projet",
                 "phase_project": "Projet",
                 "phase_event": "Événement",
                 "phase_postevent": "Post Événement",
                 "events_title": "Événements à Venir et Échéances",
                 "events_description": "Ce qui suit dans votre agenda.",
-                "month_nov": "NOV",
-                "month_dec": "DÉC",
-                "event1_title": "Tournoi d'Échecs Rapide",
-                "event1_location": "Cité Sportive - 10:00",
-                "event2_title": "Finale du Championnat Régional",
-                "event2_location": "Centre Culturel - 16:00",
                 "quick_actions_title": "Accès Rapides",
-                "quick_actions_description": "Vos actions les plus fréquentes.",
+                "quick_actions_description": "Vos acciones les plus fréquentes.",
                 "action_new_participant": "Nouveau Participant",
                 "action_register_payment": "Enregistrer Paiement",
                 "action_send_reminder": "Envoyer Rappel",
                 "action_view_stats": "Voir Statistiques",
                 "guide_title": "Guide de Démarrage Rapide",
-                "guide_description": "Bienvenue à Chess Organizers ! Voici un tour rapide des sections principales pour bien commencer.",
-                "guide1_title": "Créer un Tournoi",
-                "guide1_description": "Configurez un nouveau tournoi en quelques minutes",
-                "guide2_title": "Gérer les Participants",
-                "guide2_description": "Ajoutez et organisez les joueurs",
-                "guide3_title": "Planifier l'Agenda",
-                "guide3_description": "Établissez les dates et horaires",
-                "guide4_title": "Partager sur les Réseaux Sociaux",
-                "guide4_description": "Promouvez votre événement automatiquement"
+                "guide_description": "Bienvenue à Chess Organizers ! Voici un tour rapide des sections principales para bien commencer."
             }
         };
 
@@ -1607,8 +1628,40 @@
             document.documentElement.lang = lang;
         }
 
-        // Inicializar sistema de idiomas
+        // ========== FUNCIONES PRINCIPALES ==========
+
+        function logout() {
+            if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
+                // Limpiar localStorage
+                localStorage.removeItem('userAuthenticated');
+                localStorage.removeItem('username');
+                localStorage.removeItem('userRole');
+                
+                // Cerrar ventana
+                window.close();
+            }
+        }
+
+        function addNewParticipant() {
+            alert('Funcionalidad: Nuevo Participante\n\nFormulario para agregar nuevos participantes al torneo actual.');
+        }
+
+        function registerPayment() {
+            alert('Funcionalidad: Registrar Pago\n\nSistema de gestión de pagos de inscripciones y patrocinios.');
+        }
+
+        function sendReminder() {
+            alert('Funcionalidad: Enviar Recordatorio\n\nEnviar notificaciones automáticas a participantes y staff.');
+        }
+
+        function viewStatistics() {
+            alert('Funcionalidad: Ver Estadísticas\n\nDashboard avanzado con métricas del torneo.');
+        }
+
+        // ========== INICIALIZACIÓN AL CARGAR ==========
+
         document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar sistema de idiomas
             const savedLang = localStorage.getItem('preferred-language') || 'es';
             document.querySelectorAll('.language-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
@@ -1626,51 +1679,17 @@
                 icon.classList.remove('fa-moon');
                 icon.classList.add('fa-sun');
             }
+            
+            // Inicializar aplicación
+            initializeDashboardApp();
         });
 
-        // ========== FUNCIONES PLACEHOLDER ==========
+        // ========== DATOS DE DEMOSTRACIÓN ==========
 
-        function addNewParticipant() {
-            showParticipantsModal();
+        function loadDemoData() {
+            console.log("📋 Cargando datos de demostración...");
+            updateDashboardUI();
         }
-
-        function registerPayment() {
-            alert('Funcionalidad: Registrar pago\n\nSistema de gestión de pagos de inscripciones y patrocinios.');
-        }
-
-        function sendReminder() {
-            alert('Funcionalidad: Enviar recordatorio\n\nEnviar notificaciones automáticas a participantes y staff.');
-        }
-
-        function viewStatistics() {
-            alert('Funcionalidad: Ver estadísticas\n\nDashboard avanzado con métricas del torneo.');
-        }
-
-        function startLiveStream() {
-            alert('Funcionalidad: Transmisión en vivo\n\nIntegración con plataformas de streaming para el torneo.');
-        }
-
-        function showAgendaModal() { alert('Módulo Agenda - Próximamente'); }
-        function showPreProjectModal() { alert('Módulo Anteproyecto - Próximamente'); }
-        function showProjectModal() { alert('Módulo Proyecto - Próximamente'); }
-        function showEventModal() { alert('Módulo Evento - Próximamente'); }
-        function showPostEventModal() { alert('Módulo Post Evento - Próximamente'); }
-        function showReportsModal() { alert('Módulo Informes - Próximamente'); }
-        function showGalleryModal() { alert('Módulo Galería - Próximamente'); }
-        function showSocialModal() { alert('Módulo Redes Sociales - Próximamente'); }
-        function showCommunityModal() { alert('Módulo Comunidad - Próximamente'); }
-        function showCRMModal() { alert('Módulo CRM - Próximamente'); }
-        function showNotifications() { alert('Centro de Notificaciones - Próximamente'); }
-        function showTasks() { alert('Gestor de Tareas - Próximamente'); }
-        function showMessages() { alert('Sistema de Mensajes - Próximamente'); }
-        function showUserProfile() { alert('Perfil de Usuario - Próximamente'); }
-        function deleteParticipant(id) { 
-            if (confirm('¿Estás seguro de que quieres eliminar este participante?')) {
-                showNotification('Participante eliminado (simulación)', 'success');
-            }
-        }
-
-        // ========== INICIALIZACIÓN AL CARGAR ==========
 
         console.log("♛ Chess Organizers - Dashboard Cargado");
     </script>
