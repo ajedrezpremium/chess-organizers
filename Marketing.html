@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Organizers - Marketing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --info-color: #9b59b6;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --sidebar-width: 280px;
+            --marketing-color: #e67e22;
+            --social-color: #3498db;
+            --gallery-color: #9b59b6;
+            --reports-color: #2ecc71;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .logo {
+            text-align: center;
+            padding: 20px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 10px;
+            background-color: #fff;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 2rem;
+        }
+
+        .logo h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .menu {
+            list-style: none;
+            padding: 0 15px;
+        }
+
+        .menu-item {
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+
+        .menu-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .menu-item.active {
+            background-color: var(--marketing-color);
+        }
+
+        .menu-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .menu-link i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 30px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e1e8ed;
+        }
+
+        .page-title h1 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .page-title p {
+            color: #7f8c8d;
+        }
+
+        .marketing-badge {
+            background: var(--marketing-color);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-success {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #27ae60;
+        }
+
+        .btn-warning {
+            background-color: var(--warning-color);
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background-color: #e67e22;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--secondary-color);
+            color: var(--secondary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        /* Marketing Sections */
+        .marketing-sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .marketing-section {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .section-header {
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary-color), #34495e);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .section-body {
+            padding: 20px;
+        }
+
+        /* Gallery */
+        .gallery-section {
+            border-left: 4px solid var(--gallery-color);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #7f8c8d;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            overflow: hidden;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item.upload {
+            border: 2px dashed #bdc3c7;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .gallery-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Social Media */
+        .social-section {
+            border-left: 4px solid var(--social-color);
+        }
+
+        .social-accounts {
+            margin-bottom: 20px;
+        }
+
+        .account-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .account-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .tiktok { background: #000000; }
+        .instagram { background: #E4405F; }
+        .x { background: #000000; }
+        .facebook { background: #1877F2; }
+        .other { background: var(--secondary-color); }
+
+        .account-info {
+            flex: 1;
+        }
+
+        .account-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .account-url {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+        }
+
+        .account-actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        .ai-generator {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .ai-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .ai-icon {
+            width: 30px;
+            height: 30px;
+            background: var(--info-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+        }
+
+        .ai-title {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .ai-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e1e8ed;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        /* Reports */
+        .reports-section {
+            border-left: 4px solid var(--reports-color);
+        }
+
+        .reports-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .report-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .report-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .report-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--reports-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            margin: 0 auto 15px;
+        }
+
+        .report-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+        }
+
+        .report-desc {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            margin-bottom: 15px;
+        }
+
+        /* Documents */
+        .documents-section {
+            border-left: 4px solid var(--warning-color);
+        }
+
+        .documents-empty {
+            text-align: center;
+            padding: 40px 20px;
+            color: #7f8c8d;
+        }
+
+        .documents-empty i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #bdc3c7;
+        }
+
+        .upload-area {
+            border: 2px dashed #bdc3c7;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+
+        .upload-area:hover {
+            border-color: var(--secondary-color);
+            background: #f8f9fa;
+        }
+
+        .upload-icon {
+            font-size: 2rem;
+            color: #bdc3c7;
+            margin-bottom: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .marketing-sections {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 70px;
+            }
+            
+            .sidebar .logo h1,
+            .sidebar .menu-link span {
+                display: none;
+            }
+            
+            .main-content {
+                margin-left: 70px;
+            }
+            
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .reports-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-img">
+                    <i class="fas fa-chess-knight"></i>
+                </div>
+                <h1>Chess Organizers</h1>
+            </div>
+            <ul class="menu">
+                <li class="menu-item"><a href="dashboard.html" class="menu-link"><i class="fas fa-tachometer-alt"></i> <span>Panel</span></a></li>
+                <li class="menu-item"><a href="torneos.html" class="menu-link"><i class="fas fa-trophy"></i> <span>Torneos</span></a></li>
+                <li class="menu-item"><a href="agenda.html" class="menu-link"><i class="fas fa-calendar-alt"></i> <span>Agenda</span></a></li>
+                <li class="menu-item"><a href="crm.html" class="menu-link"><i class="fas fa-address-book"></i> <span>CRM</span></a></li>
+                <li class="menu-item"><a href="comunidad.html" class="menu-link"><i class="fas fa-users"></i> <span>Comunidad</span></a></li>
+                <li class="menu-item active"><a href="marketing.html" class="menu-link"><i class="fas fa-bullhorn" style="color: var(--marketing-color);"></i> <span>Marketing</span></a></li>
+                <li class="menu-item"><a href="finanzas.html" class="menu-link"><i class="fas fa-chart-bar"></i> <span>Finanzas</span></a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="page-title">
+                    <h1>Marketing y Comunicación</h1>
+                    <p>Gestiona tu imagen, redes sociales y documentación del evento</p>
+                </div>
+                <div class="header-actions">
+                    <span class="marketing-badge">CAMPAÑAS ACTIVAS: 3</span>
+                    <button class="btn btn-primary" onclick="createCampaign()">
+                        <i class="fas fa-plus"></i>
+                        <span>Nueva Campaña</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Marketing Sections -->
+            <div class="marketing-sections">
+                <!-- Galería -->
+                <div class="marketing-section gallery-section">
+                    <div class="section-header">
+                        <div class="section-title">Galería Multimedia</div>
+                        <div class="section-icon">
+                            <i class="fas fa-images"></i>
+                        </div>
+                    </div>
+                    <div class="section-body">
+                        <div class="gallery-grid">
+                            <div class="gallery-item upload" onclick="uploadMedia()">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <span>Subir</span>
+                            </div>
+                            <div class="gallery-item" onclick="viewMedia('poster')">
+                                <i class="fas fa-file-image"></i>
+                                <span>Cartel Principal</span>
+                            </div>
+                            <div class="gallery-item" onclick="viewMedia('brochure')">
+                                <i class="fas fa-file-alt"></i>
+                                <span>Díptico</span>
+                            </div>
+                            <div class="gallery-item" onclick="viewMedia('photo1')">
+                                <i class="fas fa-camera"></i>
+                                <span>Fotos Evento</span>
+                            </div>
+                            <div class="gallery-item" onclick="viewMedia('video')">
+                                <i class="fas fa-video"></i>
+                                <span>Video Resumen</span>
+                            </div>
+                            <div class="gallery-item" onclick="viewMedia('logo')">
+                                <i class="fas fa-chess-knight"></i>
+                                <span>Logotipos</span>
+                            </div>
+                        </div>
+                        <div class="gallery-actions">
+                            <button class="btn btn-outline" onclick="organizeGallery()">
+                                <i class="fas fa-folder"></i>
+                                <span>Organizar</span>
+                            </button>
+                            <button class="btn btn-primary" onclick="downloadAll()">
+                                <i class="fas fa-download"></i>
+                                <span>Descargar Todo</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Redes Sociales -->
+                <div class="marketing-section social-section">
+                    <div class="section-header">
+                        <div class="section-title">Redes Sociales</div>
+                        <div class="section-icon">
+                            <i class="fas fa-share-alt"></i>
+                        </div>
+                    </div>
+                    <div class="section-body">
+                        <div class="social-accounts">
+                            <div class="account-item">
+                                <div class="account-icon tiktok">
+                                    <i class="fab fa-tiktok"></i>
+                                </div>
+                                <div class="account-info">
+                                    <div class="account-name">TikTok</div>
+                                    <div class="account-url">https://www.tiktok.com/@chessorganizers</div>
+                                </div>
+                                <div class="account-actions">
+                                    <button class="btn btn-outline" style="padding: 6px 12px;" onclick="editAccount('tiktok')">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-primary" style="padding: 6px 12px;" onclick="shareToAccount('tiktok')">
+                                        <i class="fas fa-share"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="account-item">
+                                <div class="account-icon instagram">
+                                    <i class="fab fa-instagram"></i>
+                                </div>
+                                <div class="account-info">
+                                    <div class="account-name">Instagram</div>
+                                    <div class="account-url">https://www.instagram.com/chessorganizers</div>
+                                </div>
+                                <div class="account-actions">
+                                    <button class="btn btn-outline" style="padding: 6px 12px;" onclick="editAccount('instagram')">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-primary" style="padding: 6px 12px;" onclick="shareToAccount('instagram')">
+                                        <i class="fas fa-share"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="account-item">
+                                <div class="account-icon x">
+                                    <i class="fab fa-x-twitter"></i>
+                                </div>
+                                <div class="account-info">
+                                    <div class="account-name">X (Twitter)</div>
+                                    <div class="account-url">https://www.x.com/chessorganizers</div>
+                                </div>
+                                <div class="account-actions">
+                                    <button class="btn btn-outline" style="padding: 6px 12px;" onclick="editAccount('x')">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-primary" style="padding: 6px 12px;" onclick="shareToAccount('x')">
+                                        <i class="fas fa-share"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="account-item">
+                                <div class="account-icon facebook">
+                                    <i class="fab fa-facebook"></i>
+                                </div>
+                                <div class="account-info">
+                                    <div class="account-name">Facebook</div>
+                                    <div class="account-url">https://www.facebook.com/chessorganizers</div>
+                                </div>
+                                <div class="account-actions">
+                                    <button class="btn btn-outline" style="padding: 6px 12px;" onclick="editAccount('facebook')">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-primary" style="padding: 6px 12px;" onclick="shareToAccount('facebook')">
+                                        <i class="fas fa-share"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ai-generator">
+                            <div class="ai-header">
+                                <div class="ai-icon">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <div class="ai-title">Generador de Posts con IA</div>
+                            </div>
+                            <input type="text" class="ai-input" placeholder="Describe el contenido para tu post...">
+                            <button class="btn btn-warning" onclick="generateAIPost()">
+                                <i class="fas fa-magic"></i>
+                                <span>Generar Post con IA</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Informes -->
+                <div class="marketing-section reports-section">
+                    <div class="section-header">
+                        <div class="section-title">Informes y Documentación</div>
+                        <div class="section-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                    </div>
+                    <div class="section-body">
+                        <div class="reports-grid">
+                            <div class="report-card" onclick="generateReport('dossier')">
+                                <div class="report-icon">
+                                    <i class="fas fa-file-contract"></i>
+                                </div>
+                                <div class="report-title">Dossier del Evento</div>
+                                <div class="report-desc">Presentación para patrocinadores e instituciones</div>
+                                <button class="btn btn-outline" style="padding: 8px 16px;">
+                                    <i class="fas fa-download"></i>
+                                    <span>Generar</span>
+                                </button>
+                            </div>
+
+                            <div class="report-card" onclick="generateReport('memoria')">
+                                <div class="report-icon">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                                <div class="report-title">Memoria Final</div>
+                                <div class="report-desc">Análisis, resultados y conclusiones del evento</div>
+                                <button class="btn btn-outline" style="padding: 8px 16px;">
+                                    <i class="fas fa-download"></i>
+                                    <span>Generar</span>
+                                </button>
+                            </div>
+
+                            <div class="report-card" onclick="generateReport('economico')">
+                                <div class="report-icon">
+                                    <i class="fas fa-euro-sign"></i>
+                                </div>
+                                <div class="report-title">Informe Económico</div>
+                                <div class="report-desc">Resumen detallado de ingresos y gastos</div>
+                                <button class="btn btn-outline" style="padding: 8px 16px;">
+                                    <i class="fas fa-download"></i>
+                                    <span>Generar</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-success" onclick="generateAllReports()" style="width: 100%;">
+                            <i class="fas fa-file-export"></i>
+                            <span>Generar Todos los Informes</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mis Documentos -->
+                <div class="marketing-section documents-section">
+                    <div class="section-header">
+                        <div class="section-title">Mis Documentos</div>
+                        <div class="section-icon">
+                            <i class="fas fa-folder"></i>
+                        </div>
+                    </div>
+                    <div class="section-body">
+                        <div class="documents-empty">
+                            <i class="fas fa-folder-open"></i>
+                            <h3>No has subido ningún documento</h3>
+                            <p>Comienza subiendo tus documentos privados del evento</p>
+                        </div>
+
+                        <div class="upload-area" onclick="uploadDocument()">
+                            <div class="upload-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <h3>Subir Documento</h3>
+                            <p>Arrastra archivos aquí o haz clic para seleccionar</p>
+                            <p style="font-size: 0.8rem; margin-top: 10px;">PDF, Word, Excel, PowerPoint (max. 50MB)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Estado de la aplicación
+        const appState = {
+            currentSection: 'marketing',
+            socialAccounts: [],
+            documents: [],
+            galleryItems: []
+        };
+
+        // Inicializar la aplicación
+        function initializeApp() {
+            loadMarketingData();
+            console.log('📢 Marketing Dashboard inicializado');
+        }
+
+        // Cargar datos de marketing
+        function loadMarketingData() {
+            // Simular carga de datos
+            setTimeout(() => {
+                console.log('Datos de marketing cargados');
+            }, 1000);
+        }
+
+        // Subir medio a la galería
+        function uploadMedia() {
+            alert('Subir archivo multimedia\n\nSelecciona imágenes, videos o documentos para tu evento');
+            console.log('Iniciando subida de archivo multimedia');
+        }
+
+        // Ver medio específico
+        function viewMedia(mediaType) {
+            alert(`Viendo: ${mediaType}\n\nVisualizando archivo multimedia seleccionado`);
+            console.log('Viendo medio:', mediaType);
+        }
+
+        // Organizar galería
+        function organizeGallery() {
+            alert('Organizar Galería\n\nArrastra y suelta para reorganizar tus archivos multimedia');
+            console.log('Organizando galería multimedia');
+        }
+
+        // Descargar todos los archivos
+        function downloadAll() {
+            alert('Descargando todos los archivos\n\nSe generará un ZIP con todo el contenido multimedia');
+            console.log('Iniciando descarga completa de archivos');
+        }
+
+        // Editar cuenta de redes sociales
+        function editAccount(platform) {
+            const newUrl = prompt(`Editar ${platform}:\nIntroduce la nueva URL:`, `https://www.${platform}.com/chessorganizers`);
+            if (newUrl) {
+                alert(`Cuenta de ${platform} actualizada:\n${newUrl}`);
+                console.log('Cuenta actualizada:', platform, newUrl);
+            }
+        }
+
+        // Compartir en red social
+        function shareToAccount(platform) {
+            alert(`Compartiendo en ${platform}\n\nPreparando publicación para la red social seleccionada`);
+            console.log('Compartiendo en:', platform);
+        }
+
+        // Generar post con IA
+        function generateAIPost() {
+            const input = document.querySelector('.ai-input');
+            const content = input.value.trim();
+            
+            if (content) {
+                alert(`Generando post con IA para:\n"${content}"\n\nEl post se creará automáticamente con imágenes y hashtags optimizados`);
+                console.log('Generando post IA para:', content);
+                input.value = '';
+            } else {
+                alert('Por favor, describe el contenido para tu post');
+            }
+        }
+
+        // Generar informe específico
+        function generateReport(reportType) {
+            const reportNames = {
+                'dossier': 'Dossier del Evento',
+                'memoria': 'Memoria Final', 
+                'economico': 'Informe Económico'
+            };
+            
+            alert(`Generando ${reportNames[reportType]}\n\nEl documento se creará en PDF y estará listo para descargar en unos segundos`);
+            console.log('Generando informe:', reportType);
+        }
+
+        // Generar todos los informes
+        function generateAllReports() {
+            alert('Generando todos los informes\n\nSe crearán los 3 documentos principales en formato PDF');
+            console.log('Generando todos los informes');
+        }
+
+        // Subir documento
+        function uploadDocument() {
+            alert('Subir Documento\n\nSelecciona el archivo que quieres subir a tu espacio privado');
+            console.log('Subiendo documento');
+        }
+
+        // Crear nueva campaña
+        function createCampaign() {
+            alert('Crear Nueva Campaña\n\nConfigura una nueva campaña de marketing para tu evento');
+            console.log('Creando nueva campaña de marketing');
+        }
+
+        // Inicializar la aplicación cuando se carga la página
+        document.addEventListener('DOMContentLoaded', initializeApp);
+    </script>
+</body>
+</html>
