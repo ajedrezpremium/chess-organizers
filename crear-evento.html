@@ -3,163 +3,447 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Nuevo Evento - Chess Organizers</title>
+    <title>Dashboard - Chess Organizers</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #2563eb;
-            --secondary: #64748b;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --error: #ef4444;
+            --primary-color: #2563eb;
+            --secondary-color: #64748b;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --error-color: #ef4444;
+            --light-color: #f8fafc;
+            --dark-color: #1f2937;
+            --sidebar-width: 280px;
         }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+        * {
             margin: 0;
             padding: 0;
-            background: #f8fafc;
-            color: #1f2937;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
-        .navbar {
-            background: white;
-            padding: 1rem 2rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: linear-gradient(180deg, var(--primary-color) 0%, #1e40af 100%);
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            text-align: center;
+            padding: 20px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 10px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 2rem;
+        }
+
+        .logo h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .menu {
+            list-style: none;
+            padding: 0 15px;
+        }
+
+        .menu-item {
+            margin-bottom: 5px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .menu-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .menu-item.active {
+            background-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .menu-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .menu-link i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 30px;
+            background-color: #f8f9fa;
+        }
+
+        .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 30px;
+            padding: 20px 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
         }
-        
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
+
+        .page-title h1 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .page-title p {
+            color: #7f8c8d;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), #1e40af);
+            color: white;
+            box-shadow: 0 2px 5px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success-color), #0d9665);
+            color: white;
+            box-shadow: 0 2px 5px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        /* Card Styles */
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 25px;
+            margin-bottom: 30px;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        /* Event Creation Wizard */
+        .wizard-steps {
+            display: flex;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .wizard-steps::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: #e5e7eb;
+            z-index: 1;
+        }
+
+        .wizard-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background-color: #e5e7eb;
+            color: #6b7280;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid #e5e7eb;
+        }
+
+        .wizard-step.active .step-number {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .wizard-step.completed .step-number {
+            background-color: var(--success-color);
+            color: white;
+            border-color: var(--success-color);
+        }
+
+        .step-label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #6b7280;
+        }
+
+        .wizard-step.active .step-label {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Form Styles */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-text {
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-top: 5px;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 1rem;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .form-select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        /* Rating System */
+        .rating-system {
+            display: flex;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+        }
+
+        .star {
+            font-size: 2rem;
+            cursor: pointer;
+            color: #d1d5db;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .star:hover {
+            transform: scale(1.2);
+        }
+
+        .star.active {
+            color: var(--warning-color);
+            transform: scale(1.2);
+        }
+
+        .rating-description {
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        /* Criteria Grid */
+        .criteria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 1rem 0;
+        }
+
+        .criteria-item {
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .criteria-item:hover {
+            border-color: var(--primary-color);
+            background: #f0f9ff;
+        }
+
+        .criteria-item.fulfilled {
+            border-color: var(--success-color);
+            background: #f0fdf4;
+        }
+
+        .criteria-item label {
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            cursor: pointer;
+            font-weight: 500;
         }
-        
-        .evento-container {
-            max-width: 900px;
-            margin: 1rem auto;
-            padding: 0 1rem;
-        }
-        
-        .progress-steps {
-            display: flex;
-            margin-bottom: 1.5rem;
-            background: white;
-            padding: 0.5rem;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        
-        .step {
-            flex: 1;
-            text-align: center;
+
+        /* Summary Items */
+        .resumen-item {
+            margin-bottom: 0.75rem;
             padding: 0.75rem;
-            cursor: pointer;
-            border-bottom: 3px solid transparent;
-            transition: all 0.3s;
-            font-size: 0.9rem;
+            background: #f8fafc;
+            border-radius: 6px;
+            border-left: 4px solid var(--primary-color);
         }
-        
-        .step.active {
-            border-bottom-color: var(--primary);
-            color: var(--primary);
-            font-weight: 600;
+
+        .resumen-item strong {
+            color: var(--primary-color);
         }
-        
-        .step.completed {
-            color: var(--success);
-        }
-        
-        .form-section {
-            background: white;
-            padding: 1.5rem;
+
+        /* Progress Bar */
+        .progress-bar {
+            background: #e5e7eb;
+            height: 15px;
             border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            margin-bottom: 1.5rem;
-            display: none;
+            margin: 0.5rem 0;
+            overflow: hidden;
         }
-        
-        .form-section.active {
-            display: block;
+
+        .progress-fill {
+            background: var(--success-color);
+            height: 100%;
+            border-radius: 8px;
+            transition: width 0.5s;
         }
-        
-        .section-title {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid #e5e7eb;
-            font-size: 1.2rem;
-        }
-        
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-group {
-            margin-bottom: 1rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.25rem;
-            font-weight: 600;
-            color: #374151;
-            font-size: 0.9rem;
-        }
-        
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.5rem;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            transition: border-color 0.3s;
-            box-sizing: border-box;
-        }
-        
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-        
-        .btn {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background: #1d4ed8;
-        }
-        
-        .btn-secondary {
-            background: var(--secondary);
-            color: white;
-        }
-        
-        .btn-secondary:hover {
-            background: #475569;
-        }
-        
+
+        /* Form Actions */
         .form-actions {
             display: flex;
             justify-content: space-between;
@@ -167,267 +451,359 @@
             padding-top: 1rem;
             border-top: 1px solid #e5e7eb;
         }
-        
-        .rating-system {
-            display: flex;
-            gap: 0.25rem;
-            margin: 0.5rem 0;
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .criteria-grid {
+                grid-template-columns: 1fr 1fr;
+            }
         }
-        
-        .star {
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #d1d5db;
-            transition: color 0.3s;
-        }
-        
-        .star.active {
-            color: #f59e0b;
-        }
-        
-        .criteria-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 0.75rem;
-            margin: 0.75rem 0;
-        }
-        
-        .criteria-item {
-            padding: 0.75rem;
-            background: #f8fafc;
-            border-radius: 6px;
-            border: 1px solid #e5e7eb;
-            font-size: 0.8rem;
-        }
-        
-        .criteria-item.fulfilled {
-            border-color: var(--success);
-            background: #f0fdf4;
-        }
-        
-        .file-upload {
-            border: 1px dashed #d1d5db;
-            padding: 1rem;
-            text-align: center;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: border-color 0.3s;
-            font-size: 0.9rem;
-        }
-        
-        .file-upload:hover {
-            border-color: var(--primary);
-        }
-        
-        .resumen-item {
-            margin-bottom: 0.75rem;
-            padding: 0.75rem;
-            background: #f8fafc;
-            border-radius: 6px;
-        }
-        
-        .resumen-item strong {
-            color: var(--primary);
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 70px;
+            }
+            
+            .sidebar .logo h1,
+            .sidebar .menu-link span {
+                display: none;
+            }
+            
+            .main-content {
+                margin-left: 70px;
+            }
+            
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .criteria-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo">♛ Chess Organizers</div>
-        <div>
-            <a href="/dashboard.html" class="btn btn-secondary">← Volver al Dashboard</a>
-        </div>
-    </nav>
-
-    <div class="evento-container">
-        <h1 style="margin-bottom: 1rem; font-size: 1.5rem;">Crear Nuevo Evento de Ajedrez</h1>
-        
-        <!-- Progreso -->
-        <div class="progress-steps">
-            <div class="step active" onclick="showSection('tecnica')">1. Datos Técnicos</div>
-            <div class="step" onclick="showSection('logistica')">2. Logística</div>
-            <div class="step" onclick="showSection('resumen')">3. Confirmación</div>
-        </div>
-
-        <!-- SECCIÓN 1: DATOS TÉCNICOS -->
-        <form id="form-tecnica" class="form-section active">
-            <h2 class="section-title">📋 Datos Técnicos del Torneo</h2>
-            
-            <div class="form-grid">
-                <div class="form-group">
-                    <label for="nombre-torneo">Nombre del Torneo *</label>
-                    <input type="text" id="nombre-torneo" required placeholder="Ej: Torneo Nacional 2025">
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-img">
+                    <i class="fas fa-chess-knight"></i>
                 </div>
-                
-                <div class="form-group">
-                    <label for="fecha-inicio">Fecha Inicio *</label>
-                    <input type="date" id="fecha-inicio" required>
+                <h1>Chess Organizers</h1>
+            </div>
+            <ul class="menu">
+                <li class="menu-item active"><a href="dashboard.html" class="menu-link"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
+                <li class="menu-item"><a href="torneos.html" class="menu-link"><i class="fas fa-trophy"></i> <span>Torneos</span></a></li>
+                <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-users"></i> <span>Participantes</span></a></li>
+                <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-calendar-alt"></i> <span>Calendario</span></a></li>
+                <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-chart-line"></i> <span>Análisis</span></a></li>
+                <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-cog"></i> <span>Configuración</span></a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="page-title">
+                    <h1>Crear Nuevo Evento</h1>
+                    <p>Configura tu evento de ajedrez y obtén tu categoría de Reyes</p>
                 </div>
-                
-                <div class="form-group">
-                    <label for="fecha-fin">Fecha Fin *</label>
-                    <input type="date" id="fecha-fin" required>
+                <div class="header-actions">
+                    <button class="btn btn-outline" onclick="window.location.href='dashboard.html'">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Volver al Dashboard</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Content Grid -->
+            <div class="content-grid">
+                <!-- Left Column - Event Creation -->
+                <div class="left-column">
+                    <!-- Event Creation Wizard -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Configuración del Evento</h2>
+                            <span class="status-badge status-planning">En Progreso</span>
+                        </div>
+                        
+                        <div class="wizard-steps">
+                            <div class="wizard-step active">
+                                <div class="step-number">1</div>
+                                <div class="step-label">Datos Técnicos</div>
+                            </div>
+                            <div class="wizard-step">
+                                <div class="step-number">2</div>
+                                <div class="step-label">Logística</div>
+                            </div>
+                            <div class="wizard-step">
+                                <div class="step-number">3</div>
+                                <div class="step-label">Confirmación</div>
+                            </div>
+                        </div>
+                        
+                        <form id="eventForm">
+                            <!-- SECCIÓN 1: DATOS TÉCNICOS -->
+                            <div id="section-tecnica" class="form-section active">
+                                <h3 class="section-title">📋 Datos Técnicos del Torneo</h3>
+                                
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label class="form-label" for="nombre-torneo">Nombre del Torneo *</label>
+                                        <input type="text" class="form-control" id="nombre-torneo" required placeholder="Ej: Torneo Nacional 2025">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label" for="fecha-inicio">Fecha Inicio *</label>
+                                        <input type="date" class="form-control" id="fecha-inicio" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label" for="fecha-fin">Fecha Fin *</label>
+                                        <input type="date" class="form-control" id="fecha-fin" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label" for="lugar">Lugar y Sede *</label>
+                                        <input type="text" class="form-control" id="lugar" required placeholder="Palacio de Congresos de Madrid">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label" for="entidad">Entidad Organizadora *</label>
+                                        <input type="text" class="form-control" id="entidad" required placeholder="Federación Española de Ajedrez">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label" for="organizador">Organizador Principal *</label>
+                                        <input type="text" class="form-control" id="organizador" required placeholder="Nombre del organizador">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label" for="arbitro">Árbitro Principal *</label>
+                                        <input type="text" class="form-control" id="arbitro" required placeholder="Nombre del árbitro">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label" for="sistema-juego">Sistema de Juego *</label>
+                                        <select class="form-select" id="sistema-juego" required>
+                                            <option value="">Seleccionar...</option>
+                                            <option value="swiss">Sistema Suizo</option>
+                                            <option value="round-robin">Round Robin</option>
+                                            <option value="knockout">Eliminación Directa</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label" for="ritmo-juego">Ritmo de Juego *</label>
+                                        <input type="text" class="form-control" id="ritmo-juego" required placeholder="90min + 30seg">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label" for="modalidad">Modalidad *</label>
+                                        <select class="form-select" id="modalidad" required>
+                                            <option value="">Seleccionar...</option>
+                                            <option value="presencial">Presencial</option>
+                                            <option value="online">Online</option>
+                                            <option value="hibrido">Híbrido</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label" for="max-participantes">Máx. Participantes</label>
+                                        <input type="number" class="form-control" id="max-participantes" min="2" placeholder="100">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-actions">
+                                    <div></div>
+                                    <button type="button" class="btn btn-primary" onclick="validarTecnica()">
+                                        <span>Continuar a Logística</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- SECCIÓN 2: LOGÍSTICA Y CATEGORIZACIÓN -->
+                            <div id="section-logistica" class="form-section" style="display: none;">
+                                <h3 class="section-title">🏨 Logística y Categorización</h3>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Categoría del Evento</label>
+                                    <div class="rating-system" id="rating-stars">
+                                        <span class="star" data-rating="1">♔</span>
+                                        <span class="star" data-rating="2">♔</span>
+                                        <span class="star" data-rating="3">♔</span>
+                                        <span class="star" data-rating="4">♔</span>
+                                        <span class="star" data-rating="5">♔</span>
+                                    </div>
+                                    <div class="rating-description" id="rating-description">Provisional - Pendiente ratificación CO</div>
+                                </div>
+
+                                <h4 style="margin: 1.5rem 0 1rem 0; color: var(--dark-color);">📊 Criterios de Categorización</h4>
+                                <div class="criteria-grid" id="criteria-list">
+                                    <!-- Los criterios se generarán con JavaScript -->
+                                </div>
+
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label class="form-label" for="presupuesto">Presupuesto Total (€)</label>
+                                        <input type="number" class="form-control" id="presupuesto" min="0" placeholder="50000">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label" for="patrocinadores">Patrocinadores</label>
+                                        <textarea class="form-control" id="patrocinadores" rows="2" placeholder="Patrocinadores principales..."></textarea>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label" for="hotel-principal">Hotel Principal</label>
+                                        <input type="text" class="form-control" id="hotel-principal" placeholder="Hotel oficial">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label" for="transmision">Transmisión en Vivo</label>
+                                        <select class="form-select" id="transmision">
+                                            <option value="">Seleccionar...</option>
+                                            <option value="si">Sí</option>
+                                            <option value="no">No</option>
+                                            <option value="parcial">Parcial</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-actions">
+                                    <button type="button" class="btn btn-outline" onclick="showSection('tecnica')">
+                                        <i class="fas fa-arrow-left"></i>
+                                        <span>Volver</span>
+                                    </button>
+                                    <button type="button" class="btn btn-primary" onclick="validarLogistica()">
+                                        <span>Ver Resumen</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- SECCIÓN 3: RESUMEN Y CONFIRMACIÓN -->
+                            <div id="section-resumen" class="form-section" style="display: none;">
+                                <h3 class="section-title">✅ Resumen del Evento</h3>
+                                
+                                <div id="resumen-contenido">
+                                    <!-- El resumen se generará con JavaScript -->
+                                </div>
+                                
+                                <div class="form-actions">
+                                    <button type="button" class="btn btn-outline" onclick="showSection('logistica')">
+                                        <i class="fas fa-arrow-left"></i>
+                                        <span>Volver</span>
+                                    </button>
+                                    <button type="button" class="btn btn-success" onclick="crearEvento()">
+                                        <i class="fas fa-check"></i>
+                                        <span>Crear Evento</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Right Column - Help & Recommendations -->
+                <div class="right-column">
+                    <!-- Help Card -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">💡 Mejora tu Evento</h2>
+                        </div>
+                        <div style="padding: 20px;">
+                            <h4 style="margin-bottom: 15px; color: var(--primary-color);">Recomendaciones para subir de categoría</h4>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <div style="font-weight: 600; margin-bottom: 5px;">🎥 Transmisión en Vivo</div>
+                                <div style="font-size: 0.9rem; color: #6b7280; margin-bottom: 15px;">
+                                    Añade comentaristas profesionales y gráficos en pantalla para mejorar la experiencia.
+                                </div>
+                                
+                                <div style="font-weight: 600; margin-bottom: 5px;">🏨 Mejora de Accesos</div>
+                                <div style="font-size: 0.9rem; color: #6b7280; margin-bottom: 15px;">
+                                    Facilita el acceso al recinto con señalización clara y personal de apoyo.
+                                </div>
+                                
+                                <div style="font-weight: 600; margin-bottom: 5px;">🎪 Actividades Paralelas</div>
+                                <div style="font-size: 0.9rem; color: #6b7280; margin-bottom: 15px;">
+                                    Incluye simuls, conferencias o torneos secundarios para enriquecer el evento.
+                                </div>
+                                
+                                <div style="font-weight: 600; margin-bottom: 5px;">💰 Aumento de Premios</div>
+                                <div style="font-size: 0.9rem; color: #6b7280;">
+                                    Incrementa el fondo de premios para atraer jugadores de mayor nivel.
+                                </div>
+                            </div>
+                            
+                            <div style="padding: 15px; background: rgba(37, 99, 235, 0.05); border-radius: 8px; border-left: 4px solid var(--primary-color);">
+                                <div style="font-weight: 600; margin-bottom: 5px;">🏆 Sistema de Reyes</div>
+                                <div style="font-size: 0.9rem; color: #6b7280;">
+                                    Cada criterio cumplido te acerca a la siguiente categoría de Reyes. ¡Apunta a 5 Reyes!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Stats -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">📈 Tu Progreso</h2>
+                        </div>
+                        <div style="padding: 20px;">
+                            <div id="progress-stats">
+                                <!-- El progreso se actualizará con JavaScript -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <div class="form-grid">
-                <div class="form-group">
-                    <label for="lugar">Lugar y Sede *</label>
-                    <input type="text" id="lugar" required placeholder="Palacio de Congresos de Madrid">
-                </div>
-                
-                <div class="form-group">
-                    <label for="entidad">Entidad Organizadora *</label>
-                    <input type="text" id="entidad" required placeholder="Federación Española de Ajedrez">
-                </div>
-            </div>
-
-            <div class="form-grid">
-                <div class="form-group">
-                    <label for="organizador">Organizador Principal *</label>
-                    <input type="text" id="organizador" required placeholder="Nombre del organizador">
-                </div>
-                
-                <div class="form-group">
-                    <label for="arbitro">Árbitro Principal *</label>
-                    <input type="text" id="arbitro" required placeholder="Nombre del árbitro">
-                </div>
-            </div>
-
-            <div class="form-grid">
-                <div class="form-group">
-                    <label for="sistema-juego">Sistema de Juego *</label>
-                    <select id="sistema-juego" required>
-                        <option value="">Seleccionar...</option>
-                        <option value="swiss">Sistema Suizo</option>
-                        <option value="round-robin">Round Robin</option>
-                        <option value="knockout">Eliminación Directa</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="ritmo-juego">Ritmo de Juego *</label>
-                    <input type="text" id="ritmo-juego" required placeholder="90min + 30seg">
-                </div>
-            </div>
-
-            <div class="form-grid">
-                <div class="form-group">
-                    <label for="modalidad">Modalidad *</label>
-                    <select id="modalidad" required>
-                        <option value="">Seleccionar...</option>
-                        <option value="presencial">Presencial</option>
-                        <option value="online">Online</option>
-                        <option value="hibrido">Híbrido</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="max-participantes">Máx. Participantes</label>
-                    <input type="number" id="max-participantes" min="2" placeholder="100">
-                </div>
-            </div>
-
-            <div class="form-actions">
-                <div></div>
-                <button type="button" class="btn btn-primary" onclick="validarTecnica()">
-                    Continuar a Logística →
-                </button>
-            </div>
-        </form>
-
-        <!-- SECCIÓN 2: LOGÍSTICA Y CATEGORIZACIÓN -->
-        <form id="form-logistica" class="form-section">
-            <h2 class="section-title">🏨 Logística y Categorización</h2>
-            
-            <div class="form-group">
-                <label>Categoría del Evento</label>
-                <div class="rating-system" id="rating-stars">
-                    <span class="star" data-rating="1">♔</span>
-                    <span class="star" data-rating="2">♔</span>
-                    <span class="star" data-rating="3">♔</span>
-                    <span class="star" data-rating="4">♔</span>
-                    <span class="star" data-rating="5">♔</span>
-                </div>
-                <small id="rating-description" style="color: #6b7280;">Provisional - Pendiente ratificación CO</small>
-            </div>
-
-            <h3 style="font-size: 1rem; margin: 1rem 0 0.5rem 0;">📊 Criterios de Categorización</h3>
-            <div class="criteria-grid" id="criteria-list">
-                <!-- Los criterios se generarán con JavaScript -->
-            </div>
-
-            <div class="form-grid">
-                <div class="form-group">
-                    <label for="presupuesto">Presupuesto Total (€)</label>
-                    <input type="number" id="presupuesto" min="0" placeholder="50000">
-                </div>
-                
-                <div class="form-group">
-                    <label for="patrocinadores">Patrocinadores</label>
-                    <textarea id="patrocinadores" rows="2" placeholder="Patrocinadores principales..."></textarea>
-                </div>
-            </div>
-
-            <div class="form-grid">
-                <div class="form-group">
-                    <label for="hotel-principal">Hotel Principal</label>
-                    <input type="text" id="hotel-principal" placeholder="Hotel oficial">
-                </div>
-                
-                <div class="form-group">
-                    <label for="transmision">Transmisión en Vivo</label>
-                    <select id="transmision">
-                        <option value="">Seleccionar...</option>
-                        <option value="si">Sí</option>
-                        <option value="no">No</option>
-                        <option value="parcial">Parcial</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-actions">
-                <button type="button" class="btn btn-secondary" onclick="showSection('tecnica')">
-                    ← Volver
-                </button>
-                <button type="button" class="btn btn-primary" onclick="validarLogistica()">
-                    Ver Resumen →
-                </button>
-            </div>
-        </form>
-
-        <!-- SECCIÓN 3: RESUMEN Y CONFIRMACIÓN -->
-        <div id="form-resumen" class="form-section">
-            <h2 class="section-title">✅ Resumen del Evento</h2>
-            
-            <div id="resumen-contenido">
-                <!-- El resumen se generará con JavaScript -->
-            </div>
-
-            <div class="form-actions">
-                <button type="button" class="btn btn-secondary" onclick="showSection('logistica')">
-                    ← Volver
-                </button>
-                <button type="button" class="btn btn-primary" onclick="crearEvento()">
-                    🚀 Crear Evento
-                </button>
-            </div>
-        </div>
+        </main>
     </div>
 
     <script>
-        // Sistema de 10 criterios principales (simplificado)
+        // Sistema de 25 criterios (simplificado para el ejemplo)
         const criteriosCO = [
             { id: 1, nombre: "Presupuesto > 50.000€", puntos: 1 },
             { id: 2, nombre: "Apoyo federación nacional", puntos: 1 },
-            { id: 3, nombre: "Transmisión en vivo", puntos: 1 },
-            { id: 4, nombre: "Al menos 3 GMs", puntos: 1 },
+            { id: 3, nombre: "Transmisión en vivo profesional", puntos: 1 },
+            { id: 4, nombre: "Al menos 3 Grandes Maestros", puntos: 1 },
             { id: 5, nombre: "Premios > 10.000€", puntos: 1 },
-            { id: 6, nombre: "Sede capacidad > 500", puntos: 1 },
-            { id: 7, nombre: "Hotel 4-5 estrellas", puntos: 1 },
-            { id: 8, nombre: "Medios nacionales", puntos: 1 },
-            { id: 9, nombre: "Programa social", puntos: 1 },
-            { id: 10, nombre: "Sponsors internacionales", puntos: 1 }
+            { id: 6, nombre: "Sede capacidad > 500 personas", puntos: 1 },
+            { id: 7, nombre: "Hotel 4-5 estrellas para jugadores", puntos: 1 },
+            { id: 8, nombre: "Cobertura medios nacionales", puntos: 1 },
+            { id: 9, nombre: "Programa social y actividades", puntos: 1 },
+            { id: 10, nombre: "Sponsors internacionales", puntos: 1 },
+            { id: 11, nombre: "Sistema de arbitraje FI", puntos: 1 },
+            { id: 12, nombre: "Área de prensa equipada", puntos: 1 },
+            { id: 13, nombre: "Accesibilidad universal", puntos: 1 },
+            { id: 14, nombre: "Streaming multicámara", puntos: 1 },
+            { id: 15, nombre: "Comentaristas profesionales", puntos: 1 },
+            { id: 16, nombre: "Zona VIP para invitados", puntos: 1 },
+            { id: 17, nombre: "Catering de calidad", puntos: 1 },
+            { id: 18, nombre: "Seguridad profesional", puntos: 1 },
+            { id: 19, nombre: "App oficial del evento", puntos: 1 },
+            { id: 20, nombre: "Presencia redes sociales", puntos: 1 },
+            { id: 21, nombre: "Patrocinio público", puntos: 1 },
+            { id: 22, nombre: "Colaboración con clubes locales", puntos: 1 },
+            { id: 23, nombre: "Programa formativo paralelo", puntos: 1 },
+            { id: 24, nombre: "Certificación ecológica", puntos: 1 },
+            { id: 25, nombre: "Legado para la comunidad", puntos: 1 }
         ];
 
         let ratingActual = 0;
@@ -435,21 +811,25 @@
 
         // Navegación entre secciones
         function showSection(sectionName) {
+            // Ocultar todas las secciones
             document.querySelectorAll('.form-section').forEach(section => {
-                section.classList.remove('active');
+                section.style.display = 'none';
             });
             
-            document.getElementById(`form-${sectionName}`).classList.add('active');
+            // Mostrar la sección seleccionada
+            document.getElementById(`section-${sectionName}`).style.display = 'block';
             
-            document.querySelectorAll('.step').forEach((step, index) => {
+            // Actualizar pasos del wizard
+            document.querySelectorAll('.wizard-step').forEach((step, index) => {
                 step.classList.remove('active');
             });
             
             const stepIndex = ['tecnica', 'logistica', 'resumen'].indexOf(sectionName);
-            document.querySelectorAll('.step')[stepIndex].classList.add('active');
+            document.querySelectorAll('.wizard-step')[stepIndex].classList.add('active');
             
             if (sectionName === 'resumen') {
                 generarResumen();
+                actualizarProgreso();
             }
         }
 
@@ -462,7 +842,7 @@
                 const element = document.getElementById(field);
                 if (!element.value) {
                     valid = false;
-                    element.style.borderColor = 'var(--error)';
+                    element.style.borderColor = 'var(--error-color)';
                 } else {
                     element.style.borderColor = '';
                 }
@@ -497,14 +877,16 @@
                     });
                     
                     const descriptions = [
-                        "Evento Local",
-                        "Evento Regional", 
-                        "Evento Nacional",
-                        "Evento Internacional",
-                        "Evento Élite"
+                        "Evento Local - 1 Rey",
+                        "Evento Regional - 2 Reyes", 
+                        "Evento Nacional - 3 Reyes",
+                        "Evento Internacional - 4 Reyes",
+                        "Evento Élite - 5 Reyes"
                     ];
                     document.getElementById('rating-description').textContent = 
                         `${descriptions[rating-1]} - Provisional - Pendiente ratificación CO`;
+                        
+                    actualizarProgreso();
                 });
             });
         }
@@ -517,7 +899,7 @@
                 const item = document.createElement('div');
                 item.className = 'criteria-item';
                 item.innerHTML = `
-                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                    <label>
                         <input type="checkbox" value="${criterio.id}" onchange="actualizarCriterio(this)">
                         ${criterio.nombre}
                     </label>
@@ -537,6 +919,42 @@
                 criteriosCumplidos = criteriosCumplidos.filter(id => id !== criterioId);
                 item.classList.remove('fulfilled');
             }
+            
+            actualizarProgreso();
+        }
+
+        // Actualizar progreso
+        function actualizarProgreso() {
+            const container = document.getElementById('progress-stats');
+            const porcentaje = Math.min(100, (criteriosCumplidos.length / 25) * 100);
+            const ratingCalculado = Math.min(5, Math.ceil(criteriosCumplidos.length / 5));
+            
+            container.innerHTML = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="font-size: 2rem; font-weight: bold; color: var(--primary-color);">
+                        ${ratingCalculado} ${ratingCalculado === 1 ? 'Rey' : 'Reyes'}
+                    </div>
+                    <div style="font-size: 0.9rem; color: #6b7280;">Categoría Actual</div>
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <span style="font-size: 0.9rem;">Progreso de Criterios</span>
+                        <span style="font-size: 0.9rem; font-weight: 600;">${criteriosCumplidos.length}/25</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${porcentaje}%"></div>
+                    </div>
+                </div>
+                
+                <div style="font-size: 0.85rem; color: #6b7280; text-align: center;">
+                    ${criteriosCumplidos.length < 5 ? 'Completa más criterios para subir de categoría' : 
+                      criteriosCumplidos.length < 10 ? '¡Buen progreso! Sigue mejorando tu evento' :
+                      criteriosCumplidos.length < 15 ? '¡Excelente! Tu evento tiene gran potencial' :
+                      criteriosCumplidos.length < 20 ? '¡Impresionante! Evento de alta calidad' :
+                      '¡Evento de élite! Máxima categoría alcanzada'}
+                </div>
+            `;
         }
 
         // Generar resumen
@@ -544,10 +962,11 @@
             const container = document.getElementById('resumen-contenido');
             const datosTecnicos = obtenerDatosTecnicos();
             const datosLogistica = obtenerDatosLogistica();
+            const ratingCalculado = Math.min(5, Math.ceil(criteriosCumplidos.length / 5));
             
             container.innerHTML = `
-                <div style="background: #f0f9ff; padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
-                    <h3 style="color: #0369a1; margin-top: 0; font-size: 1.1rem;">🎯 Resumen del Evento</h3>
+                <div style="background: #f0f9ff; padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                    <h4 style="color: #0369a1; margin-top: 0; margin-bottom: 1rem; font-size: 1.1rem;">🎯 Resumen del Evento</h4>
                     
                     <div class="resumen-item">
                         <strong>Nombre:</strong> ${datosTecnicos.nombre}
@@ -562,19 +981,38 @@
                         <strong>Sistema:</strong> ${datosTecnicos.sistema}
                     </div>
                     <div class="resumen-item">
-                        <strong>Categoría:</strong> ${ratingActual} ${ratingActual === 1 ? 'Rey' : 'Reyes'} - ${criteriosCumplidos.length}/10 criterios
+                        <strong>Modalidad:</strong> ${datosTecnicos.modalidad}
+                    </div>
+                    <div class="resumen-item">
+                        <strong>Categoría:</strong> ${ratingCalculado} ${ratingCalculado === 1 ? 'Rey' : 'Reyes'} - ${criteriosCumplidos.length}/25 criterios
                     </div>
                     <div class="resumen-item">
                         <strong>Presupuesto:</strong> ${datosLogistica.presupuesto}
                     </div>
-                    
-                    <div style="margin-top: 1rem; padding: 0.75rem; background: white; border-radius: 6px;">
-                        <h4 style="margin: 0 0 0.5rem 0; font-size: 0.9rem;">📊 Progreso Categorización CO</h4>
-                        <div style="background: #e5e7eb; height: 15px; border-radius: 8px; margin: 0.25rem 0;">
-                            <div style="background: #10b981; height: 100%; width: ${(criteriosCumplidos.length / 10) * 100}%; border-radius: 8px;"></div>
-                        </div>
-                        <small style="color: #6b7280;">${criteriosCumplidos.length} de 10 criterios cumplidos</small>
+                    <div class="resumen-item">
+                        <strong>Transmisión:</strong> ${datosLogistica.transmision}
                     </div>
+                    
+                    <div style="margin-top: 1rem; padding: 1rem; background: white; border-radius: 6px;">
+                        <h5 style="margin: 0 0 0.5rem 0; font-size: 0.9rem;">📊 Progreso de Categorización</h5>
+                        <div style="background: #e5e7eb; height: 15px; border-radius: 8px; margin: 0.25rem 0;">
+                            <div style="background: #10b981; height: 100%; width: ${(criteriosCumplidos.length / 25) * 100}%; border-radius: 8px;"></div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-top: 0.5rem;">
+                            <small style="color: #6b7280;">${criteriosCumplidos.length} de 25 criterios cumplidos</small>
+                            <small style="color: #10b981; font-weight: 600;">${Math.round((criteriosCumplidos.length / 25) * 100)}%</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: #fef3c7; padding: 1rem; border-radius: 6px; border-left: 4px solid var(--warning-color);">
+                    <h5 style="margin: 0 0 0.5rem 0; color: #92400e;">💡 Recomendaciones para Mejorar</h5>
+                    <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.9rem; color: #92400e;">
+                        <li>Considera añadir transmisión en vivo con comentaristas</li>
+                        <li>Mejora la señalización y accesos al recinto</li>
+                        <li>Añade actividades paralelas como simuls o conferencias</li>
+                        <li>Incrementa el fondo de premios para atraer más jugadores</li>
+                    </ul>
                 </div>
             `;
         }
@@ -592,6 +1030,12 @@
                 'hibrido': 'Híbrido'
             };
 
+            const transmisionTexto = {
+                'si': 'Sí',
+                'no': 'No',
+                'parcial': 'Parcial'
+            };
+
             return {
                 nombre: document.getElementById('nombre-torneo').value,
                 fechas: `${document.getElementById('fecha-inicio').value} al ${document.getElementById('fecha-fin').value}`,
@@ -602,8 +1046,15 @@
         }
 
         function obtenerDatosLogistica() {
+            const transmisionTexto = {
+                'si': 'Sí',
+                'no': 'No',
+                'parcial': 'Parcial'
+            };
+
             return {
-                presupuesto: document.getElementById('presupuesto').value ? `${document.getElementById('presupuesto').value}€` : 'No especificado'
+                presupuesto: document.getElementById('presupuesto').value ? `${document.getElementById('presupuesto').value}€` : 'No especificado',
+                transmision: transmisionTexto[document.getElementById('transmision').value] || 'No especificado'
             };
         }
 
@@ -612,20 +1063,21 @@
             const eventoData = {
                 tecnica: obtenerDatosTecnicos(),
                 logistica: obtenerDatosLogistica(),
-                rating: ratingActual,
+                rating: Math.min(5, Math.ceil(criteriosCumplidos.length / 5)),
                 criteriosCumplidos: criteriosCumplidos,
                 fechaCreacion: new Date().toISOString()
             };
             
             console.log('Evento creado:', eventoData);
-            alert('✅ Evento creado exitosamente!\n\nPróximamente se guardará en la base de datos Firestore.');
-            window.location.href = '/dashboard.html';
+            alert('✅ Evento creado exitosamente!\n\nCategoría: ' + eventoData.rating + (eventoData.rating === 1 ? ' Rey' : ' Reyes') + '\n\nPróximamente se guardará en la base de datos Firestore.');
+            window.location.href = 'dashboard.html';
         }
 
         // Inicializar cuando cargue la página
         document.addEventListener('DOMContentLoaded', function() {
             inicializarRating();
             inicializarCriterios();
+            actualizarProgreso();
             
             // Establecer fecha mínima como hoy
             const hoy = new Date().toISOString().split('T')[0];

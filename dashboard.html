@@ -902,7 +902,7 @@
                 <li class="menu-item"><a href="agenda.html" class="menu-link"><i class="fas fa-calendar-alt"></i> <span data-translate="menu_agenda">Agenda</span></a></li>
                 <li class="menu-item"><a href="anteproyecto.html" class="menu-link"><i class="fas fa-lightbulb"></i> <span data-translate="menu_preproject">Anteproyecto</span></a></li>
                 <li class="menu-item"><a href="proyecto.html" class="menu-link"><i class="fas fa-project-diagram"></i> <span data-translate="menu_project">Proyecto</span></a></li>
-                <li class="menu-item"><a href="evento.html" class="menu-link"><i class="fas fa-calendar-check"></i> <span data-translate="menu_event">Evento</span></a></li>
+                <li class="menu-item"><a href="crear-evento.html" class="menu-link"><i class="fas fa-calendar-check"></i> <span data-translate="menu_event">Evento</span></a></li>
                 <li class="menu-item"><a href="postevento.html" class="menu-link"><i class="fas fa-chart-line"></i> <span data-translate="menu_postevent">Post Evento</span></a></li>
                 <li class="menu-item"><a href="marketing.html" class="menu-link"><i class="fas fa-bullhorn"></i> <span data-translate="menu_marketing">Marketing</span></a></li>
                 <li class="menu-item"><a href="comunidad.html" class="menu-link"><i class="fas fa-users"></i> <span data-translate="menu_community">Comunidad</span></a></li>
@@ -917,10 +917,10 @@
         <header class="header">
             <div class="page-title">
                 <h2 data-translate="page_title">Panel de Gestión</h2>
-                <p id="userWelcome" style="color: var(--text-light); font-size: 0.9rem; margin-top: 5px;">Bienvenido de nuevo</p>
+                <p id="userWelcome" style="color: var(--text-light); font-size: 0.9rem; margin-top: 5px;" data-translate="welcome_message">Bienvenido de nuevo</p>
             </div>
             <div class="header-actions">
-                <a href="evento.html" class="btn btn-primary"><i class="fas fa-calendar-plus"></i> <span data-translate="btn_event">Evento</span></a>
+                <a href="crear-evento.html" class="btn btn-primary"><i class="fas fa-calendar-plus"></i> <span data-translate="btn_event">Evento</span></a>
                 <a href="live.html" class="btn btn-secondary"><i class="fas fa-broadcast-tower"></i> <span data-translate="btn_live">Live</span></a>
                 
                 <a href="notificaciones.html" class="icon-btn" title="Notificaciones"><i class="fas fa-bell"></i></a>
@@ -1006,41 +1006,41 @@
 
                 <!-- BUZÓN DE SUGERENCIAS -->
                 <div class="suggestion-box">
-                    <h3 class="section-title">Buzón de Sugerencias</h3>
+                    <h3 class="section-title" data-translate="suggestion_box_title">Buzón de Sugerencias</h3>
                     <div class="suggestion-header">
                         <div class="suggestion-count">
                             <strong>42</strong>
-                            <span>Total</span>
+                            <span data-translate="suggestion_total">Total</span>
                         </div>
                         <div class="suggestion-count new">
                             <strong>15</strong>
-                            <span>Nuevas</span>
+                            <span data-translate="suggestion_new">Nuevas</span>
                         </div>
                     </div>
                     
                     <div class="suggestion-input">
-                        <textarea placeholder="Tu sugerencia para mejorar..." rows="3"></textarea>
-                        <button class="send-suggestion-btn">Enviar</button>
+                        <textarea placeholder="Tu sugerencia para mejorar..." rows="3" data-translate-placeholder="suggestion_placeholder"></textarea>
+                        <button class="send-suggestion-btn" data-translate="suggestion_send">Enviar</button>
                     </div>
 
                     <div class="suggestion-divider"></div>
 
                     <div class="popular-suggestions">
                         <div class="suggestion-item">
-                            <span class="suggestion-text">Más partidas simultáneas con grandes maestros</span>
+                            <span class="suggestion-text" data-translate="suggestion_1">Más partidas simultáneas con grandes maestros</span>
                             <span class="suggestion-votes">✔ 24</span>
                         </div>
                         <div class="suggestion-item">
-                            <span class="suggestion-text">Mejorar señalización de salas</span>
+                            <span class="suggestion-text" data-translate="suggestion_2">Mejorar señalización de salas</span>
                             <span class="suggestion-votes">✔ 18</span>
                         </div>
                         <div class="suggestion-item">
-                            <span class="suggestion-text">App con notificaciones push</span>
+                            <span class="suggestion-text" data-translate="suggestion_3">App con notificaciones push</span>
                             <span class="suggestion-votes">✔ 15</span>
                         </div>
                     </div>
 
-                    <button class="view-all-suggestions-btn">
+                    <button class="view-all-suggestions-btn" data-translate="suggestion_view_all">
                         👍 Ver todas las sugerencias
                     </button>
                 </div>
@@ -1057,71 +1057,71 @@
                             <div class="guide-icon">
                                 <i class="fas fa-trophy"></i>
                             </div>
-                            <div class="guide-icon-title">Torneo</div>
-                            <div class="guide-tooltip">Configura y gestiona todos los detalles de tu torneo</div>
+                            <div class="guide-icon-title" data-translate="guide_tournament">Torneo</div>
+                            <div class="guide-tooltip" data-translate="guide_tournament_tooltip">Configura y gestiona todos los detalles de tu torneo</div>
                         </div>
                         
                         <div class="guide-icon-item">
                             <div class="guide-icon">
                                 <i class="fas fa-calendar-alt"></i>
                             </div>
-                            <div class="guide-icon-title">Agenda</div>
-                            <div class="guide-tooltip">Planifica fechas, horarios y cronograma del evento</div>
+                            <div class="guide-icon-title" data-translate="guide_agenda">Agenda</div>
+                            <div class="guide-tooltip" data-translate="guide_agenda_tooltip">Planifica fechas, horarios y cronograma del evento</div>
                         </div>
                         
                         <div class="guide-icon-item">
                             <div class="guide-icon">
                                 <i class="fas fa-lightbulb"></i>
                             </div>
-                            <div class="guide-icon-title">Anteproyecto</div>
-                            <div class="guide-tooltip">Desarrolla la idea inicial y planificación básica</div>
+                            <div class="guide-icon-title" data-translate="guide_preproject">Anteproyecto</div>
+                            <div class="guide-tooltip" data-translate="guide_preproject_tooltip">Desarrolla la idea inicial y planificación básica</div>
                         </div>
                         
                         <div class="guide-icon-item">
                             <div class="guide-icon">
                                 <i class="fas fa-project-diagram"></i>
                             </div>
-                            <div class="guide-icon-title">Proyecto</div>
-                            <div class="guide-tooltip">Gestiona la ejecución detallada del evento</div>
+                            <div class="guide-icon-title" data-translate="guide_project">Proyecto</div>
+                            <div class="guide-tooltip" data-translate="guide_project_tooltip">Gestiona la ejecución detallada del evento</div>
                         </div>
                         
                         <div class="guide-icon-item">
                             <div class="guide-icon">
                                 <i class="fas fa-calendar-check"></i>
                             </div>
-                            <div class="guide-icon-title">Evento</div>
-                            <div class="guide-tooltip">Control en tiempo real durante la celebración</div>
+                            <div class="guide-icon-title" data-translate="guide_event">Evento</div>
+                            <div class="guide-tooltip" data-translate="guide_event_tooltip">Control en tiempo real durante la celebración</div>
                         </div>
                         
                         <div class="guide-icon-item">
                             <div class="guide-icon">
                                 <i class="fas fa-chart-line"></i>
                             </div>
-                            <div class="guide-icon-title">Post Evento</div>
-                            <div class="guide-tooltip">Análisis de resultados y cierre del proyecto</div>
+                            <div class="guide-icon-title" data-translate="guide_postevent">Post Evento</div>
+                            <div class="guide-tooltip" data-translate="guide_postevent_tooltip">Análisis de resultados y cierre del proyecto</div>
                         </div>
                         
                         <div class="guide-icon-item">
                             <div class="guide-icon">
                                 <i class="fas fa-bullhorn"></i>
                             </div>
-                            <div class="guide-icon-title">Marketing</div>
-                            <div class="guide-tooltip">Promoción y comunicación del evento</div>
+                            <div class="guide-icon-title" data-translate="guide_marketing">Marketing</div>
+                            <div class="guide-tooltip" data-translate="guide_marketing_tooltip">Promoción y comunicación del evento</div>
                         </div>
                         
                         <div class="guide-icon-item">
                             <div class="guide-icon">
                                 <i class="fas fa-users"></i>
                             </div>
-                            <div class="guide-icon-title">Comunidad</div>
-                            <div class="guide-tooltip">Gestiona participantes y relaciones</div>
+                            <div class="guide-icon-title" data-translate="guide_community">Comunidad</div>
+                            <div class="guide-tooltip" data-translate="guide_community_tooltip">Gestiona participantes y relaciones</div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Recent Activity -->
                 <div class="quick-guide" style="margin-top: 20px;">
-                    <h3 class="section-title">Actividad Reciente</h3>
+                    <h3 class="section-title" data-translate="recent_activity_title">Actividad Reciente</h3>
                     <div id="recentActivity">
                         <!-- La actividad se cargará dinámicamente -->
                     </div>
@@ -1159,10 +1159,10 @@
     <div id="contactModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>Contacto - Chess Organizers</h3>
+                <h3 data-translate="contact_title">Contacto - Chess Organizers</h3>
                 <button class="close-modal" onclick="closeModal('contactModal')">×</button>
             </div>
-            <p style="color: var(--text-color);">Selecciona el tipo de consulta que deseas realizar:</p>
+            <p style="color: var(--text-color);" data-translate="contact_description">Selecciona el tipo de consulta que deseas realizar:</p>
             
             <div class="contact-options">
                 <div class="contact-option" onclick="sendEmail('info@chessorganizers.com')">
@@ -1170,7 +1170,7 @@
                         <i class="fas fa-info-circle"></i>
                     </div>
                     <div class="contact-info">
-                        <h4>Información General</h4>
+                        <h4 data-translate="contact_info">Información General</h4>
                         <p>info@chessorganizers.com</p>
                     </div>
                 </div>
@@ -1180,7 +1180,7 @@
                         <i class="fas fa-headset"></i>
                     </div>
                     <div class="contact-info">
-                        <h4>Soporte Técnico</h4>
+                        <h4 data-translate="contact_support">Soporte Técnico</h4>
                         <p>soporte@chessorganizers.com</p>
                     </div>
                 </div>
@@ -1190,7 +1190,7 @@
                         <i class="fas fa-handshake"></i>
                     </div>
                     <div class="contact-info">
-                        <h4>Consultas Comerciales</h4>
+                        <h4 data-translate="contact_commercial">Consultas Comerciales</h4>
                         <p>comercial@chessorganizers.com</p>
                     </div>
                 </div>
@@ -1199,25 +1199,262 @@
     </div>
 
     <script>
-        // ========== CONFIGURACIÓN Y ESTADO GLOBAL ==========
-        
-        const DASHBOARD_CONFIG = {
-            collections: {
-                TOURNAMENTS: 'tournaments',
-                PARTICIPANTS: 'participants',
-                EVENTS: 'events',
-                ACTIVITY: 'activity'
+        // ========== SISTEMA DE TRADUCCIONES ==========
+        const translations = {
+            es: {
+                "app_name": "Chess Organizers",
+                "menu_dashboard": "Panel",
+                "menu_tournament": "Torneo",
+                "menu_agenda": "Agenda",
+                "menu_preproject": "Anteproyecto",
+                "menu_project": "Proyecto",
+                "menu_event": "Evento",
+                "menu_postevent": "Post Evento",
+                "menu_marketing": "Marketing",
+                "menu_community": "Comunidad",
+                "menu_crm": "CRM",
+                "page_title": "Panel de Gestión",
+                "welcome_message": "Bienvenido de nuevo",
+                "btn_event": "Evento",
+                "btn_live": "Live",
+                "stat_participants_title": "Total de Participantes",
+                "stat_participants_subtitle": "Torneo actual",
+                "stat_income_title": "Ingresos del Evento",
+                "stat_income_subtitle": "Provisional",
+                "stat_contacts_title": "Nuevos Contactos",
+                "stat_contacts_subtitle": "Últimos 30 días",
+                "stat_tasks_title": "Progreso",
+                "stat_tasks_subtitle": "Porcentaje completado",
+                "progress_title": "Progreso del Proyecto",
+                "progress_description": "Vista general del estado de cada fase del torneo.",
+                "phase_preproject": "Anteproyecto",
+                "phase_project": "Proyecto",
+                "phase_event": "Evento",
+                "phase_postevent": "Post Evento",
+                "events_title": "Próximos Eventos y Plazos",
+                "events_description": "Lo siguiente en tu agenda.",
+                "quick_actions_title": "Accesos Rápidos",
+                "quick_actions_description": "Tus acciones más frecuentes.",
+                "action_new_participant": "Nuevo Participante",
+                "action_register_payment": "Registrar Pago",
+                "action_send_reminder": "Enviar Recordatorio",
+                "action_view_stats": "Ver Estadísticas",
+                "guide_title": "Guía Rápida para Empezar",
+                "guide_description": "¡Bienvenido a Chess Organizers! Aquí tienes un recorrido rápido por las secciones principales para que empieces con buen pie.",
+                "guide_tournament": "Torneo",
+                "guide_tournament_tooltip": "Configura y gestiona todos los detalles de tu torneo",
+                "guide_agenda": "Agenda",
+                "guide_agenda_tooltip": "Planifica fechas, horarios y cronograma del evento",
+                "guide_preproject": "Anteproyecto",
+                "guide_preproject_tooltip": "Desarrolla la idea inicial y planificación básica",
+                "guide_project": "Proyecto",
+                "guide_project_tooltip": "Gestiona la ejecución detallada del evento",
+                "guide_event": "Evento",
+                "guide_event_tooltip": "Control en tiempo real durante la celebración",
+                "guide_postevent": "Post Evento",
+                "guide_postevent_tooltip": "Análisis de resultados y cierre del proyecto",
+                "guide_marketing": "Marketing",
+                "guide_marketing_tooltip": "Promoción y comunicación del evento",
+                "guide_community": "Comunidad",
+                "guide_community_tooltip": "Gestiona participantes y relaciones",
+                "recent_activity_title": "Actividad Reciente",
+                "suggestion_box_title": "Buzón de Sugerencias",
+                "suggestion_total": "Total",
+                "suggestion_new": "Nuevas",
+                "suggestion_placeholder": "Tu sugerencia para mejorar...",
+                "suggestion_send": "Enviar",
+                "suggestion_1": "Más partidas simultáneas con grandes maestros",
+                "suggestion_2": "Mejorar señalización de salas",
+                "suggestion_3": "App con notificaciones push",
+                "suggestion_view_all": "👍 Ver todas las sugerencias",
+                "contact_title": "Contacto - Chess Organizers",
+                "contact_description": "Selecciona el tipo de consulta que deseas realizar:",
+                "contact_info": "Información General",
+                "contact_support": "Soporte Técnico",
+                "contact_commercial": "Consultas Comerciales"
             },
-            user: null
+            en: {
+                "app_name": "Chess Organizers",
+                "menu_dashboard": "Dashboard",
+                "menu_tournament": "Tournament",
+                "menu_agenda": "Agenda",
+                "menu_preproject": "Pre-project",
+                "menu_project": "Project",
+                "menu_event": "Event",
+                "menu_postevent": "Post Event",
+                "menu_marketing": "Marketing",
+                "menu_community": "Community",
+                "menu_crm": "CRM",
+                "page_title": "Management Panel",
+                "welcome_message": "Welcome back",
+                "btn_event": "Event",
+                "btn_live": "Live",
+                "stat_participants_title": "Total Participants",
+                "stat_participants_subtitle": "Current tournament",
+                "stat_income_title": "Event Income",
+                "stat_income_subtitle": "Provisional",
+                "stat_contacts_title": "New Contacts",
+                "stat_contacts_subtitle": "Last 30 days",
+                "stat_tasks_title": "Progress",
+                "stat_tasks_subtitle": "Percentage completed",
+                "progress_title": "Project Progress",
+                "progress_description": "Overview of the status of each tournament phase.",
+                "phase_preproject": "Pre-project",
+                "phase_project": "Project",
+                "phase_event": "Event",
+                "phase_postevent": "Post Event",
+                "events_title": "Upcoming Events and Deadlines",
+                "events_description": "What's next on your agenda.",
+                "quick_actions_title": "Quick Access",
+                "quick_actions_description": "Your most frequent actions.",
+                "action_new_participant": "New Participant",
+                "action_register_payment": "Register Payment",
+                "action_send_reminder": "Send Reminder",
+                "action_view_stats": "View Statistics",
+                "guide_title": "Quick Start Guide",
+                "guide_description": "Welcome to Chess Organizers! Here's a quick tour of the main sections to get you started.",
+                "guide_tournament": "Tournament",
+                "guide_tournament_tooltip": "Configure and manage all your tournament details",
+                "guide_agenda": "Agenda",
+                "guide_agenda_tooltip": "Plan dates, schedules and event timeline",
+                "guide_preproject": "Pre-project",
+                "guide_preproject_tooltip": "Develop the initial idea and basic planning",
+                "guide_project": "Project",
+                "guide_project_tooltip": "Manage detailed event execution",
+                "guide_event": "Event",
+                "guide_event_tooltip": "Real-time control during the celebration",
+                "guide_postevent": "Post Event",
+                "guide_postevent_tooltip": "Results analysis and project closure",
+                "guide_marketing": "Marketing",
+                "guide_marketing_tooltip": "Event promotion and communication",
+                "guide_community": "Community",
+                "guide_community_tooltip": "Manage participants and relationships",
+                "recent_activity_title": "Recent Activity",
+                "suggestion_box_title": "Suggestion Box",
+                "suggestion_total": "Total",
+                "suggestion_new": "New",
+                "suggestion_placeholder": "Your suggestion for improvement...",
+                "suggestion_send": "Send",
+                "suggestion_1": "More simultaneous games with grandmasters",
+                "suggestion_2": "Improve room signage",
+                "suggestion_3": "App with push notifications",
+                "suggestion_view_all": "👍 View all suggestions",
+                "contact_title": "Contact - Chess Organizers",
+                "contact_description": "Select the type of inquiry you want to make:",
+                "contact_info": "General Information",
+                "contact_support": "Technical Support",
+                "contact_commercial": "Commercial Inquiries"
+            },
+            fr: {
+                "app_name": "Chess Organizers",
+                "menu_dashboard": "Tableau de Bord",
+                "menu_tournament": "Tournoi",
+                "menu_agenda": "Agenda",
+                "menu_preproject": "Avant-projet",
+                "menu_project": "Projet",
+                "menu_event": "Événement",
+                "menu_postevent": "Post Événement",
+                "menu_marketing": "Marketing",
+                "menu_community": "Communauté",
+                "menu_crm": "CRM",
+                "page_title": "Panneau de Gestion",
+                "welcome_message": "Bienvenue de retour",
+                "btn_event": "Événement",
+                "btn_live": "En Direct",
+                "stat_participants_title": "Total des Participants",
+                "stat_participants_subtitle": "Tournoi actuel",
+                "stat_income_title": "Revenus de l'Événement",
+                "stat_income_subtitle": "Provisoire",
+                "stat_contacts_title": "Nouveaux Contacts",
+                "stat_contacts_subtitle": "30 derniers jours",
+                "stat_tasks_title": "Progression",
+                "stat_tasks_subtitle": "Pourcentage terminé",
+                "progress_title": "Progression du Projet",
+                "progress_description": "Aperçu de l'état de cada phase du tournoi.",
+                "phase_preproject": "Avant-projet",
+                "phase_project": "Projet",
+                "phase_event": "Événement",
+                "phase_postevent": "Post Événement",
+                "events_title": "Événements à Venir et Échéances",
+                "events_description": "Ce qui suit dans votre agenda.",
+                "quick_actions_title": "Accès Rapides",
+                "quick_actions_description": "Vos acciones les plus fréquentes.",
+                "action_new_participant": "Nouveau Participant",
+                "action_register_payment": "Enregistrer Paiement",
+                "action_send_reminder": "Envoyer Rappel",
+                "action_view_stats": "Voir Statistiques",
+                "guide_title": "Guide de Démarrage Rapide",
+                "guide_description": "Bienvenue à Chess Organizers ! Voici un tour rapide des sections principales para bien commencer.",
+                "guide_tournament": "Tournoi",
+                "guide_tournament_tooltip": "Configurez et gérez tous les détails de votre tournoi",
+                "guide_agenda": "Agenda",
+                "guide_agenda_tooltip": "Planifiez dates, horaires et calendrier de l'événement",
+                "guide_preproject": "Avant-projet",
+                "guide_preproject_tooltip": "Développez l'idée initiale et la planification de base",
+                "guide_project": "Projet",
+                "guide_project_tooltip": "Gérez l'exécution détaillée de l'événement",
+                "guide_event": "Événement",
+                "guide_event_tooltip": "Contrôle en temps réel pendant la célébration",
+                "guide_postevent": "Post Événement",
+                "guide_postevent_tooltip": "Analyse des résultats et clôture du projet",
+                "guide_marketing": "Marketing",
+                "guide_marketing_tooltip": "Promotion et communication de l'événement",
+                "guide_community": "Communauté",
+                "guide_community_tooltip": "Gérez les participants et les relations",
+                "recent_activity_title": "Activité Récente",
+                "suggestion_box_title": "Boîte à Suggestions",
+                "suggestion_total": "Total",
+                "suggestion_new": "Nouvelles",
+                "suggestion_placeholder": "Votre suggestion pour améliorer...",
+                "suggestion_send": "Envoyer",
+                "suggestion_1": "Plus de parties simultanées avec des grands maîtres",
+                "suggestion_2": "Améliorer la signalisation des salles",
+                "suggestion_3": "Application avec notifications push",
+                "suggestion_view_all": "👍 Voir toutes les suggestions",
+                "contact_title": "Contact - Chess Organizers",
+                "contact_description": "Sélectionnez le type de demande que vous souhaitez effectuer :",
+                "contact_info": "Informations Générales",
+                "contact_support": "Support Technique",
+                "contact_commercial": "Demandes Commerciales"
+            }
         };
 
-        // Estado global de la aplicación
-        let appState = {
-            tournaments: [],
-            participants: [],
-            events: [],
-            currentUser: null
-        };
+        // Función para cambiar idioma
+        function changeLanguage(lang) {
+            localStorage.setItem('preferred-language', lang);
+            
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            const indicator = document.getElementById('language-indicator');
+            const activeBtn = document.querySelector(`.language-btn[data-lang="${lang}"]`);
+            if (activeBtn && indicator) {
+                const btnRect = activeBtn.getBoundingClientRect();
+                const containerRect = activeBtn.parentElement.getBoundingClientRect();
+                indicator.style.width = `${btnRect.width}px`;
+                indicator.style.left = `${btnRect.left - containerRect.left}px`;
+            }
+            
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+            
+            document.querySelectorAll('[data-translate-placeholder]').forEach(element => {
+                const key = element.getAttribute('data-translate-placeholder');
+                if (translations[lang] && translations[lang][key]) {
+                    element.placeholder = translations[lang][key];
+                }
+            });
+            
+            document.documentElement.lang = lang;
+        }
 
         // ========== INICIALIZACIÓN DE LA APLICACIÓN ==========
 
@@ -1425,7 +1662,8 @@
             // Actualizar bienvenida del usuario
             const userWelcome = document.getElementById('userWelcome');
             if (userWelcome && appState.currentUser) {
-                userWelcome.textContent = `Bienvenido de nuevo, ${appState.currentUser.username}`;
+                const welcomeText = document.querySelector('[data-translate="welcome_message"]').textContent;
+                userWelcome.textContent = `${welcomeText}, ${appState.currentUser.username}`;
             }
         }
 
@@ -1472,160 +1710,6 @@
         function sendEmail(email) {
             window.location.href = `mailto:${email}?subject=Consulta Chess Organizers&body=Hola, me gustaría obtener información sobre:`;
             closeModal('contactModal');
-        }
-
-        // ========== SISTEMA DE TRADUCCIONES ==========
-        const translations = {
-            es: {
-                "app_name": "Chess Organizers",
-                "menu_dashboard": "Panel",
-                "menu_tournament": "Torneo",
-                "menu_agenda": "Agenda",
-                "menu_preproject": "Anteproyecto",
-                "menu_project": "Proyecto",
-                "menu_event": "Evento",
-                "menu_postevent": "Post Evento",
-                "menu_marketing": "Marketing",
-                "menu_community": "Comunidad",
-                "menu_crm": "CRM",
-                "page_title": "Panel de Gestión",
-                "btn_event": "Evento",
-                "btn_live": "Live",
-                "stat_participants_title": "Total de Participantes",
-                "stat_participants_subtitle": "Torneo actual",
-                "stat_income_title": "Ingresos del Evento",
-                "stat_income_subtitle": "Provisional",
-                "stat_contacts_title": "Nuevos Contactos",
-                "stat_contacts_subtitle": "Últimos 30 días",
-                "stat_tasks_title": "Progreso",
-                "stat_tasks_subtitle": "Porcentaje completado",
-                "progress_title": "Progreso del Proyecto",
-                "progress_description": "Vista general del estado de cada fase del torneo.",
-                "phase_preproject": "Anteproyecto",
-                "phase_project": "Proyecto",
-                "phase_event": "Evento",
-                "phase_postevent": "Post Evento",
-                "events_title": "Próximos Eventos y Plazos",
-                "events_description": "Lo siguiente en tu agenda.",
-                "quick_actions_title": "Accesos Rápidos",
-                "quick_actions_description": "Tus acciones más frecuentes.",
-                "action_new_participant": "Nuevo Participante",
-                "action_register_payment": "Registrar Pago",
-                "action_send_reminder": "Enviar Recordatorio",
-                "action_view_stats": "Ver Estadísticas",
-                "guide_title": "Guía Rápida para Empezar",
-                "guide_description": "¡Bienvenido a Chess Organizers! Aquí tienes un recorrido rápido por las secciones principales para que empieces con buen pie."
-            },
-            en: {
-                "app_name": "Chess Organizers",
-                "menu_dashboard": "Dashboard",
-                "menu_tournament": "Tournament",
-                "menu_agenda": "Agenda",
-                "menu_preproject": "Pre-project",
-                "menu_project": "Project",
-                "menu_event": "Event",
-                "menu_postevent": "Post Event",
-                "menu_marketing": "Marketing",
-                "menu_community": "Community",
-                "menu_crm": "CRM",
-                "page_title": "Management Panel",
-                "btn_event": "Event",
-                "btn_live": "Live",
-                "stat_participants_title": "Total Participants",
-                "stat_participants_subtitle": "Current tournament",
-                "stat_income_title": "Event Income",
-                "stat_income_subtitle": "Provisional",
-                "stat_contacts_title": "New Contacts",
-                "stat_contacts_subtitle": "Last 30 days",
-                "stat_tasks_title": "Progress",
-                "stat_tasks_subtitle": "Percentage completed",
-                "progress_title": "Project Progress",
-                "progress_description": "Overview of the status of each tournament phase.",
-                "phase_preproject": "Pre-project",
-                "phase_project": "Project",
-                "phase_event": "Event",
-                "phase_postevent": "Post Event",
-                "events_title": "Upcoming Events and Deadlines",
-                "events_description": "What's next on your agenda.",
-                "quick_actions_title": "Quick Access",
-                "quick_actions_description": "Your most frequent actions.",
-                "action_new_participant": "New Participant",
-                "action_register_payment": "Register Payment",
-                "action_send_reminder": "Send Reminder",
-                "action_view_stats": "View Statistics",
-                "guide_title": "Quick Start Guide",
-                "guide_description": "Welcome to Chess Organizers! Here's a quick tour of the main sections to get you started."
-            },
-            fr: {
-                "app_name": "Chess Organizers",
-                "menu_dashboard": "Tableau de Bord",
-                "menu_tournament": "Tournoi",
-                "menu_agenda": "Agenda",
-                "menu_preproject": "Avant-projet",
-                "menu_project": "Projet",
-                "menu_event": "Événement",
-                "menu_postevent": "Post Événement",
-                "menu_marketing": "Marketing",
-                "menu_community": "Communauté",
-                "menu_crm": "CRM",
-                "page_title": "Panneau de Gestion",
-                "btn_event": "Événement",
-                "btn_live": "En Direct",
-                "stat_participants_title": "Total des Participants",
-                "stat_participants_subtitle": "Tournoi actuel",
-                "stat_income_title": "Revenus de l'Événement",
-                "stat_income_subtitle": "Provisoire",
-                "stat_contacts_title": "Nouveaux Contacts",
-                "stat_contacts_subtitle": "30 derniers jours",
-                "stat_tasks_title": "Progression",
-                "stat_tasks_subtitle": "Pourcentage terminé",
-                "progress_title": "Progression du Projet",
-                "progress_description": "Aperçu de l'état de cada phase du tournoi.",
-                "phase_preproject": "Avant-projet",
-                "phase_project": "Projet",
-                "phase_event": "Événement",
-                "phase_postevent": "Post Événement",
-                "events_title": "Événements à Venir et Échéances",
-                "events_description": "Ce qui suit dans votre agenda.",
-                "quick_actions_title": "Accès Rapides",
-                "quick_actions_description": "Vos acciones les plus fréquentes.",
-                "action_new_participant": "Nouveau Participant",
-                "action_register_payment": "Enregistrer Paiement",
-                "action_send_reminder": "Envoyer Rappel",
-                "action_view_stats": "Voir Statistiques",
-                "guide_title": "Guide de Démarrage Rapide",
-                "guide_description": "Bienvenue à Chess Organizers ! Voici un tour rapide des sections principales para bien commencer."
-            }
-        };
-
-        // Función para cambiar idioma
-        function changeLanguage(lang) {
-            localStorage.setItem('preferred-language', lang);
-            
-            document.querySelectorAll('.language-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.getAttribute('data-lang') === lang) {
-                    btn.classList.add('active');
-                }
-            });
-            
-            const indicator = document.getElementById('language-indicator');
-            const activeBtn = document.querySelector(`.language-btn[data-lang="${lang}"]`);
-            if (activeBtn && indicator) {
-                const btnRect = activeBtn.getBoundingClientRect();
-                const containerRect = activeBtn.parentElement.getBoundingClientRect();
-                indicator.style.width = `${btnRect.width}px`;
-                indicator.style.left = `${btnRect.left - containerRect.left}px`;
-            }
-            
-            document.querySelectorAll('[data-translate]').forEach(element => {
-                const key = element.getAttribute('data-translate');
-                if (translations[lang] && translations[lang][key]) {
-                    element.textContent = translations[lang][key];
-                }
-            });
-            
-            document.documentElement.lang = lang;
         }
 
         // ========== FUNCIONES PRINCIPALES ==========
