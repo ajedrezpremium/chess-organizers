@@ -819,6 +819,123 @@
             font-size: 0.9rem;
         }
 
+        /* NUEVOS ESTILOS PARA SUSCRIPCIONES */
+        .subscription-module {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            border: 1px solid var(--border-color);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .subscription-module::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            z-index: 0;
+        }
+        
+        .subscription-header {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .subscription-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subscription-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .kings-rating {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        
+        .king-icon {
+            color: gold;
+            font-size: 1.2rem;
+            margin: 0 2px;
+            text-shadow: 0 0 5px rgba(255,215,0,0.5);
+        }
+        
+        .subscription-cta {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+        
+        .subscription-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+            background: #c0392b;
+        }
+        
+        .membership-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .membership-item {
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 15px 10px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .membership-item:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-3px);
+        }
+        
+        .membership-icon {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+        
+        .membership-name {
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .membership-price {
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
         /* Responsive */
         @media (max-width: 1200px) {
             .content-grid {
@@ -831,6 +948,10 @@
             }
             
             .guide-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .membership-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
@@ -873,6 +994,10 @@
             .suggestion-header {
                 flex-direction: column;
                 gap: 1rem;
+            }
+            
+            .membership-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -1127,7 +1252,7 @@
                     </div>
                 </div>
 
-                <!-- Accesos Rápidos - MOVIDO AQUÍ -->
+                <!-- Accesos Rápidos -->
                 <div class="quick-guide" style="margin-top: 20px;">
                     <h3 class="section-title" data-translate="quick_actions_title">Accesos Rápidos</h3>
                     <p data-translate="quick_actions_description" style="color: var(--text-light);">Tus acciones más frecuentes.</p>
@@ -1149,6 +1274,56 @@
                             <i class="fas fa-chart-pie"></i>
                             <span data-translate="action_view_stats">Ver Estadísticas</span>
                         </button>
+                    </div>
+                </div>
+
+                <!-- NUEVO MÓDULO DE SUSCRIPCIONES ACTUALIZADO -->
+                <div class="subscription-module">
+                    <div class="subscription-header">
+                        <h3 class="subscription-title" data-translate="subscribe_title">SUSCRÍBETE AHORA</h3>
+                        <p class="subscription-subtitle" data-translate="subscribe_subtitle">Alcanza la máxima categoría, ahorra mucho tiempo, aumenta los ingresos y genera sinergias en la Comunidad</p>
+                        <div class="kings-rating">
+                            <i class="fas fa-crown king-icon"></i>
+                            <i class="fas fa-crown king-icon"></i>
+                            <i class="fas fa-crown king-icon"></i>
+                            <i class="fas fa-crown king-icon"></i>
+                            <i class="fas fa-crown king-icon"></i>
+                        </div>
+                        <a href="suscripciones.html" class="subscription-cta" data-translate="upgrade_plan">¡Mejora tu Plan!</a>
+                    </div>
+                    
+                    <div class="membership-grid">
+                        <div class="membership-item">
+                            <div class="membership-icon">
+                                <i class="fas fa-chess-pawn"></i>
+                            </div>
+                            <div class="membership-name" data-translate="plan_free">GRATUITO</div>
+                            <div class="membership-price" data-translate="price_free">0€/mes</div>
+                        </div>
+                        
+                        <div class="membership-item">
+                            <div class="membership-icon">
+                                <i class="fas fa-chess-knight"></i>
+                            </div>
+                            <div class="membership-name" data-translate="plan_basic">BÁSICO</div>
+                            <div class="membership-price" data-translate="price_basic">25€/mes</div>
+                        </div>
+                        
+                        <div class="membership-item">
+                            <div class="membership-icon">
+                                <i class="fas fa-chess-rook"></i>
+                            </div>
+                            <div class="membership-name" data-translate="plan_pro">PRO</div>
+                            <div class="membership-price" data-translate="price_pro">49€/mes</div>
+                        </div>
+                        
+                        <div class="membership-item">
+                            <div class="membership-icon">
+                                <i class="fas fa-chess-king"></i>
+                            </div>
+                            <div class="membership-name" data-translate="plan_business">BUSINESS</div>
+                            <div class="membership-price" data-translate="price_business">99€/mes</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1271,7 +1446,20 @@
                 "contact_description": "Selecciona el tipo de consulta que deseas realizar:",
                 "contact_info": "Información General",
                 "contact_support": "Soporte Técnico",
-                "contact_commercial": "Consultas Comerciales"
+                "contact_commercial": "Consultas Comerciales",
+                
+                // NUEVAS TRADUCCIONES PARA SUSCRIPCIONES
+                "subscribe_title": "SUSCRÍBETE AHORA",
+                "subscribe_subtitle": "Alcanza la máxima categoría, ahorra mucho tiempo, aumenta los ingresos y genera sinergias en la Comunidad",
+                "upgrade_plan": "¡Mejora tu Plan!",
+                "plan_free": "GRATUITO",
+                "plan_basic": "BÁSICO",
+                "plan_pro": "PRO",
+                "plan_business": "BUSINESS",
+                "price_free": "0€/mes",
+                "price_basic": "25€/mes",
+                "price_pro": "49€/mes",
+                "price_business": "99€/mes"
             },
             en: {
                 "app_name": "Chess Organizers",
@@ -1343,7 +1531,20 @@
                 "contact_description": "Select the type of inquiry you want to make:",
                 "contact_info": "General Information",
                 "contact_support": "Technical Support",
-                "contact_commercial": "Commercial Inquiries"
+                "contact_commercial": "Commercial Inquiries",
+                
+                // NUEVAS TRADUCCIONES PARA SUSCRIPCIONES
+                "subscribe_title": "SUBSCRIBE NOW",
+                "subscribe_subtitle": "Reach the highest category, save a lot of time, increase income and generate synergies in the Community",
+                "upgrade_plan": "Upgrade Your Plan!",
+                "plan_free": "FREE",
+                "plan_basic": "BASIC",
+                "plan_pro": "PRO",
+                "plan_business": "BUSINESS",
+                "price_free": "0€/month",
+                "price_basic": "25€/month",
+                "price_pro": "49€/month",
+                "price_business": "99€/month"
             },
             fr: {
                 "app_name": "Chess Organizers",
@@ -1415,7 +1616,20 @@
                 "contact_description": "Sélectionnez le type de demande que vous souhaitez effectuer :",
                 "contact_info": "Informations Générales",
                 "contact_support": "Support Technique",
-                "contact_commercial": "Demandes Commerciales"
+                "contact_commercial": "Demandes Commerciales",
+                
+                // NUEVAS TRADUCCIONES PARA SUSCRIPCIONES
+                "subscribe_title": "ABONNEZ-VOUS MAINTENANT",
+                "subscribe_subtitle": "Atteignez la catégorie maximale, économisez beaucoup de temps, augmentez les revenus et générez des synergies dans la Communauté",
+                "upgrade_plan": "Améliorez votre Plan!",
+                "plan_free": "GRATUIT",
+                "plan_basic": "BASIQUE",
+                "plan_pro": "PRO",
+                "plan_business": "BUSINESS",
+                "price_free": "0€/mois",
+                "price_basic": "25€/mois",
+                "price_pro": "49€/mois",
+                "price_business": "99€/mois"
             }
         };
 
@@ -1458,6 +1672,13 @@
 
         // ========== INICIALIZACIÓN DE LA APLICACIÓN ==========
 
+        // Estado global de la aplicación
+        const appState = {
+            currentUser: null,
+            darkMode: false,
+            currentLanguage: 'es'
+        };
+
         function initializeDashboardApp() {
             console.log("🎯 Inicializando Dashboard de Chess Organizers...");
             
@@ -1472,6 +1693,9 @@
             
             // Actualizar interfaz de usuario
             updateUserInterface();
+            
+            // Inicializar módulo de suscripciones
+            initializeSubscriptionModule();
         }
 
         function checkAuthentication() {
@@ -1740,6 +1964,30 @@
 
         function viewStatistics() {
             alert('Funcionalidad: Ver Estadísticas\n\nDashboard avanzado con métricas del torneo.');
+        }
+
+        // ========== FUNCIONES PARA SUSCRIPCIONES ==========
+        function redirectToSubscriptions() {
+            window.location.href = 'suscripciones.html';
+        }
+
+        // Inicializar módulo de suscripciones
+        function initializeSubscriptionModule() {
+            // Añadir event listeners a los elementos de membresía
+            document.querySelectorAll('.membership-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    redirectToSubscriptions();
+                });
+            });
+            
+            // Añadir event listener al botón de CTA
+            const ctaButton = document.querySelector('.subscription-cta');
+            if (ctaButton) {
+                ctaButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    redirectToSubscriptions();
+                });
+            }
         }
 
         // ========== INICIALIZACIÓN AL CARGAR ==========
